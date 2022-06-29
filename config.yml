@@ -4,6 +4,7 @@ title: NewHorizonz
 theme: "PaperMod"
 paginate: 5
 
+publishDir: "docs"
 enableRobotsTXT: true
 buildDrafts: false
 buildFuture: false
