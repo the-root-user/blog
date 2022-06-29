@@ -118,9 +118,9 @@ params:
     keys: ["title", "permalink", "summary", "content"]
 menu:
   main:
-    - identifier: archive
+    - identifier: archives
       name: Archive
-      url: /archive/
+      url: /archives/
       weight: 10
     - identifier: categories
       name: Categories
