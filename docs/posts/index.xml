@@ -6,14 +6,14 @@
     <description>Recent content in Posts on NewHorizonz</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 29 Jun 2022 10:12:44 +0500</lastBuildDate><atom:link href="https://the-root-user.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 29 Jun 2022 09:00:00 +0500</lastBuildDate><atom:link href="https://the-root-user.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>First Post</title>
       <link>https://the-root-user.github.io/blog/posts/first-post/</link>
-      <pubDate>Wed, 29 Jun 2022 10:12:44 +0500</pubDate>
+      <pubDate>Wed, 29 Jun 2022 09:00:00 +0500</pubDate>
       
       <guid>https://the-root-user.github.io/blog/posts/first-post/</guid>
-      <description>Sample post</description>
+      <description>Works like subtitle</description>
     </item>
     
   </channel>

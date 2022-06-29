@@ -9,6 +9,7 @@ enableRobotsTXT: true
 buildDrafts: false
 buildFuture: false
 buildExpired: false
+enableEmoji: true
 
 googleAnalytics: UA-123-45
 
@@ -19,8 +20,8 @@ minify:
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
   title: NewHorizonz
-  description: "Site description"
-  keywords: [Blog, Portfolio, PaperMod]
+  description: "Adventures in the field of Offensive Computers Security"
+  keywords: [Blog, Ethical Hacking, Cyber Security, Exploit Development, Reverse Engineering, CTF]
   author: Signore
   # author: ["Me", "You"] # multiple authors
   # images: ["<link or path of image for opengraph, twitter-cards>"]
@@ -41,20 +42,20 @@ params:
   comments: false
   hidemeta: false
   hideSummary: false
-  showtoc: false
+  showtoc: true
   tocopen: false
 
   assets:
     # disableHLJS: true # to disable highlight.js
     # disableFingerprinting: true
-    favicon: "<link / abs url>"
-    favicon16x16: "<link / abs url>"
-    favicon32x32: "<link / abs url>"
-    apple_touch_icon: "<link / abs url>"
+    favicon: "assets/favicons/favicon.ico"
+    favicon16x16: "assets/favicons/favicon-16x16.png"
+    favicon32x32: "assets/favicons/favicon-32x32.png"
+    apple_touch_icon: "assets/favicons/apple-touch-icon.png"
     safari_pinned_tab: "<link / abs url>"
 
   label:
-    text: "Home" #"NewHorizonz"
+    text: "New Horizonz" #"Home"
     #icon: /apple-touch-icon.png
     #iconHeight: 35
 
@@ -62,11 +63,11 @@ params:
   profileMode:
     enabled: false # needs to be explicitly set
     title: NewHorizonz
-    subtitle: "This is subtitle"
-    imageUrl: "<img location>"
+    subtitle: "Signore"
+    imageUrl: ""
     imageWidth: 120
     imageHeight: 120
-    imageTitle: my image
+    imageTitle: avatar
     buttons:
       - name: Posts
         url: posts
@@ -101,13 +102,19 @@ params:
     hiddenInList: true # hide on list pages and home
     hiddenInSingle: true # hide on single page
 
-  editPost:
-    URL: "https://github.com/the-root-user/blog/content"
-    Text: "Suggest Changes" # edit text
-    appendFilePath: true # to append file path to Edit link
+  #editPost:
+    #URL: "https://github.com/the-root-user/blog/content/posts"
+    #Text: "Suggest Changes" # edit text
+    #appendFilePath: true # to append file path to Edit link
 
   # for search
   # https://fusejs.io/api/options.html
+  outputs:
+    home:
+      - HTML
+      - RSS
+      - JSON # is necessary
+
   fuseOpts:
     isCaseSensitive: false
     shouldSort: true
@@ -118,6 +125,10 @@ params:
     keys: ["title", "permalink", "summary", "content"]
 menu:
   main:
+    - identifier: author
+      name: About Me
+      url: /author/
+      weight: 5
     - identifier: archives
       name: Archive
       url: /archives/
