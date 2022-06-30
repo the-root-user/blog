@@ -4,10 +4,12 @@ layout: "author"
 url: "/author"
 summary: "author"
 ShowReadingTime: false
-ShowShareButtons: false
+showsharebuttons: false
+sharebuttons: " "
 ShowBreadcrumbs: false
 ShowToc: false
 author: " "
+searchHidden: true
 
 ---
 

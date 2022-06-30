@@ -1,0 +1,33 @@
+- id: prev_page
+  translation: "پچھلا صفحہ"
+
+- id: next_page
+  translation: "اگلا صفحہ"
+
+- id: read_time
+  translation:
+    one: "ایک منٹ"
+    two: "دو منٹ"
+    few: "چند سیکنڈ"
+    zero: "الآن"
+    other: "منٹ {{ .Count }}"
+
+- id: words
+  translation:
+    one: "ایک لفظ"
+    other: "الفاظ {{ .Count }}"
+
+- id: toc
+  translation: "فہرست"
+
+- id: translations
+  translation: "دیگر تراجم"
+
+- id: home
+  translation: "ہوم پیج"
+
+- id: code_copy
+  translation: "کاپی کریں۔"
+
+- id: code_copied
+  translation: "کاپی ہو گیا"

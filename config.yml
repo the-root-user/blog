@@ -17,17 +17,25 @@ minify:
   disableXML: true
   minifyOutput: true
 
+#permalinks:
+  #posts: /:year/:monthname/:title/
+
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
   title: NewHorizonz
-  description: "Adventures in the field of Offensive Computers Security"
-  keywords: [Blog, Ethical Hacking, Cyber Security, Exploit Development, Reverse Engineering, CTF]
+  description: "A blog about adventures in Offensive Computers Security"
+  keywords: [Blog, Ethical Hacking, Cyber Security, OSINT, Exploit Development, Reverse Engineering, CTF, Writeup, Hackthebox, Tryhackme]
   author: Signore
+  images: "https://images.unsplash.com/photo-1621360841013-c7683c659ec6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80"
+  #https://images.unsplash.com/photo-1622737133809-d95047b9e673?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80
+  #https://images.unsplash.com/photo-1585079542156-2755d9c8a094?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80
   # author: ["Me", "You"] # multiple authors
   # images: ["<link or path of image for opengraph, twitter-cards>"]
   DateFormat: "January 2, 2006"
+  timeZone: Asia/Karachi
   defaultTheme: dark # auto, light
   disableThemeToggle: false
+  SidebarRecentLimit: 5
 
   ShowReadingTime: true
   ShowShareButtons: true
@@ -48,16 +56,16 @@ params:
   assets:
     # disableHLJS: true # to disable highlight.js
     # disableFingerprinting: true
-    favicon: "https://github.com/the-root-user/blog/raw/main/assets/favicons/favicon.ico"
-    favicon16x16: "https://github.com/the-root-user/blog/raw/main/assets/favicons/favicon-16x16.png"
-    favicon32x32: "https://github.com/the-root-user/blog/raw/main/assets/favicons/favicon-32x32.png"
-    apple_touch_icon: "https://github.com/the-root-user/blog/raw/main/assets/favicons/apple-touch-icon.png"
-    safari_pinned_tab: "<link / abs url>"
+    #favicon: "https://github.com/the-root-user/blog/raw/main/assets/favicons/favicon.ico"
+    #favicon16x16: "https://github.com/the-root-user/blog/raw/main/assets/favicons/favicon-16x16.png"
+    #favicon32x32: "https://github.com/the-root-user/blog/raw/main/assets/favicons/favicon-32x32.png"
+    #apple_touch_icon: "https://github.com/the-root-user/blog/raw/main/assets/favicons/apple-touch-icon.png"
+    #safari_pinned_tab: "<link / abs url>"
 
   label:
     text: "New Horizonz" #"Home"
-    #icon: /apple-touch-icon.png
-    #iconHeight: 35
+    icon: "https://github.com/the-root-user/blog/raw/main/assets/favicons/apple-touch-icon.png"
+    iconHeight: 28
 
   # profile-mode
   profileMode:
@@ -69,7 +77,7 @@ params:
     imageHeight: 120
     imageTitle: avatar
     buttons:
-      - name: Posts
+      - name: Blog
         url: posts
       - name: Tags
         url: tags
@@ -77,7 +85,7 @@ params:
   # home-info mode
   homeInfoParams:
     Title: "New Horizonz" # "Hi there \U0001F44B"
-    Content: A blog focused on Offensive Security Adventures :)
+    Content: A blog about Offensive Security Adventures
 
            - For any query/suggestion, hit me on Twitter!
 
@@ -123,6 +131,7 @@ params:
     threshold: 0.4
     minMatchCharLength: 0
     keys: ["title", "permalink", "summary", "content"]
+
 menu:
   main:
     - identifier: author
@@ -145,6 +154,7 @@ menu:
       name: Search
       url: /search/
       weight: 40
+
 # Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
 pygmentsUseClasses: true
 markup:
