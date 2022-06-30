@@ -17,8 +17,9 @@ AoA!
 
 You're probably here wanting to know a little about who I am and what I do.
 
-Since November 2021, I am doing my BS degree in Computer Science.
+Since November 2021, I have been working on my BS degree in Computer Science.
 
-I am a Computers Security enthusiast, driven by Curiosity, love linux, enjoy scripting & have fun playing CTFs. I like Threat Intelligence but love Offensive Security and, currently, am into Exploit Development.
+I have a passion for Computer Security and am a hacker driven by curiosity. I love Linux, like scripting, and have fun playing CTFs. I like Threat Intelligence but adore Offensive Security and, currently, am into Exploit Development.
 
-This blog serves the purpose of a medium for me to document my journey into the field of Cyber Security and to share CTF write-ups as well as anything interesting I come across in my study/research. I hope you find my posts informative :slightly_smiling_face:
+This blog serves the purpose of a medium for me to chronicle my journey into the world of Cyber Security and to share CTF write-ups as well as anything interesting I come across in my studies or research. I hope you find my posts informative :slightly_smiling_face:
+
