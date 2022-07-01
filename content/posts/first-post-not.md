@@ -1,7 +1,7 @@
 ---
-title: "{{ replace .Name "-" " " | title }}"
+title: "First Post Not"
 author: "Signore"
-date: {{ .Date }}
+date: 2022-07-01T10:44:58+05:00
 summary: ""
 description: ""
 categories: [""]
@@ -13,4 +13,4 @@ images: [""]
 
 draft: true
 ---
-
+Eh!

@@ -25,8 +25,8 @@ params:
   title: NewHorizonz
   description: "A blog about adventures in Offensive Computers Security"
   keywords: [Blog, Ethical Hacking, Cyber Security, OSINT, Exploit Development, Reverse Engineering, CTF, Writeup, Hackthebox, Tryhackme]
-  author: Signore
-  images: "https://images.unsplash.com/photo-1621360841013-c7683c659ec6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80"
+  author: ["Signore"]
+  images: ["https://images.unsplash.com/photo-1621360841013-c7683c659ec6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80"]
   #https://images.unsplash.com/photo-1622737133809-d95047b9e673?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80
   #https://images.unsplash.com/photo-1585079542156-2755d9c8a094?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80
   # author: ["Me", "You"] # multiple authors
@@ -90,6 +90,8 @@ params:
            - For any query/suggestion, hit me on Twitter!
 
   socialIcons:
+    - name: hackthebox
+      url: "#"
     - name: twitter
       url: "https://twitter.com/@therootuser_"
       #- name: stackoverflow
@@ -132,27 +134,36 @@ params:
     minMatchCharLength: 0
     keys: ["title", "permalink", "summary", "content"]
 
+taxonomies:
+  category: categories
+  tag: tags
+  series: series
+
 menu:
   main:
     - identifier: author
       name: About Me
-      url: /author/
+      url: author/
       weight: 5
     - identifier: archives
       name: Archive
-      url: /archives/
+      url: archives/
+      weight: 7
+    - identifier: series
+      name: Series
+      url: series/
       weight: 10
     - identifier: categories
       name: Categories
-      url: /categories/
+      url: categories/
       weight: 20
     - identifier: tags
       name: Tags
-      url: /tags/
+      url: tags/
       weight: 30
     - identifier: search
       name: Search
-      url: /search/
+      url: search/
       weight: 40
 
 # Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma

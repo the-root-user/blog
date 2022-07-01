@@ -23,3 +23,4 @@ I have a passion for Computer Security and am a hacker driven by curiosity. I lo
 
 This blog serves the purpose of a medium for me to chronicle my journey into the world of Cyber Security and to share CTF write-ups as well as anything interesting I come across in my studies or research. I hope you find my posts informative :slightly_smiling_face:
 
+> **Signore**
