@@ -5,127 +5,126 @@ theme: "PaperMod"
 paginate: 5
 
 publishDir: "docs"
+enableInlineShortcodes: true
 enableRobotsTXT: true
 buildDrafts: false
 buildFuture: false
 buildExpired: false
 enableEmoji: true
-
-googleAnalytics: UA-123-45
+pygmentsUseClasses: true # Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
+# googleAnalytics: UA-123-45
 
 minify:
-  disableXML: true
-  minifyOutput: true
+    disableXML: true
+    # minifyOutput: true
 
-#permalinks:
-  #posts: /:year/:monthname/:title/
+# permalinks:
+    # posts: /:year/:monthname/:title/
 
 params:
-  env: production # to enable google analytics, opengraph, twitter-cards and schema.
-  title: NewHorizonz
-  description: "A blog about adventures in Offensive Computers Security"
-  keywords: [Blog, Ethical Hacking, Cyber Security, OSINT, Exploit Development, Reverse Engineering, CTF, Writeup, Hackthebox, Tryhackme]
-  author: ["Signore"]
-  #images: ["https://images.unsplash.com/photo-1621360841013-c7683c659ec6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80"]
-  images: ["https://images.unsplash.com/photo-1622737133809-d95047b9e673?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80"]
-  #https://images.unsplash.com/photo-1585079542156-2755d9c8a094?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80
-  # author: ["Me", "You"] # multiple authors
-  # images: ["<link or path of image for opengraph, twitter-cards>"]
-  DateFormat: "January 2, 2006"
-  timeZone: Asia/Karachi
-  defaultTheme: dark # auto, light
-  disableThemeToggle: false
-  SidebarRecentLimit: 5
-
-  ShowReadingTime: true
-  ShowShareButtons: true
-  ShowPostNavLinks: true
-  ShowBreadCrumbs: true
-  ShowCodeCopyButtons: false
-  #ShowWordCount: true
-  ShowRssButtonInSectionTermList: true
-  UseHugoToc: true
-  disableSpecial1stPost: false
-  disableScrollToTop: false
-  comments: false
-  hidemeta: false
-  hideSummary: false
-  showtoc: true
-  tocopen: false
-
-  assets:
-    # disableHLJS: true # to disable highlight.js
-    # disableFingerprinting: true
-    #favicon: "https://github.com/the-root-user/blog/raw/main/assets/favicons/favicon.ico"
-    #favicon16x16: "https://github.com/the-root-user/blog/raw/main/assets/favicons/favicon-16x16.png"
-    #favicon32x32: "https://github.com/the-root-user/blog/raw/main/assets/favicons/favicon-32x32.png"
-    #apple_touch_icon: "https://github.com/the-root-user/blog/raw/main/assets/favicons/apple-touch-icon.png"
-    #safari_pinned_tab: "<link / abs url>"
-
-  label:
-    text: "New Horizonz" #"Home"
-    icon: "https://github.com/the-root-user/blog/raw/main/assets/favicons/apple-touch-icon.png"
-    iconHeight: 28
-
-  # profile-mode
-  profileMode:
-    enabled: false # needs to be explicitly set
+    env: production # to enable google analytics, opengraph, twitter-cards and schema.
     title: NewHorizonz
-    subtitle: "Signore"
-    imageUrl: ""
-    imageWidth: 120
-    imageHeight: 120
-    imageTitle: avatar
-    buttons:
-      - name: Blog
-        url: posts
-      - name: Tags
-        url: tags
+    description: "A blog about adventures in Offensive Computers Security"
+    keywords: [Blog, Ethical Hacking, Cyber Security, OSINT, Exploit Development, Reverse Engineering, CTF, Writeup, Hackthebox, Tryhackme]
+    author: ["Signore"]
+    # images: ["https://images.unsplash.com/photo-1621360841013-c7683c659ec6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80"]
+    images: ["https://images.unsplash.com/photo-1622737133809-d95047b9e673?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80"]
+    # images: ["/images/Unsplash-Redline-I-milad-fakurian.jpg"]
+    # author: ["Me", "You"] # multiple authors
+    # images: ["<link or path of image for opengraph, twitter-cards>"]
+    DateFormat: "January 2, 2006"
+    timeZone: Asia/Karachi
+    defaultTheme: dark # auto, light
+    # disableThemeToggle: true
+    SidebarRecentLimit: 5
 
-  # home-info mode
-  homeInfoParams:
-    Title: "New Horizonz" # "Hi there \U0001F44B"
-    Content: A blog about Offensive Security Adventures
+    ShowReadingTime: true
+    ShowShareButtons: true
+    ShowPostNavLinks: true
+    ShowBreadCrumbs: true
+    ShowCodeCopyButtons: true
+    # ShowWordCount: true
+    ShowRssButtonInSectionTermList: true
+    UseHugoToc: true
+    disableSpecial1stPost: false
+    disableScrollToTop: false
+    comments: false
+    hidemeta: false
+    hideSummary: false
+    showtoc: true
+    tocopen: false
 
-           - For any query/suggestion, hit me on Twitter!
+    assets:
+        # disableHLJS: true # to disable highlight.js
+        # disableFingerprinting: true
+        # favicon: "https://github.com/the-root-user/blog/raw/main/assets/favicons/favicon.ico"
+        # favicon16x16: "https://github.com/the-root-user/blog/raw/main/assets/favicons/favicon-16x16.png"
+        # favicon32x32: "https://github.com/the-root-user/blog/raw/main/assets/favicons/favicon-32x32.png"
+        # apple_touch_icon: "https://github.com/the-root-user/blog/raw/main/assets/favicons/apple-touch-icon.png"
+        # safari_pinned_tab: "<link / abs url>"
 
-  socialIcons:
-    - name: hackthebox
-      url: "#"
-    - name: twitter
-      url: "https://twitter.com/@therootuser_"
-      #- name: stackoverflow
-      #url: "https://stackoverflow.com"
-    - name: github
-      url: "https://github.com/the-root-user"
+    label:
+        text: "New Horizonz" #"Home"
+        icon: "https://github.com/the-root-user/blog/raw/main/assets/favicons/apple-touch-icon.png"
+        iconHeight: 28
 
-  analytics:
-    google:
-      SiteVerificationTag: "XYZabc"
-    bing:
-      SiteVerificationTag: "XYZabc"
-    yandex:
-      SiteVerificationTag: "XYZabc"
+    # profile-mode
+    profileMode:
+        enabled: false # needs to be explicitly set
+        title: NewHorizonz
+        subtitle: "Signore"
+        imageUrl: ""
+        imageWidth: 120
+        imageHeight: 120
+        imageTitle: avatar
+        buttons:
+        - name: Blog
+          url: posts
+        - name: Tags
+          url: tags
 
-  cover:
-    hidden: true # hide everywhere but not in structured data
-    hiddenInList: true # hide on list pages and home
-    hiddenInSingle: true # hide on single page
+    # home-info mode
+    homeInfoParams:
+        Title: "New Horizonz" # "Hi there \U0001F44B"
+        Content: >
+            A blog about Offensive Security Adventures
 
-  #editPost:
-    #URL: "https://github.com/the-root-user/blog/content/posts"
-    #Text: "Suggest Changes" # edit text
-    #appendFilePath: true # to append file path to Edit link
+            - For any query/suggestion, hit me up on Twitter!
 
-  # for search
-  # https://fusejs.io/api/options.html
-  outputs:
+    socialIcons:
+        - name: twitter
+          url: "https://twitter.com/@therootuser_"
+        - name: github
+          url: "https://github.com/the-root-user"
+
+    analytics:
+        google:
+        SiteVerificationTag: "XYZabc"
+        bing:
+        SiteVerificationTag: "XYZabc"
+        yandex:
+        SiteVerificationTag: "XYZabc"
+
+    cover:
+        hidden: true # hide everywhere but not in structured data
+        hiddenInList: true # hide on list pages and home
+        hiddenInSingle: true # hide on single page
+
+    # editPost:
+    #   URL: "https://github.com/the-root-user/blog/content/posts"
+    #   Text: "Suggest Changes" # edit text
+    #   appendFilePath: true # to append file path to Edit link
+
+
+# for search
+# https://fusejs.io/api/options.html
+outputs:
     home:
-      - HTML
-      - RSS
-      - JSON # is necessary
+        - HTML
+        - RSS
+        - JSON # is necessary
 
-  fuseOpts:
+fuseOpts:
     isCaseSensitive: false
     shouldSort: true
     location: 0
@@ -135,44 +134,45 @@ params:
     keys: ["title", "permalink", "summary", "content"]
 
 taxonomies:
-  category: categories
-  tag: tags
-  series: series
+    category: categories
+    tag: tags
+    series: series
 
 menu:
-  main:
-    - identifier: author
-      name: About Me
-      url: author/
-      weight: 5
-    - identifier: archives
-      name: Archive
-      url: archives/
-      weight: 7
-    - identifier: series
-      name: Series
-      url: series/
-      weight: 10
-    - identifier: categories
-      name: Categories
-      url: categories/
-      weight: 20
-    - identifier: tags
-      name: Tags
-      url: tags/
-      weight: 30
-    - identifier: search
-      name: Search
-      url: search/
-      weight: 40
+    main:
+        - identifier: author
+          name: About Me
+          url: author/
+          weight: 5
+        - identifier: archives
+          name: Archive
+          url: archives/
+          weight: 7
+        - identifier: series
+          name: Series
+          url: series/
+          weight: 10
+        - identifier: categories
+          name: Categories
+          url: categories/
+          weight: 20
+        - identifier: tags
+          name: Tags
+          url: tags/
+          weight: 30
+        - identifier: search
+          name: Search
+          url: search/
+          weight: 40
 
-# Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
-pygmentsUseClasses: true
 markup:
-  highlight:
-    noClasses: false
-    # anchorLineNos: true
-    # codeFences: true
-    # guessSyntax: true
-    # lineNos: true
-    # style: monokai
+    goldmark:
+        renderer:
+            unsafe: true
+    highlight:
+        noClasses: false
+        # anchorLineNos: true
+        # codeFences: true
+        # guessSyntax: true
+        # lineNos: true
+        # style: monokai

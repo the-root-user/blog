@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>gdb on NewHorizonz</title>
+    <link>https://the-root-user.github.io/blog/tags/gdb/</link>
+    <description>Recent content in gdb on NewHorizonz</description>
+    <image>
+      <url>https://images.unsplash.com/photo-1622737133809-d95047b9e673?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80</url>
+      <link>https://images.unsplash.com/photo-1622737133809-d95047b9e673?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 01 Jul 2022 22:20:00 +0500</lastBuildDate><atom:link href="https://the-root-user.github.io/blog/tags/gdb/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Pwn 0x0: Warmup</title>
+      <link>https://the-root-user.github.io/blog/posts/pwn-0x0-warmup/</link>
+      <pubDate>Fri, 01 Jul 2022 22:20:00 +0500</pubDate>
+      
+      <guid>https://the-root-user.github.io/blog/posts/pwn-0x0-warmup/</guid>
+      <description>We will not be diving deep into things but only as much as is necessary. For further learning, I&amp;#39;m going to link relevant resources.</description>
+    </item>
+    
+  </channel>
+</rss>

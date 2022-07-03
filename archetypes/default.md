@@ -9,8 +9,9 @@ tags: [""]
 series: [""]
 keywords: [""]
 ShowToc: true
-images: [""]
-
-draft: true
+cover:
+  image: "image path/url"
+  caption: "text"
+<!-- draft: true -->
 ---
 

@@ -3,53 +3,53 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://the-root-user.github.io/blog/categories/binary-exploitation/</loc>
-    <lastmod>2022-06-29T09:00:00+05:00</lastmod>
+    <loc>https://the-root-user.github.io/blog/series/binary-exploitation-adventures/</loc>
+    <lastmod>2022-07-01T22:20:00+05:00</lastmod>
   </url>
   
   <url>
-    <loc>https://the-root-user.github.io/blog/series/binary-exploitation-adventures-intro/</loc>
-    <lastmod>2022-06-29T09:00:00+05:00</lastmod>
+    <loc>https://the-root-user.github.io/blog/tags/gdb/</loc>
+    <lastmod>2022-07-01T22:20:00+05:00</lastmod>
   </url>
   
   <url>
-    <loc>https://the-root-user.github.io/blog/categories/</loc>
-    <lastmod>2022-06-29T09:00:00+05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://the-root-user.github.io/blog/tags/ctf/</loc>
-    <lastmod>2022-06-29T09:00:00+05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://the-root-user.github.io/blog/posts/first-post/</loc>
-    <lastmod>2022-06-29T09:00:00+05:00</lastmod>
+    <loc>https://the-root-user.github.io/blog/tags/memory/</loc>
+    <lastmod>2022-07-01T22:20:00+05:00</lastmod>
   </url>
   
   <url>
     <loc>https://the-root-user.github.io/blog/</loc>
-    <lastmod>2022-06-29T09:00:00+05:00</lastmod>
+    <lastmod>2022-07-01T22:20:00+05:00</lastmod>
   </url>
   
   <url>
     <loc>https://the-root-user.github.io/blog/posts/</loc>
-    <lastmod>2022-06-29T09:00:00+05:00</lastmod>
+    <lastmod>2022-07-01T22:20:00+05:00</lastmod>
   </url>
   
   <url>
-    <loc>https://the-root-user.github.io/blog/tags/pwn/</loc>
-    <lastmod>2022-06-29T09:00:00+05:00</lastmod>
+    <loc>https://the-root-user.github.io/blog/posts/pwn-0x0-warmup/</loc>
+    <lastmod>2022-07-01T22:20:00+05:00</lastmod>
   </url>
   
   <url>
     <loc>https://the-root-user.github.io/blog/series/</loc>
-    <lastmod>2022-06-29T09:00:00+05:00</lastmod>
+    <lastmod>2022-07-01T22:20:00+05:00</lastmod>
   </url>
   
   <url>
     <loc>https://the-root-user.github.io/blog/tags/</loc>
-    <lastmod>2022-06-29T09:00:00+05:00</lastmod>
+    <lastmod>2022-07-01T22:20:00+05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://the-root-user.github.io/blog/tags/x32/</loc>
+    <lastmod>2022-07-01T22:20:00+05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://the-root-user.github.io/blog/tags/x64/</loc>
+    <lastmod>2022-07-01T22:20:00+05:00</lastmod>
   </url>
   
   <url>
@@ -58,6 +58,10 @@
   
   <url>
     <loc>https://the-root-user.github.io/blog/archives/</loc>
+  </url>
+  
+  <url>
+    <loc>https://the-root-user.github.io/blog/categories/</loc>
   </url>
   
   <url>

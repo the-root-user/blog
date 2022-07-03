@@ -4,7 +4,8 @@ layout: "author"
 url: "/author"
 summary: "author"
 ShowReadingTime: false
-showsharebuttons: false
+params:
+  ShowShareButtons: false
 sharebuttons: " "
 ShowBreadcrumbs: false
 ShowToc: false
