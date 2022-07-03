@@ -130,4 +130,4 @@ ELF files, short for Executable and Linkable Format, are standard executables fo
 And as for our current program, as we compiled it on Linux, it also is an ELF file.
 ![elf](elf.png)
 
-We might discuss them in detail later on. For further study, here's a nice [video](https://youtu.be/ddLB8A1ai_M "Deep Dive Into ELF Binaries - PinkDraconian").
+We might discuss ELF files in detail later on. For further study, here's a nice [video](https://youtu.be/ddLB8A1ai_M "Deep Dive Into ELF Binaries - PinkDraconian").
