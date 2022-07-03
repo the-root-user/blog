@@ -10,7 +10,7 @@ series: ["Binary Exploitation Adventures"]
 keywords: ["pwn", "binary", "memory", "x32", "x64", "gdb", "binary exploitation", "exploit development"]
 ShowToc: true
 cover:
-  image: "cover.png"
+  image: "images/cover-pwn0.png"
   alt: "banner"
   caption: "cover"
 
