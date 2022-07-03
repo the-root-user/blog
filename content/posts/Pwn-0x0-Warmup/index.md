@@ -1,9 +1,9 @@
 ---
 title: "Pwn 0x0: Warmup"
 author: "Signore"
-date: 2022-07-01T22:20:00+05:00
+date: 2022-07-03T11:20:00+05:00
 summary: "Let's get ready to Pwn"
-description: "We will not be diving deep into things but only as much as is necessary. For further learning, I'm going to link relevant resources."
+description: "Let's get ready to Pwn"
 categories: [""]
 tags: ["memory", "x32", "x64", "gdb"]
 series: ["Binary Exploitation Adventures"]
@@ -15,6 +15,8 @@ cover:
   caption: "cover"
 
 ---
+
+❕ We will not be diving deep into things but only as much as necessary. For further learning, I'll link relevant resources.
 
 ## 0.1 Prerequisites
 
