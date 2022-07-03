@@ -17,6 +17,7 @@ pygmentsUseClasses: true # Read: https://github.com/adityatelange/hugo-PaperMod/
 minify:
     disableXML: true
     # minifyOutput: true
+
 # permalinks:
     # posts: /:year/:monthname/:title/
 
