@@ -7,7 +7,7 @@
 <meta name="robots" content="index, follow">
 <title>Pwn 0x0: Warmup | NewHorizonz</title>
 <meta name="keywords" content="pwn, binary, memory, x32, x64, gdb, binary exploitation, exploit development">
-<meta name="description" content="We will not be diving deep into things but only as much as is necessary. For further learning, I&#39;m going to link relevant resources.">
+<meta name="description" content="Let&#39;s get ready to Pwn">
 <meta name="author" content="Signore">
 <link rel="canonical" href="https://the-root-user.github.io/blog/posts/pwn-0x0-warmup/">
 <link crossorigin="anonymous" href="/blog/assets/css/stylesheet.41f2d211c00e636a3c229c52ef2d4299a66891ae66771098993b13bca7972ae6.css" integrity="sha256-QfLSEcAOY2o8IpxS7y1CmaZoka5mdxCYmTsTvKeXKuY=" rel="preload stylesheet" as="style">
@@ -29,18 +29,18 @@
 
     </style>
 </noscript><meta property="og:title" content="Pwn 0x0: Warmup" />
-<meta property="og:description" content="We will not be diving deep into things but only as much as is necessary. For further learning, I&#39;m going to link relevant resources." />
+<meta property="og:description" content="Let&#39;s get ready to Pwn" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://the-root-user.github.io/blog/posts/pwn-0x0-warmup/" />
 <meta property="og:image" content="https://the-root-user.github.io/blog/cover.png" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2022-07-01T22:20:00&#43;05:00" />
-<meta property="article:modified_time" content="2022-07-01T22:20:00&#43;05:00" /><meta property="og:site_name" content="NewHorizonz" />
+<meta property="article:published_time" content="2022-07-03T11:20:00&#43;05:00" />
+<meta property="article:modified_time" content="2022-07-03T11:20:00&#43;05:00" /><meta property="og:site_name" content="NewHorizonz" />
 
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://the-root-user.github.io/blog/cover.png" />
 <meta name="twitter:title" content="Pwn 0x0: Warmup"/>
-<meta name="twitter:description" content="We will not be diving deep into things but only as much as is necessary. For further learning, I&#39;m going to link relevant resources."/>
+<meta name="twitter:description" content="Let&#39;s get ready to Pwn"/>
 
 
 <script type="application/ld+json">
@@ -69,15 +69,15 @@
   "@type": "BlogPosting",
   "headline": "Pwn 0x0: Warmup",
   "name": "Pwn 0x0: Warmup",
-  "description": "We will not be diving deep into things but only as much as is necessary. For further learning, I'm going to link relevant resources.",
+  "description": "Let's get ready to Pwn",
   "keywords": [
     "pwn", "binary", "memory", "x32", "x64", "gdb", "binary exploitation", "exploit development"
   ],
-  "articleBody": "0.1 Prerequisites  Basic Computer Science knowledge Fundamental knowledge of C - here is a nice tutorial Curiosity - Consistency  Optional  Since, at first, we will be doing exploit development on Linux, it would be nice to learn the necessary things here. Some Assembly knowledge will benefit you a lot - here is a nice tutorial Gdb is going to play a key role in our exploit dev - here’s a lovely tutorial  0.2 Memory Structure High-level overview  More here  0.3 Architectures Comparison ! We won’t be comparing each and everything, but just as much as we need.\nHere’s a C program:\n#include  void print_user_data(char* arg1, char* arg2, char* arg3){ printf(\"Here is Your data\\n\"); printf(\"Name: %s Age: %s Job: %s\\n\", arg1, arg2, arg3); } void main(int argc, char **argv){ if (argc!=4){ printf(\"Please provide 3 inputs\\n\"); } else { print_user_data(argv[1], argv[2], argv[3]); } } The program takes some command line arguments from the user, checks if they are equivalent to 3 and then passes them to another function which prints some data on the console.\n After compiling the code with gcc as:\ngcc code.c -o code or\nmake code make command is just another shortcut for us (for gcc)\n Here' what it does: Simple enough, right?\nIn Assembly, arguments to a function are first passed into memory and then the function is called.\nAfter seeing the disassembly of both archs, you will be able to notice that the length of memory addresses changes. But.. I want you to answer this question:\n How are the command line arguments being parsed in memory?\n Let’s compile the code, disassemble it, and see what’s happening under the curtains.\nx32 Compile the code with the command: gcc -m32 code.c -o code\nWhy -m32? When we're on a 64-bit OS, the -m32 flag tells the compiler (gcc) to compile the code and give us a 32-bit binary. If you are on 32-bit machine, you can skip it.  Disassembly You can just follow along with the tutorial, but if you're curious how I disassembled the binary, here you go. There are many a ways/tools to disassemble a binary. Here, I have used gdb in the following way:\ngdb code # 'code' is the name of our binary b main # instructing gdb to break at main function disassemble main # disassemble the main function  In the case of 32-bit binary, we can see that first, the arguments are being pushed onto the stack and then the call to our function print_user_data is made. They are later popped off the stack before the program exits.\nx64 Compile the code with the command: gcc code.c -o code\nDisassembly On the other hand, in the case of 64-bit binary, arguments are first moved into registers and then our function print_user_data is called.\nNow that you understand the distinction between the two, it will come in handy later on, as we will be putting 32-bit binaries to test more frequently for simplicity.\n0.4 ELF The last thing to be aware of are the ELF files. Wondering what they are?\nELF files, short for Executable and Linkable Format, are standard executables for Linux and other Unix OSs, much like EXE files for Windows.\nWe might discuss them in detail later on. For further study, here’s a nice video.\n",
-  "wordCount" : "545",
+  "articleBody": "! We will not be diving deep into things but only as much as necessary. For further learning, I’ll link relevant resources.\n0.1 Prerequisites  Basic Computer Science knowledge Fundamental knowledge of C - here is a nice tutorial Curiosity - Consistency  Optional  Since, at first, we will be doing exploit development on Linux, it would be nice to learn the necessary things here. Some Assembly knowledge will benefit you a lot - here is a nice tutorial Gdb is going to play a key role in our exploit dev - here’s a lovely tutorial  0.2 Memory Structure High-level overview  More here  0.3 Architectures Comparison ! We won’t be comparing each and everything, but just as much as we need.\nHere’s a C program:\n#include  void print_user_data(char* arg1, char* arg2, char* arg3){ printf(\"Here is Your data\\n\"); printf(\"Name: %s Age: %s Job: %s\\n\", arg1, arg2, arg3); } void main(int argc, char **argv){ if (argc!=4){ printf(\"Please provide 3 inputs\\n\"); } else { print_user_data(argv[1], argv[2], argv[3]); } } The program takes some command line arguments from the user, checks if they are equivalent to 3 and then passes them to another function which prints some data on the console.\n After compiling the code with gcc as:\ngcc code.c -o code or\nmake code make command is just another shortcut for us (for gcc)\n Here' what it does: Simple enough, right?\nIn Assembly, arguments to a function are first passed into memory and then the function is called.\nAfter seeing the disassembly of both archs, you will be able to notice that the length of memory addresses changes. But.. I want you to answer this question:\n How are the command line arguments being parsed in memory?\n Let’s compile the code, disassemble it, and see what’s happening under the curtains.\nx32 Compile the code with the command: gcc -m32 code.c -o code\nWhy -m32? When we're on a 64-bit OS, the -m32 flag tells the compiler (gcc) to compile the code and give us a 32-bit binary. If you are on 32-bit machine, you can skip it.  Disassembly You can just follow along with the tutorial, but if you're curious how I disassembled the binary, here you go. There are many a ways/tools to disassemble a binary. Here, I have used gdb in the following way:\ngdb code # 'code' is the name of our binary b main # instructing gdb to break at main function disassemble main # disassemble the main function  In the case of 32-bit binary, we can see that first, the arguments are being pushed onto the stack and then the call to our function print_user_data is made. They are later popped off the stack before the program exits.\nx64 Compile the code with the command: gcc code.c -o code\nDisassembly On the other hand, in the case of 64-bit binary, arguments are first moved into registers and then our function print_user_data is called.\nNow that you understand the distinction between the two, it will come in handy later on, as we will be putting 32-bit binaries to test more frequently for simplicity.\n0.4 ELF The last thing to be aware of are the ELF files. Wondering what they are?\nELF files, short for Executable and Linkable Format, are standard executables for Linux and other Unix OSs, much like EXE files for Windows.\nWe might discuss them in detail later on. For further study, here’s a nice video.\n",
+  "wordCount" : "567",
   "inLanguage": "en",
-  "image":"https://the-root-user.github.io/blog/cover.png","datePublished": "2022-07-01T22:20:00+05:00",
-  "dateModified": "2022-07-01T22:20:00+05:00",
+  "image":"https://the-root-user.github.io/blog/cover.png","datePublished": "2022-07-03T11:20:00+05:00",
+  "dateModified": "2022-07-03T11:20:00+05:00",
   "author":{
     "@type": "Person",
     "name": "Signore"
@@ -178,9 +178,9 @@
       Pwn 0x0: Warmup
     </h1>
     <div class="post-description">
-      We will not be diving deep into things but only as much as is necessary. For further learning, I&#39;m going to link relevant resources.
+      Let&#39;s get ready to Pwn
     </div>
-    <div class="post-meta"><span title='2022-07-01 22:20:00 +0500 PKT'>July 1, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Signore
+    <div class="post-meta"><span title='2022-07-03 11:20:00 +0500 PKT'>July 3, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Signore
 
 </div>
   </header> <div class="toc">
@@ -214,7 +214,8 @@
     </details>
 </div>
 
-  <div class="post-content"><h2 id="01-prerequisites">0.1 Prerequisites<a hidden class="anchor" aria-hidden="true" href="#01-prerequisites">#</a></h2>
+  <div class="post-content"><p>! We will not be diving deep into things but only as much as necessary. For further learning, I&rsquo;ll link relevant resources.</p>
+<h2 id="01-prerequisites">0.1 Prerequisites<a hidden class="anchor" aria-hidden="true" href="#01-prerequisites">#</a></h2>
 <ul>
 <li>Basic Computer Science knowledge</li>
 <li>Fundamental knowledge of C - here is a nice <a href="https://www.tutorialspoint.com/cprogramming/index.htm">tutorial</a></li>

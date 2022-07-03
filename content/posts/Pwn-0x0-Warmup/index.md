@@ -16,7 +16,7 @@ cover:
 
 ---
 
-❕ We will not be diving deep into things but only as much as necessary. For further learning, I'll link relevant resources.
+! We will not be diving deep into things but only as much as necessary. For further learning, I'll link relevant resources.
 
 ## 0.1 Prerequisites
 

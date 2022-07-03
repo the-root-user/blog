@@ -60,7 +60,7 @@ params:
         # favicon: "https://github.com/the-root-user/blog/raw/main/assets/favicons/favicon.ico"
         # favicon16x16: "https://github.com/the-root-user/blog/raw/main/assets/favicons/favicon-16x16.png"
         # favicon32x32: "https://github.com/the-root-user/blog/raw/main/assets/favicons/favicon-32x32.png"
-        # apple_touch_icon: "https://github.com/the-root-user/blog/raw/main/assets/favicons/apple-touch-icon.png"
+        # apple_touch_icon: "/blog/apple-touch-icon.png"
         # safari_pinned_tab: "<link / abs url>"
 
     label:
