@@ -40,8 +40,6 @@ cover:
 
 ## 0.3 Architectures Comparison
 
-! We won't be comparing each and everything, but just as much as we need.
-
 Here's a C program:
 ```c {linenos=false}
 #include <stdio.h>
@@ -81,9 +79,9 @@ Here' what it does:
 
 Simple enough, right? 
 
-In Assembly, arguments to a function are first passed into memory and then the function is called.
+When we execute a binary, the binary name and the arguments to its function(s) are stored on the stack (in memory). They are accessed differently in different architectures.
 
-After seeing the disassembly of both <abbr title="Architectures">archs</abbr>, you will be able to notice that the length of memory addresses changes. But.. I want you to answer this question:
+After seeing the disassembled binaries of both <abbr title="Architectures">archs</abbr>, you will notice that the length of memory addresses changes. But.. wait
 > How are the command line arguments being parsed in memory?
 
 Let's compile the code, disassemble it, and see what's happening under the curtains.
@@ -127,6 +125,9 @@ Now that you understand the distinction between the two, it will come in handy l
 
 The last thing to be aware of are the ELF files. Wondering what they are?
 
-ELF files, short for Executable and Linkable Format, are standard executables for Linux and other Unix OSs, much like EXE files for Windows.
+ELF files, short for Executable and Linkable Format, are standard executables for Linux and other Unix OSs (consider them the EXE files of Windows).
+
+And as for our current program, as we compiled it on Linux, it also is an ELF file.
+![elf](elf.png)
 
 We might discuss them in detail later on. For further study, here's a nice [video](https://youtu.be/ddLB8A1ai_M "Deep Dive Into ELF Binaries - PinkDraconian").
