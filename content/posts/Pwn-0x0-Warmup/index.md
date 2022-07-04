@@ -127,7 +127,7 @@ The last thing to be aware of are the ELF files. Wondering what they are?
 
 ELF files, short for Executable and Linkable Format, are standard executables for Linux and other Unix OSs (not exactly but, think of them as the EXE files on Windows).
 
-And as for our current program, as we compiled it on Linux, it also is an ELF file.
+And as for our current program, since we compiled it on Linux, it also is an ELF file.
 ![elf](elf.png)
 
 We might discuss ELF files in detail later on. For further study, here's a nice [video](https://youtu.be/ddLB8A1ai_M "Deep Dive Into ELF Binaries - PinkDraconian").
