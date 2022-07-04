@@ -125,7 +125,7 @@ Now that you understand the distinction between the two, it will come in handy l
 
 The last thing to be aware of are the ELF files. Wondering what they are?
 
-ELF files, short for Executable and Linkable Format, are standard executables for Linux and other Unix OSs (consider them the EXE files of Windows).
+ELF files, short for Executable and Linkable Format, are standard executables for Linux and other Unix OSs (not exactly but, think of them as the EXE files on Windows).
 
 And as for our current program, as we compiled it on Linux, it also is an ELF file.
 ![elf](elf.png)
