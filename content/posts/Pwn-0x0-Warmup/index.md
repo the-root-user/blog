@@ -11,7 +11,6 @@ keywords: ["pwn", "binary", "memory", "x32", "x64", "gdb", "binary exploitation"
 ShowToc: true
 cover:
   image: "images/cover_binexp.png"
-  alt: "banner"
   caption: "cover"
 
 ---
