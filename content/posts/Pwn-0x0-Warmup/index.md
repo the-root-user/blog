@@ -1,11 +1,11 @@
 ---
 title: "Pwn 0x0: Warmup"
 author: "Signore"
-date: 2022-07-03T11:20:00+05:00
+date: 2022-07-03
 summary: "Let's get ready to Pwn"
-description: "Let's get ready to Pwn"
+description: ""
 categories: [""]
-tags: ["memory", "x32", "x64", "gdb"]
+tags: ["memory", "buffer overflow"]
 series: ["Binary Exploitation Adventures"]
 keywords: ["pwn", "binary", "memory", "x32", "x64", "gdb", "binary exploitation", "exploit development"]
 ShowToc: true
