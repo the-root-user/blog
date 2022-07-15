@@ -40,7 +40,7 @@ cover:
 ## 0.3 Architectures Comparison
 
 Here's a C program:
-```c {linenos=false}
+```c {linenos=true}
 #include <stdio.h>
 
 void print_user_data(char* arg1, char* arg2, char* arg3){
@@ -49,7 +49,7 @@ void print_user_data(char* arg1, char* arg2, char* arg3){
 }
 
 void main(int argc, char **argv){
-    if (argc!=4){
+    if (argc!=4) {
         printf("Please provide 3 inputs\n");
     }
     else {
