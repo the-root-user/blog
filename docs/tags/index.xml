@@ -10,40 +10,22 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 03 Jul 2022 11:20:00 +0500</lastBuildDate><atom:link href="https://the-root-user.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 03 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://the-root-user.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>gdb</title>
-      <link>https://the-root-user.github.io/blog/tags/gdb/</link>
-      <pubDate>Sun, 03 Jul 2022 11:20:00 +0500</pubDate>
+      <title>buffer overflow</title>
+      <link>https://the-root-user.github.io/blog/tags/buffer-overflow/</link>
+      <pubDate>Sun, 03 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://the-root-user.github.io/blog/tags/gdb/</guid>
+      <guid>https://the-root-user.github.io/blog/tags/buffer-overflow/</guid>
       <description></description>
     </item>
     
     <item>
       <title>memory</title>
       <link>https://the-root-user.github.io/blog/tags/memory/</link>
-      <pubDate>Sun, 03 Jul 2022 11:20:00 +0500</pubDate>
+      <pubDate>Sun, 03 Jul 2022 00:00:00 +0000</pubDate>
       
       <guid>https://the-root-user.github.io/blog/tags/memory/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>x32</title>
-      <link>https://the-root-user.github.io/blog/tags/x32/</link>
-      <pubDate>Sun, 03 Jul 2022 11:20:00 +0500</pubDate>
-      
-      <guid>https://the-root-user.github.io/blog/tags/x32/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>x64</title>
-      <link>https://the-root-user.github.io/blog/tags/x64/</link>
-      <pubDate>Sun, 03 Jul 2022 11:20:00 +0500</pubDate>
-      
-      <guid>https://the-root-user.github.io/blog/tags/x64/</guid>
       <description></description>
     </item>
     

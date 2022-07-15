@@ -66,7 +66,9 @@
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://the-root-user.github.io/blog" accesskey="h" title="New Horizonz (Alt + H)">New Horizonz</a>
+            <a href="https://the-root-user.github.io/blog" accesskey="h" title="New Horizonz (Alt + H)">
+                <img src="https://the-root-user.github.io/blog/apple-touch-icon-grey.png" alt="logo" aria-label="logo"
+                    height="28">New Horizonz</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -147,7 +149,7 @@
   <div class="entry-content">
     <p>Let’s get ready to Pwn</p>
   </div>
-  <footer class="entry-footer"><span title='2022-07-03 11:20:00 +0500 PKT'>July 3, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Signore</footer>
+  <footer class="entry-footer"><span title='2022-07-03 00:00:00 +0000 UTC'>July 3, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Signore</footer>
   <a class="entry-link" aria-label="post link to Pwn 0x0: Warmup" href="https://the-root-user.github.io/blog/posts/pwn-0x0-warmup/"></a>
 </article>
     </main>
@@ -163,7 +165,20 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
         <path d="M12 6H0l6-6z" />
     </svg>
-</a>
+</a><script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.6/medium-zoom.min.js" integrity="sha512-N9IJRoc3LaP3NDoiGkcPa4gG94kapGpaA5Zq9/Dr04uf5TbLFU5q0o8AbRhLKUUlp8QFS2u7S+Yti0U7QtuZvQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+const images = Array.from(document.querySelectorAll(".post-content img"));
+images.forEach(img => {
+  mediumZoom(img, {
+    margin: 10,  
+    background: '#1b1c1e',  
+    scrollOffset: 40,  
+    container: null,  
+    template: null  
+  });
+});
+</script>
 
 <script>
     let menu = document.getElementById('menu')
