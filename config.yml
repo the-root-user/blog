@@ -65,7 +65,7 @@ params:
 
     label:
         text: "New Horizonz" #"Home"
-        icon: "apple-touch-icon.png"
+        icon: "apple-touch-icon-grey.png"
         iconHeight: 28
 
     # profile-mode
