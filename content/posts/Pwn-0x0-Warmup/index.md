@@ -67,13 +67,18 @@ The program takes some command line arguments from the user, checks if they are 
 <summary>After compiling the code</summary>
 
 with <abbr title="GNU C Compiler">gcc</abbr> as:
+{{< terminal title="Terminal" >}}
 ```shell
 gcc code.c -o code
 ```
+{{< /terminal >}}
+
 or
+{{< terminal title="Terminal" >}}
 ```shell
 make code
 ```
+{{< /terminal >}}
 make command is just another shortcut for us (for gcc)
 </details>
 
@@ -101,11 +106,13 @@ When we're on a 64-bit <abbr title="Operating System">OS</abbr>, the -m32 flag t
 You can just follow along with the tutorial, but if you're curious how I disassembled the binary, here you go.
 
 There are many a ways/tools to disassemble a binary. Here, I have used gdb in the following way:
+{{< terminal title="Terminal" >}}
 ```shell
 gdb code            # 'code' is the name of our binary
 b main              # instructing gdb to break at main function
 disassemble main    # disassemble the main function
 ```
+{{< /terminal >}}
 
 </details>
 
