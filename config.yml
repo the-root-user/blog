@@ -176,7 +176,7 @@ markup:
         anchorLineNos: false
         codeFences: true
         guessSyntax: true
-        lineNos: true
+        lineNos: false #true
         style: monokai # dracula
         lineNumbersInTable: true
         tabWidth: 4

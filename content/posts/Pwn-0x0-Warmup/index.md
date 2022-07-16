@@ -40,7 +40,9 @@ cover:
 ## 0.3 Architectures Comparison
 
 Here's a C program:
-```c {linenos=true}
+
+{{< terminal title="program.c" >}}
+```c
 #include <stdio.h>
 
 void print_user_data(char* arg1, char* arg2, char* arg3){
@@ -57,6 +59,8 @@ void main(int argc, char **argv){
     }
 }
 ```
+{{< /terminal >}}
+
 The program takes some command line arguments from the user, checks if they are equivalent to 3 and then passes them to another function which prints some data on the console.
 
 <details>
