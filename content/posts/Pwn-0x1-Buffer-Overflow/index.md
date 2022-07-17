@@ -51,11 +51,16 @@ int main(int argc, char *argv[]){
 
 The program reads user input... .
 
-Compile it this way:
+Compile the program with the following command:
 {{< terminal title="Terminal" >}}
 ```shell
 gcc -m32 -fno-stack-protector -z execstack program.c -o program
 ```
+{{< /terminal >}}
+
+Normally, here's what it does:
+{{< terminal title="Terminal" >}}
+ola
 {{< /terminal >}}
 
 #### Why those extra flags?

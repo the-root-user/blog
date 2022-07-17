@@ -73,8 +73,8 @@
   "keywords": [
     "pwn", "binary", "memory", "x32", "x64", "gdb", "memory corruption", "binary exploitation", "exploit development"
   ],
-  "articleBody": "In this post, we are going to learn what is a buffer overflow and will exploit it to get code execution.\n! Disable ASLR\nChecksec\nStack Smashing Take this C program:\n    program.c  #include #include  int helper(){ system(\"/bin/sh\"); // executes system shell } int overflow(){ char buffer[500]; // declaring buffer variable with specified size  int userinput; userinput = read(0, buffer, 700); // reading user input into buffer variable  printf(\"\\nUser provided %d bytes. Buffer content is: %s\\n\", userinput, buffer); return 0; } int main(int argc, char *argv[]){ overflow(); return 0; }    The program reads user input… .\nCompile it this way:     Terminal  gcc -m32 -fno-stack-protector -z execstack program.c -o program    Why those extra flags?  After compiling the code with gcc as:\ngcc code.c -o code or\nmake code make command is just another shortcut for us (for gcc)\n it does something.\nEIP Control Code Reuse gdb code # 'code' is the name of our binary b main # instructing gdb to break at main function disassemble main # disassemble the main function Shellcode ",
-  "wordCount" : "172",
+  "articleBody": "In this post, we are going to learn what is a buffer overflow and will exploit it to get code execution.\n! Disable ASLR\nChecksec\nStack Smashing Take this C program:\n    program.c  #include #include  int helper(){ system(\"/bin/sh\"); // executes system shell } int overflow(){ char buffer[500]; // declaring buffer variable with specified size  int userinput; userinput = read(0, buffer, 700); // reading user input into buffer variable  printf(\"\\nUser provided %d bytes. Buffer content is: %s\\n\", userinput, buffer); return 0; } int main(int argc, char *argv[]){ overflow(); return 0; }    The program reads user input… .\nCompile the program with the following command:     Terminal  gcc -m32 -fno-stack-protector -z execstack program.c -o program    Normally, here’s what it does:     Terminal  ola   Why those extra flags?  After compiling the code with gcc as:\ngcc code.c -o code or\nmake code make command is just another shortcut for us (for gcc)\n it does something.\nEIP Control Code Reuse gdb code # 'code' is the name of our binary b main # instructing gdb to break at main function disassemble main # disassemble the main function Shellcode ",
+  "wordCount" : "182",
   "inLanguage": "en",
   "image":"https://the-root-user.github.io/blog/images/cover_binexp.png","datePublished": "2022-07-17T00:00:00Z",
   "dateModified": "2022-07-17T00:00:00Z",
@@ -247,7 +247,7 @@
 </div>
 
 <p>The program reads user input&hellip; .</p>
-<p>Compile it this way:
+<p>Compile the program with the following command:
 
 
 
@@ -263,6 +263,24 @@
     <div class="terminalbody">
         <div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">gcc -m32 -fno-stack-protector -z execstack program.c -o program
 </code></pre></div>
+    </div>
+</div>
+</p>
+<p>Normally, here&rsquo;s what it does:
+
+
+
+<div class="terminal space shadow">
+    <div class="top">
+        <div class="btns">
+            <span class="circle red"></span>
+            <span class="circle yellow"></span>
+            <span class="circle green"></span>
+        </div>
+        <div class="title">Terminal</div>
+    </div>
+    <div class="terminalbody">
+        ola
     </div>
 </div>
 </p>

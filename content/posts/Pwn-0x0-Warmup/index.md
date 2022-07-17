@@ -82,7 +82,7 @@ make code
 make command is just another shortcut for us (for gcc)
 </details>
 
-Here' what it does:
+Here's what it does:
 {{< terminal title="Terminal" >}}
 ![code](code.png)
 {{< /terminal >}}
