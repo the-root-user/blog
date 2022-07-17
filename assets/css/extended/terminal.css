@@ -3,7 +3,7 @@
 }
 
 .dark {
-    --terminal-bg: #2E2E33;
+    --terminal-bg: #2E2E33; /* #2e333e - Dark HTB Konsole color */
 }
 
 .terminal {

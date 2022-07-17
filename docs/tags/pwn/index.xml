@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>buffer overflow on NewHorizonz</title>
-    <link>https://the-root-user.github.io/blog/tags/buffer-overflow/</link>
-    <description>Recent content in buffer overflow on NewHorizonz</description>
+    <title>pwn on NewHorizonz</title>
+    <link>https://the-root-user.github.io/blog/tags/pwn/</link>
+    <description>Recent content in pwn on NewHorizonz</description>
     <image>
       <url>https://the-root-user.github.io/blog/images/cover.png</url>
       <link>https://the-root-user.github.io/blog/images/cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 17 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://the-root-user.github.io/blog/tags/buffer-overflow/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 17 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://the-root-user.github.io/blog/tags/pwn/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Pwn 0x1: Buffer Overflow</title>
       <link>https://the-root-user.github.io/blog/posts/pwn-0x1-buffer-overflow/</link>
@@ -18,6 +18,15 @@
       
       <guid>https://the-root-user.github.io/blog/posts/pwn-0x1-buffer-overflow/</guid>
       <description>WTH is a buffer overflow? Let&amp;rsquo;s do it</description>
+    </item>
+    
+    <item>
+      <title>Pwn 0x0: Warmup</title>
+      <link>https://the-root-user.github.io/blog/posts/pwn-0x0-warmup/</link>
+      <pubDate>Sun, 03 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://the-root-user.github.io/blog/posts/pwn-0x0-warmup/</guid>
+      <description>Let&amp;rsquo;s get ready to Pwn</description>
     </item>
     
   </channel>

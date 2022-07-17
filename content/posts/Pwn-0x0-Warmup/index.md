@@ -83,7 +83,9 @@ make command is just another shortcut for us (for gcc)
 </details>
 
 Here' what it does:
+{{< terminal title="Terminal" >}}
 ![code](code.png)
+{{< /terminal >}}
 
 Simple enough, right? 
 
@@ -103,6 +105,7 @@ When we're on a 64-bit <abbr title="Operating System">OS</abbr>, the -m32 flag t
 <br>
 
 <details><summary><b>Disassembly</b></summary>
+
 You can just follow along with the tutorial, but if you're curious how I disassembled the binary, here you go.
 
 There are many a ways/tools to disassemble a binary. Here, I have used gdb in the following way:
@@ -114,9 +117,11 @@ disassemble main    # disassemble the main function
 ```
 {{< /terminal >}}
 
-</details>
+</details><br>
 
+{{< terminal title="Terminal" >}}
 ![arguments-32](args-x32.png)
+{{< /terminal >}}
 
 In the case of 32-bit binary, we can see that first, the arguments are being _pushed_ onto the stack and then the call to our function `print_user_data` is made. They are later _popped_ off the stack before the program exits.
 
@@ -125,7 +130,9 @@ In the case of 32-bit binary, we can see that first, the arguments are being _pu
 Compile the code with the command: `gcc code.c -o code`
 
 **Disassembly**
+{{< terminal title="Terminal" >}}
 ![arguments-64](args-x64.png)
+{{< /terminal >}}
 
 On the other hand, in the case of 64-bit binary, arguments are first _moved_ into registers and then our function `print_user_data` is called.
 
@@ -138,6 +145,8 @@ The last thing to be aware of are the ELF files. Wondering what they are?
 ELF files, short for Executable and Linkable Format, are standard executables for Linux and other Unix OSs (not exactly but, think of them as the EXE files on Windows).
 
 And as for our current program, since we compiled it on Linux, it also is an ELF file.
+{{< terminal title="Terminal" >}}
 ![elf](elf.png)
+{{< /terminal >}}
 
 We might discuss ELF files in detail later on. For further study, here's a nice [video](https://youtu.be/ddLB8A1ai_M "Deep Dive Into ELF Binaries - PinkDraconian").
