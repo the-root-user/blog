@@ -5,7 +5,7 @@ date: 2022-07-03
 summary: "Let's get ready to Pwn"
 description: ""
 categories: [""]
-tags: ["memory", "buffer overflow"]
+tags: ["memory", "pwn"]
 series: ["Binary Exploitation Adventures"]
 keywords: ["pwn", "binary", "memory", "x32", "x64", "gdb", "binary exploitation", "exploit development"]
 ShowToc: true
