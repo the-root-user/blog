@@ -5,18 +5,18 @@
     <link>https://the-root-user.github.io/blog/tags/buffer-overflow/</link>
     <description>Recent content in buffer overflow on NewHorizonz</description>
     <image>
-      <url>https://the-root-user.github.io/blog/images/cover.png</url>
-      <link>https://the-root-user.github.io/blog/images/cover.png</link>
+      <url>https://the-root-user.github.io/blog/images/blog-cover.png</url>
+      <link>https://the-root-user.github.io/blog/images/blog-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 17 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://the-root-user.github.io/blog/tags/buffer-overflow/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Pwn 0x1: Buffer Overflow</title>
-      <link>https://the-root-user.github.io/blog/posts/pwn-0x1-buffer-overflow/</link>
+      <title>Pwn 0x01: Buffer Overflow</title>
+      <link>https://the-root-user.github.io/blog/posts/pwn-0x01-buffer-overflow/</link>
       <pubDate>Sun, 17 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://the-root-user.github.io/blog/posts/pwn-0x1-buffer-overflow/</guid>
+      <guid>https://the-root-user.github.io/blog/posts/pwn-0x01-buffer-overflow/</guid>
       <description>WTH is a buffer overflow? Let&amp;rsquo;s do it</description>
     </item>
     

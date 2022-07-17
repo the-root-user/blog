@@ -28,7 +28,7 @@
   </url>
   
   <url>
-    <loc>https://the-root-user.github.io/blog/posts/pwn-0x1-buffer-overflow/</loc>
+    <loc>https://the-root-user.github.io/blog/posts/pwn-0x01-buffer-overflow/</loc>
     <lastmod>2022-07-17T00:00:00+00:00</lastmod>
   </url>
   
@@ -48,7 +48,7 @@
   </url>
   
   <url>
-    <loc>https://the-root-user.github.io/blog/posts/pwn-0x0-warmup/</loc>
+    <loc>https://the-root-user.github.io/blog/posts/pwn-0x00-warmup/</loc>
     <lastmod>2022-07-03T00:00:00+00:00</lastmod>
   </url>
   

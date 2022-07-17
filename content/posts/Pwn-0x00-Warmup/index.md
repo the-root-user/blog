@@ -1,5 +1,5 @@
 ---
-title: "Pwn 0x0: Warmup"
+title: "Pwn 0x00: Warmup"
 author: "Signore"
 date: 2022-07-03
 summary: "Let's get ready to Pwn"
@@ -10,7 +10,7 @@ series: ["Binary Exploitation Adventures"]
 keywords: ["pwn", "binary", "memory", "x32", "x64", "gdb", "binary exploitation", "exploit development"]
 ShowToc: true
 cover:
-  image: "images/cover_binexp.png"
+  image: "images/cover-binexp-00.png"
   caption: "cover"
 
 ---

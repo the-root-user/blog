@@ -29,7 +29,7 @@ params:
     author: ["Signore"]
     # images: ["https://images.unsplash.com/photo-1621360841013-c7683c659ec6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80"]
     # images: ["https://images.unsplash.com/photo-1622737133809-d95047b9e673?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80"]
-    images: ["images/cover.png"]
+    images: ["images/blog-cover.png"]
     # author: ["Me", "You"] # multiple authors
     # images: ["<link or path of image for opengraph, twitter-cards>"]
     DateFormat: "January 2, 2006"
