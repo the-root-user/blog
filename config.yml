@@ -126,6 +126,7 @@ outputs:
         - RSS
         - JSON # is necessary
 
+
 fuseOpts:
     isCaseSensitive: false
     shouldSort: true
