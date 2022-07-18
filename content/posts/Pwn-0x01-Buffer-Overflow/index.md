@@ -99,7 +99,7 @@ Since our program is not dealing with any arguments, so, in our case, it's like 
 ## Stack Abuse
 
 What if we give the program some unexpected input? <br>
-What if we give an input, more in magnitude than the defined buffer is supposed to handle? :thinking:
+What if we give an input, more in magnitude than the defined buffer is supposed to handle?
 
 Let's take a look.
 
