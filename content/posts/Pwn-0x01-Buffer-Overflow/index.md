@@ -103,8 +103,6 @@ What if we give an input, more in magnitude than the defined buffer is supposed 
 
 Let's take a look.
 
-### Concept
-
 When we give an input bigger than a defined buffer, if the program is vulnerable, we overwrite other stuff that is already present on the stack.
 
 Our goal is to overwrite the `return address` of the function so that we can point the EIP to a memory address of our own choice.

@@ -10,11 +10,11 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 17 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://the-root-user.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 18 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://the-root-user.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Pwn 0x01: Buffer Overflow</title>
       <link>https://the-root-user.github.io/blog/posts/pwn-0x01-buffer-overflow/</link>
-      <pubDate>Sun, 17 Jul 2022 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 18 Jul 2022 00:00:00 +0000</pubDate>
       
       <guid>https://the-root-user.github.io/blog/posts/pwn-0x01-buffer-overflow/</guid>
       <description>WTH is a buffer overflow? Let&amp;rsquo;s do it</description>
