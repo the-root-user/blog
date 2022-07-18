@@ -1,7 +1,7 @@
 ---
 title: "Pwn 0x01: Buffer Overflow"
 author: "Signore"
-date: 2022-07-17
+date: 2022-07-18
 summary: "WTH is a buffer overflow? Let's do it"
 description: ""
 categories: [""]

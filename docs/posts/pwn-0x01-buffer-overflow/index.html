@@ -10,7 +10,7 @@
 <meta name="description" content="WTH is a buffer overflow? Let&rsquo;s do it">
 <meta name="author" content="Signore">
 <link rel="canonical" href="https://the-root-user.github.io/blog/posts/pwn-0x01-buffer-overflow/">
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.b705a3c98b206f8914a1bb46e42f8985e0469bb6bd502e399bfc080e008c36b4.css" integrity="sha256-twWjyYsgb4kUobtG5C&#43;JheBGm7a9UC45m/wIDgCMNrQ=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.7832dde05580bc2c665f0a61fe276fe56876735f002590bd245c4c179ab6ea88.css" integrity="sha256-eDLd4FWAvCxmXwph/idv5Wh2c18AJZC9JFxMF5q26og=" rel="preload stylesheet" as="style">
 <script defer crossorigin="anonymous" src="/blog/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://the-root-user.github.io/blog/favicon.ico">
@@ -73,8 +73,8 @@
   "keywords": [
     "pwn", "binary", "memory", "x32", "x64", "gdb", "memory corruption", "binary exploitation", "exploit development"
   ],
-  "articleBody": "In this post, we will see what is a buffer overflow and will exploit it to get code execution. Do Not feel overwhelmed. Just follow along and we’ll have fun.\nIf you are new to the series, check out my previous posts here\nThe Stack Take this C program:\n    program.c  #include #include  int helper(){ system(\"/bin/sh\"); // executes system shell } int overflow(){ char buffer[500]; // declaring buffer variable with specified size  int userinput; userinput = read(0, buffer, 700); // reading user input into buffer variable  printf(\"\\nUser provided %d bytes. Buffer content is: %s\\n\", userinput, buffer); return 0; } int main(int argc, char *argv[]){ overflow(); return 0; }    If we break down the program from the main function, it calls the overflow function which declares a variable of size 500 bytes and then, reads user input into that variable. Later, it prints the size of the provided input along with the input itself.\nAfter compiling, here’s what the program does:     Terminal    You have to compile the program with the following command:     Terminal  gcc -m32 -fno-stack-protector -z execstack program.c -o program    Also, you need to disable ASLR with the following command:     Terminal  echo 0 | sudo tee /proc/sys/kernel/randomize_va_space    What's happening here?  Modern programs come with a bunch of exploit mitigations. For example, we can see the protections on the ping binary which is mostly present on linux as well as windows, with CheckSec tool.     Terminal      So, initially we’ll be working with those protections disabled and that is why we’re giving those extra flags to gcc.\nFor now, you don’t need to care about them. We’ll learn to bypass some anti-exploit mechanisms later on.\n \nLet’s see what’s happening in memory.\nTheory Practical Stack Abuse Theory What if we give the program unexpected input?\nPractical Let’s run our program with a different input.\nEIP Control Code Reuse –\nShellcode ",
-  "wordCount" : "306",
+  "articleBody": "In this post, we will see what is a buffer overflow and will exploit it to get code execution. Do Not feel overwhelmed. Just follow along and we’ll have fun.\nIf you are new to the series, check out my previous posts here\nThe Stack Take this C program:\n    program.c  #include #include  int helper(){ system(\"/bin/sh\"); // executes system shell } int overflow(){ char buffer[500]; // declaring buffer variable with specified size  int userinput; userinput = read(0, buffer, 700); // reading user input into buffer variable  printf(\"\\nUser provided %d bytes. Buffer content is: %s\\n\", userinput, buffer); return 0; } int main(int argc, char *argv[]){ overflow(); return 0; }    If we break down the program from the main function, it calls the overflow function which declares a variable of size 500 bytes and then, reads user input into that variable. Later, it prints the size of the provided input along with the input itself.\nAfter compiling, here’s what the program does:     Terminal    We have to compile the program with the following command:     Terminal  gcc -m32 -fno-stack-protector -z execstack program.c -o program    Also, we need to disable ASLR with the following command:     Terminal  echo 0 | sudo tee /proc/sys/kernel/randomize_va_space    Everytime you reboot your machine, you’ll have to do this step again.\nWhat's going on?  Modern programs come with a bunch of exploit mitigations. For example, we can see the protections on the ping binary which is mostly present on linux as well as windows, with checksec script.     Terminal      So, initially we’ll be working with those protections disabled and that is why we’re giving those extra flags to gcc.\nHere we can see the protections on our (compiled) program:     Terminal      For now, you don’t need to care about them. We’ll learn to bypass some anti-exploit mechanisms later on.\n \nIn general, the stack is aligned this way: Since our program is not dealing with any arguments, so, in our case, it’s like this: Stack Abuse What if we give the program some unexpected input? What if we give an input, more in magnitude than the defined buffer is supposed to handle? 🤔\nLet’s take a look.\nConcept When we give an input bigger than a defined buffer, if the program is vulnerable, we overwrite other stuff that is already present on the stack.\nOur goal is to overwrite the return address of the function so that we can point the EIP to a memory address of our own choice. Normally, one can just get creative and give a program random inputs until something desirable is received back :)\nDeep Dive Let’s give our program some random inputs, with the help of Python.\n(You know we can pipe the output of one command to another, right?)\n    Terminal    Hnmm.. so, eventually, we broke the program!\nLet’s generate a pattern with cyclic utility and analyse the program with gdb to determine the offset of EIP.\nAlternative One can also use metasploit’s msf-pattern_create and msf-pattern_offset to achieve the same result.\n\n    Terminal    We get the offset to be 516.\nNow, we will send calculated input to see if we can control the EIP.\n    Terminal    And.. Yes! We can see 0x42424242, the hex code for the 4 B’s we sent.\nEIP Control When we have EIP under control, one of the first things we can do is to reuse the dead code present inside a binary.\nDead Code is a piece of code within a program which is not used when the program executes.\nCode Reuse We can see that the helper function isn’t called during the program execution. Since we have control over the EIP, we can point it to the helper function to get it executed.\nFor that purpose, we need the memory address of the helper function. We can find it with gdb as:\n    Terminal    Our binary is 32-bit and 32-bit programs use little-endian, due to which we have to provide the memory address in reverse bytes order.\n    Terminal    But.. we still get segmentation fault.\nNo need to worry. This is a common thing in exploit dev. Let’s arrange the bytes a bit and see what happens.\n    Terminal    Yay! Did you see? a new process /usr/bin/dash started.. Our Shell!\nBut, wait.. it also did exit even before we could interact with it.\nWhat happens under the hood is that a child process dash is started which operates by getting input from user (like bash or sh) but the parent process (our program) is done with its job and exits. The child process with no input, consequently, also exits.\nWe can take help of cat command to make the terminal wait for input.\nBut, for convenience, we are going to use an awesome tool, a python library, pwntools to make our exploitation process easy.\nPwntools\nHere’s a nice little exploit:\n    vim - exploit.py  1 2 3 4 5 6 7 8 9 10 11  #!/bin/python3 from pwn import * exe = './program' elf = context.binary = ELF(exe, checksec=False) payload=flat(\"A\"*516,0x565561b9) io = process(exe) io.sendline(payload) io.interactive()     Upon running the exploit, we successfully get a system shell and can execute arbitrary commands 🔥\n    Terminal    Shellcode ",
+  "wordCount" : "844",
   "inLanguage": "en",
   "image":"https://the-root-user.github.io/blog/images/cover-binexp-01.png","datePublished": "2022-07-17T00:00:00Z",
   "dateModified": "2022-07-17T00:00:00Z",
@@ -99,12 +99,6 @@
 </head>
 
 <body class=" dark" id="top">
-<script>
-    if (localStorage.getItem("pref-theme") === "light") {
-        document.body.classList.remove('dark')
-    }
-
-</script>
 
 <header class="header">
     <nav class="nav">
@@ -113,26 +107,6 @@
                 <img src="https://the-root-user.github.io/blog/apple-touch-icon-grey.png" alt="logo" aria-label="logo"
                     height="28">New Horizonz</a>
             <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
             </div>
         </div>
         <ul id="menu">
@@ -177,7 +151,7 @@
     <h1 class="post-title">
       Pwn 0x01: Buffer Overflow
     </h1>
-    <div class="post-meta"><span title='2022-07-17 00:00:00 +0000 UTC'>July 17, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Signore
+    <div class="post-meta"><span title='2022-07-17 00:00:00 +0000 UTC'>July 17, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Signore
 
 </div>
   </header> <div class="toc">
@@ -188,16 +162,11 @@
 
         <div class="inner"><nav id="TableOfContents">
   <ul>
-    <li><a href="#the-stack">The Stack</a>
-      <ul>
-        <li><a href="#theory">Theory</a></li>
-        <li><a href="#practical">Practical</a></li>
-      </ul>
-    </li>
+    <li><a href="#the-stack">The Stack</a></li>
     <li><a href="#stack-abuse">Stack Abuse</a>
       <ul>
-        <li><a href="#theory-1">Theory</a></li>
-        <li><a href="#practical-1">Practical</a></li>
+        <li><a href="#concept">Concept</a></li>
+        <li><a href="#deep-dive">Deep Dive</a></li>
       </ul>
     </li>
     <li><a href="#eip-control">EIP Control</a>
@@ -272,7 +241,7 @@ Do Not feel overwhelmed. Just follow along and we&rsquo;ll have fun.</p>
     </div>
 </div>
 </p>
-<p>You have to compile the program with the following command:
+<p>We have to compile the program with the following command:
 
 
 
@@ -291,7 +260,7 @@ Do Not feel overwhelmed. Just follow along and we&rsquo;ll have fun.</p>
     </div>
 </div>
 </p>
-<p>Also, you need to disable ASLR with the following command:
+<p>Also, we need to disable ASLR with the following command:
 
 
 
@@ -309,11 +278,12 @@ Do Not feel overwhelmed. Just follow along and we&rsquo;ll have fun.</p>
 </code></pre></div>
     </div>
 </div>
-</p>
-<details><summary><b>What's happening here?</b></summary>
+
+Everytime you reboot your machine, you&rsquo;ll have to do this step again.</p>
+<details><summary><b>What's going on?</b></summary>
 <blockquote>
 <p>Modern programs come with a bunch of exploit mitigations.
-For example, we can see the protections on the <code>ping</code> binary which is mostly present on linux as well as windows, with <code>CheckSec</code> tool.
+For example, we can see the protections on the <code>ping</code> binary which is mostly present on linux as well as windows, with <a href="https://github.com/slimm609/checksec.sh"><code>checksec</code></a> script.
 
 
 
@@ -327,7 +297,7 @@ For example, we can see the protections on the <code>ping</code> binary which is
         <div class="title">Terminal</div>
     </div>
     <div class="terminalbody">
-        <p><img src="checksec1.png" alt="CheckSec"></p>
+        <p><img src="checksec1.png" alt="checksec-ping"></p>
 <blockquote>
 </blockquote>
 
@@ -335,20 +305,241 @@ For example, we can see the protections on the <code>ping</code> binary which is
 </div>
 </p>
 <p>So, initially we&rsquo;ll be working with those protections disabled and that is why we&rsquo;re giving those extra flags to gcc.</p>
-<p>For now, you don&rsquo;t need to care about them. We&rsquo;ll learn to bypass some anti-exploit mechanisms later on.</p>
+<p>Here we can see the protections on our (compiled) program:
+
+
+
+<div class="terminal space shadow">
+    <div class="top">
+        <div class="btns">
+            <span class="circle red"></span>
+            <span class="circle yellow"></span>
+            <span class="circle green"></span>
+        </div>
+        <div class="title">Terminal</div>
+    </div>
+    <div class="terminalbody">
+        <p><img src="checksec2.png" alt="checksec-program"></p>
+<blockquote>
+</blockquote>
+
+    </div>
+</div>
+
+For now, you don&rsquo;t need to care about them. We&rsquo;ll learn to bypass some anti-exploit mechanisms later on.</p>
 </blockquote>
 </details><br>
-<p>Let&rsquo;s see what&rsquo;s happening in memory.</p>
-<h3 id="theory">Theory<a hidden class="anchor" aria-hidden="true" href="#theory">#</a></h3>
-<h3 id="practical">Practical<a hidden class="anchor" aria-hidden="true" href="#practical">#</a></h3>
+<br>
+<p>In general, the stack is aligned this way:
+<img loading="lazy" src="memory-layout0.png" alt="Stack Layout"  />
+</p>
+<p>Since our program is not dealing with any arguments, so, in our case, it&rsquo;s like this:
+<img loading="lazy" src="memory-layout1.png" alt="Program Stack Layout"  />
+</p>
 <h2 id="stack-abuse">Stack Abuse<a hidden class="anchor" aria-hidden="true" href="#stack-abuse">#</a></h2>
-<h3 id="theory-1">Theory<a hidden class="anchor" aria-hidden="true" href="#theory-1">#</a></h3>
-<p>What if we give the program unexpected input?</p>
-<h3 id="practical-1">Practical<a hidden class="anchor" aria-hidden="true" href="#practical-1">#</a></h3>
-<p>Let&rsquo;s run our program with a different input.</p>
+<p>What if we give the program some unexpected input? <br>
+What if we give an input, more in magnitude than the defined buffer is supposed to handle? 🤔</p>
+<p>Let&rsquo;s take a look.</p>
+<h3 id="concept">Concept<a hidden class="anchor" aria-hidden="true" href="#concept">#</a></h3>
+<p>When we give an input bigger than a defined buffer, if the program is vulnerable, we overwrite other stuff that is already present on the stack.</p>
+<p>Our goal is to overwrite the <code>return address</code> of the function so that we can point the EIP to a memory address of our own choice.
+<img loading="lazy" src="memory-layout-overflow.png" alt="Memory Overflow"  />
+</p>
+<p>Normally, one can just get creative and give a program random inputs until something desirable is received back :)</p>
+<h3 id="deep-dive">Deep Dive<a hidden class="anchor" aria-hidden="true" href="#deep-dive">#</a></h3>
+<p>Let&rsquo;s give our program some random inputs, with the help of Python.<br>
+(You know we can <code>pipe</code> the output of one command to another, right?)</p>
+
+
+
+<div class="terminal space shadow">
+    <div class="top">
+        <div class="btns">
+            <span class="circle red"></span>
+            <span class="circle yellow"></span>
+            <span class="circle green"></span>
+        </div>
+        <div class="title">Terminal</div>
+    </div>
+    <div class="terminalbody">
+        <img src="program-input.png" alt="input">
+    </div>
+</div>
+
+<p>Hnmm.. so, eventually, we broke the program!</p>
+<p>Let&rsquo;s generate a pattern with <code>cyclic</code> utility and analyse the program with gdb to determine the offset of EIP.</p>
+<details><summary>Alternative</summary>
+<p>One can also use metasploit&rsquo;s <code>msf-pattern_create</code> and <code>msf-pattern_offset</code> to achieve the same result.</p>
+</details><br>
+
+
+
+<div class="terminal space shadow">
+    <div class="top">
+        <div class="btns">
+            <span class="circle red"></span>
+            <span class="circle yellow"></span>
+            <span class="circle green"></span>
+        </div>
+        <div class="title">Terminal</div>
+    </div>
+    <div class="terminalbody">
+        <img src="program-offset.png" alt="">
+    </div>
+</div>
+
+<p>We get the offset to be <code>516</code>.</p>
+<p>Now, we will send calculated input to see if we can control the EIP.</p>
+
+
+
+<div class="terminal space shadow">
+    <div class="top">
+        <div class="btns">
+            <span class="circle red"></span>
+            <span class="circle yellow"></span>
+            <span class="circle green"></span>
+        </div>
+        <div class="title">Terminal</div>
+    </div>
+    <div class="terminalbody">
+        <img src="program-eip.png" alt="">
+    </div>
+</div>
+
+<p>And.. Yes! We can see <code>0x42424242</code>, the hex code for the 4 B&rsquo;s we sent.</p>
 <h2 id="eip-control">EIP Control<a hidden class="anchor" aria-hidden="true" href="#eip-control">#</a></h2>
+<p>When we have EIP under control, one of the first things we can do is to reuse the dead code present inside a binary.</p>
+<p><strong>Dead Code</strong> is a piece of code within a program which is not used when the program executes.</p>
 <h3 id="code-reuse">Code Reuse<a hidden class="anchor" aria-hidden="true" href="#code-reuse">#</a></h3>
-<p>&ndash;</p>
+<p>We can see that the <code>helper</code> function isn&rsquo;t called during the program execution. Since we have control over the EIP, we can point it to the <code>helper</code> function to get it executed.</p>
+<p>For that purpose, we need the memory address of the <code>helper</code> function.
+We can find it with gdb as:</p>
+
+
+
+<div class="terminal space shadow">
+    <div class="top">
+        <div class="btns">
+            <span class="circle red"></span>
+            <span class="circle yellow"></span>
+            <span class="circle green"></span>
+        </div>
+        <div class="title">Terminal</div>
+    </div>
+    <div class="terminalbody">
+        <img src="function-addr.png" alt="">
+    </div>
+</div>
+
+<p>Our binary is 32-bit and 32-bit programs use <a href="https://chortle.ccsu.edu/assemblytutorial/Chapter-15/ass15_3.html">little-endian</a>, due to which we have to provide the memory address in reverse bytes order.</p>
+
+
+
+<div class="terminal space shadow">
+    <div class="top">
+        <div class="btns">
+            <span class="circle red"></span>
+            <span class="circle yellow"></span>
+            <span class="circle green"></span>
+        </div>
+        <div class="title">Terminal</div>
+    </div>
+    <div class="terminalbody">
+        <img src="function-addr-error.png" alt="">
+    </div>
+</div>
+
+<p>But.. we still get <code>segmentation fault</code>.</p>
+<p>No need to worry. This is a common thing in exploit dev. Let&rsquo;s arrange the bytes a bit and see what happens.</p>
+
+
+
+<div class="terminal space shadow">
+    <div class="top">
+        <div class="btns">
+            <span class="circle red"></span>
+            <span class="circle yellow"></span>
+            <span class="circle green"></span>
+        </div>
+        <div class="title">Terminal</div>
+    </div>
+    <div class="terminalbody">
+        <img src="function-addr-no-error.png" alt="">
+    </div>
+</div>
+
+<p>Yay! Did you see? a new process <code>/usr/bin/dash</code> started.. Our Shell!</p>
+<p>But, wait.. it also did <code>exit</code> even before we could interact with it.</p>
+<p>What happens under the hood is that a child process <code>dash</code> is started which operates by getting input from user (like <code>bash</code> or <code>sh</code>) but the parent process (our <code>program</code>) is done with its job and exits. The child process with no input, consequently, also exits.</p>
+<p>We can take help of <code>cat</code> command to make the terminal wait for input.<br>
+But, for convenience, we are going to use an awesome tool, a python library, <code>pwntools</code> to make our exploitation process easy.</p>
+<p><strong><a href="https://github.com/Gallopsled/pwntools">Pwntools</a></strong></p>
+<p>Here&rsquo;s a nice little exploit:</p>
+
+
+
+<div class="terminal space shadow">
+    <div class="top">
+        <div class="btns">
+            <span class="circle red"></span>
+            <span class="circle yellow"></span>
+            <span class="circle green"></span>
+        </div>
+        <div class="title">vim - exploit.py</div>
+    </div>
+    <div class="terminalbody">
+        <div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-py" data-lang="py"><span class="ch">#!/bin/python3</span>
+<span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">exe</span> <span class="o">=</span> <span class="s1">&#39;./program&#39;</span>
+<span class="n">elf</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">binary</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="n">exe</span><span class="p">,</span> <span class="n">checksec</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="n">payload</span><span class="o">=</span><span class="n">flat</span><span class="p">(</span><span class="s2">&#34;A&#34;</span><span class="o">*</span><span class="mi">516</span><span class="p">,</span><span class="mh">0x565561b9</span><span class="p">)</span>
+
+<span class="n">io</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="n">exe</span><span class="p">)</span>
+<span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+<span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="pwn-vim.png" alt=""></p>
+
+    </div>
+</div>
+
+<p>Upon running the exploit, we successfully get a system shell and can execute arbitrary commands 🔥</p>
+
+
+
+<div class="terminal space shadow">
+    <div class="top">
+        <div class="btns">
+            <span class="circle red"></span>
+            <span class="circle yellow"></span>
+            <span class="circle green"></span>
+        </div>
+        <div class="title">Terminal</div>
+    </div>
+    <div class="terminalbody">
+        <img src="pwn.png" alt="">
+    </div>
+</div>
+
 <h2 id="shellcode">Shellcode<a hidden class="anchor" aria-hidden="true" href="#shellcode">#</a></h2>
 
 
@@ -483,18 +674,6 @@ images.forEach(img => {
             mybutton.style.opacity = "0";
         }
     };
-
-</script>
-<script>
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        if (document.body.className.includes("dark")) {
-            document.body.classList.remove('dark');
-            localStorage.setItem("pref-theme", 'light');
-        } else {
-            document.body.classList.add('dark');
-            localStorage.setItem("pref-theme", 'dark');
-        }
-    })
 
 </script>
 <script>
