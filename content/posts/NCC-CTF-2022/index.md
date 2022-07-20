@@ -1,5 +1,5 @@
 ---
-title: "NCC CTF 2022 - Reversing Challenges Writeup"
+title: "NCC CTF 2022 - Rev & BinExp Challenges Writeup"
 author: "Signore"
 date: 2022-07-20
 summary: "Walkthrough of Reversing & Binary Exploitation challenges presented at NED Cyber Community CTF 2022"
@@ -117,7 +117,7 @@ We can find the memory address of the `hacked` function with gdb and ROP gadgets
 {{< /terminal >}}
 
 Putting it all together, our final exploit script looks like this:
-{{< terminal title="Terminal">}}
+{{< terminal title="VSCodium - exploit.py">}}
 ```py {linenos=true}
 #!/usr/bin/python
 from pwn import *
