@@ -166,7 +166,7 @@ Our binary is 32-bit and 32-bit programs use [little-endian](https://chortle.ccs
 
 But.. we still get `segmentation fault`.
 
-No need to worry. This is a common thing in exploit dev. Let's arrange the bytes a bit and see what happens.
+No need to worry. This is a common thing in exploit dev. Let's arrange the bytes a little bit and see what happens.
 
 {{< terminal title="Terminal" >}}
 ![](function-addr-no-error.png)
@@ -267,11 +267,11 @@ write("payload",payload)
 
 We have inserted a NOP slide (`\x90`) in the payload before the shell code.
 
-A NOP instruction tells the CPU to do nothing (and just move to next instruction). Even if the stack alignment gets changed a bit, our NOP instructions won't let our (noted) memory address go useless.
+A NoOPeration instruction tells the CPU to do nothing (and just move to next instruction). Even if the stack alignment gets changed a bit, our NOP instructions won't let our (noted) memory address go useless.
 
 Let's run the exploit to get our `payload`.
 
-We run the program with a breakpoint set and can see what's there on the stack:
+We run the program with a breakpoint set and feed to it the payload. Then, we  see what's there on the stack:
 {{< terminal title="Terminal" >}}
 ![](run-exploit.png)
 {{< /terminal >}}
@@ -279,7 +279,7 @@ We run the program with a breakpoint set and can see what's there on the stack:
 ![](stack-after.png)
 {{< /terminal >}}
 
-Let's setup `netcat` listener in another terminal.
+Let's setup a `netcat` listener in another terminal.
 {{< terminal title="Terminal <2>" >}}
 ![](netcat1.png)
 {{< /terminal >}}
