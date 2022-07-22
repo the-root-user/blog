@@ -5,7 +5,7 @@ date: 2022-07-20
 summary: "Walkthrough of Reversing & Binary Exploitation challenges presented at NED Cyber Community CTF 2022"
 description: ""
 categories: ["CTF Writeups"]
-tags: ["r2", "reverse engineering"]
+tags: ["NCC", "reversing", "rop",]
 series: [""]
 keywords: ["rev", "binary", "r2", "radare2", "rizin", "reverse engineering", "ghidra"]
 ShowToc: true
@@ -94,7 +94,7 @@ We are given challege files as `pokemon_challenge.zip`. The binary prints out so
 
 We open the challenge binary in `cutter` (GUI for rizin). I have the decompiler plugin installed, so we navigate to `Decompiler` tab.
 
-Along `main` and `register_name` functions, we can see another function `hacked`. In the decompiled code, we can see that an `if` condition is checking the function arguments. We can also see the values against which the params are being compared.
+Along `main` and `register_name` functions, we can see another function `hacked`. In the decompiled code, we can see that an `if` condition is checking the function arguments. We can also see the values against which the params are being compared. Let's keep note of these values.
 
 ![](chall-50-cutter.png)
 

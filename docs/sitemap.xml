@@ -13,6 +13,11 @@
   </url>
   
   <url>
+    <loc>https://the-root-user.github.io/blog/tags/ncc/</loc>
+    <lastmod>2022-07-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://the-root-user.github.io/blog/posts/ncc-ctf-2022/</loc>
     <lastmod>2022-07-20T00:00:00+00:00</lastmod>
   </url>
@@ -28,12 +33,12 @@
   </url>
   
   <url>
-    <loc>https://the-root-user.github.io/blog/tags/r2/</loc>
+    <loc>https://the-root-user.github.io/blog/tags/reversing/</loc>
     <lastmod>2022-07-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://the-root-user.github.io/blog/tags/reverse-engineering/</loc>
+    <loc>https://the-root-user.github.io/blog/tags/rop/</loc>
     <lastmod>2022-07-20T00:00:00+00:00</lastmod>
   </url>
   
