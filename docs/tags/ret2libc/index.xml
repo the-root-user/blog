@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>buffer overflow on NewHorizonz</title>
-    <link>https://the-root-user.github.io/blog/tags/buffer-overflow/</link>
-    <description>Recent content in buffer overflow on NewHorizonz</description>
+    <title>ret2libc on NewHorizonz</title>
+    <link>https://the-root-user.github.io/blog/tags/ret2libc/</link>
+    <description>Recent content in ret2libc on NewHorizonz</description>
     <image>
       <url>https://the-root-user.github.io/blog/images/blog-cover.png</url>
       <link>https://the-root-user.github.io/blog/images/blog-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 22 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://the-root-user.github.io/blog/tags/buffer-overflow/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 22 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://the-root-user.github.io/blog/tags/ret2libc/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Pwn 0x02: NX Bypass</title>
       <link>https://the-root-user.github.io/blog/posts/pwn-0x02-nx-bypass/</link>
@@ -18,15 +18,6 @@
       
       <guid>https://the-root-user.github.io/blog/posts/pwn-0x02-nx-bypass/</guid>
       <description>Stack isn&amp;rsquo;t allowing code execution? Let&amp;rsquo;s bypass it</description>
-    </item>
-    
-    <item>
-      <title>Pwn 0x01: Buffer Overflow</title>
-      <link>https://the-root-user.github.io/blog/posts/pwn-0x01-buffer-overflow/</link>
-      <pubDate>Mon, 18 Jul 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://the-root-user.github.io/blog/posts/pwn-0x01-buffer-overflow/</guid>
-      <description>WTH is a buffer overflow? Let&amp;rsquo;s do it</description>
     </item>
     
   </channel>

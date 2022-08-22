@@ -1,4 +1,3 @@
-
 # New Horizonz
 
 A blog about Offensive Security Adventures

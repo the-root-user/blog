@@ -5,7 +5,7 @@ date: 2022-07-20
 summary: "Walkthrough of Reversing & Binary Exploitation challenges presented at NED Cyber Community CTF 2022"
 description: ""
 categories: ["CTF Writeups"]
-tags: ["NCC", "reversing", "rop",]
+tags: ["NCC CTF", "reversing", "rop",]
 series: [""]
 keywords: ["rev", "binary", "r2", "radare2", "rizin", "reverse engineering", "ghidra"]
 ShowToc: true
