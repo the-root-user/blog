@@ -87,7 +87,7 @@ We find the offset of EIP to be 516. You know how, right?
 We want to execute `system("/bin/sh")` for which we are going to overwrite the EIP with the address of the `system` function, and then we'll give the return address which can be anything (e.g JUNK) but we will keep it to be the address of the `exit` function so that our program terminates nicely. Lastly, we will give the function arguments which, in present case, would be the address of the `/bin/sh` string. <br>
 Remember stack alignment? revise [here](/blog/posts/pwn-0x01-buffer-overflow/#the-stack)
 
-<details><summary>With the <code>vmmap</code> command in gdb, we can see that the libc/certain sections of libc are loaded into the program</summary>
+<details><summary>With the <code>vmmap</code> command in gdb, we can confirm that the libc/certain sections of libc are loaded into the program</summary>
 
 {{< terminal title="Terminal" >}}
 ![](img02.png)
