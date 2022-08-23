@@ -2,7 +2,7 @@
 title: "Pwn 0x02: NX Bypass"
 author: "Signore"
 date: 2022-08-22
-summary: "Stack isn't allowing code execution? Let's bypass it"
+summary: "Stack is not allowing code execution? Let's bypass it"
 description: ""
 categories: [""]
 tags: ["pwn", "buffer overflow", "ret2libc"]
@@ -27,7 +27,7 @@ In modern binaries, usually what happens is that the stack is not executable, me
 Although the data on the stack is not executable, making a function call and passing required/desired arguments is still allowed. We're going to make use of this fact.
 
 When we are writing code for a program, we don't write code for `print` and such functions. They are said to be built-ins. When we compile the program, the compiler links the program to a library (shared object) in which it would be able to find definitions of those functions during execution. <br>
-Such programs are termed as Dynamically Compiled which we mostly deal with because this process saves the coder a lot of time and effort, while the opposite are Statically Compiled programs which we won't talk about for now.
+Such programs are termed as Dynamically Linked which we mostly deal with because this process saves the coder a lot of time and effort, while the opposite are Statically Linked programs which we won't talk about for now.
 
 Most of the C programs - whether it's x86 or x64 - rely on **libc**, the default C library.
 <details><summary>We can see the shared objects (libraries) being used by a program, with the <code>ldd</code> command</summary>
