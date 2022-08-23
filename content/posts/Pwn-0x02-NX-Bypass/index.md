@@ -37,9 +37,9 @@ Most of the C programs - whether it's x86 or x64 - rely on **libc**, the default
 {{< /terminal >}}
 </details><br>
 
-Since during the program execution, the program is making use of library functions, so the library (libc) is mapped in memory. We can abuse this by finding memory addresses and making calls to other functions present in the library as per our need (or as per desire ;)
-
-`print`, `write`, `system`, `exit`, etc are some of the functions present in the libc out of which, for now, we are most interested in `system`.
+Since during the program execution, the program is making use of library functions, so the library (libc) is mapped in memory. We can abuse this by finding memory addresses and making calls to other functions present in the library as per our need. <br>
+`print`, `write`, `system`, `exit`, etc are some of the functions present in the libc out of which, for now, we are most interested in `system`. <br>
+This technique is called **return2libc**, ret2libc or ret2system.
 
 ### Setup
 
