@@ -12,7 +12,7 @@ buildFuture: false
 buildExpired: false
 enableEmoji: true
 pygmentsUseClasses: true # Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
-googleAnalytics: G-48LCDX0T0B
+# googleAnalytics: G-48LCDX0T0B
 
 minify:
     disableXML: true
