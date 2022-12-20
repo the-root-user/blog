@@ -3,6 +3,10 @@
     margin: 24px auto var(--content-gap) auto;
 }
 
+* {
+    transition: 0.3s ease-in-out;
+}
+
 .post-title {
     margin-bottom: 2px;
     font-size: 40px;
@@ -69,9 +73,22 @@
     font-size: 12px;
 }
 
-.post-content a,
+/* .post-content a, */
+.post-content a {
+    color: #f29492;
+    transition: 0.3s ease-in-out;
+}
+.post-content a:hover {
+    box-shadow: 0 1px 0;
+    /* box-shadow: 0 0 10px 5px rgba(0,0,0,0.7); */
+}
+
+.toc a {
+    transition: 0.3s ease-in-out;
+}
 .toc a:hover {
     box-shadow: 0 1px 0;
+    color: rgb(240, 240, 240);
 }
 
 .post-content a code {
@@ -192,9 +209,10 @@
 .post-content code {
     margin: auto 4px;
     padding: 4px 6px;
-    font-size: 0.82em;
+    font-size: 0.80em;
     line-height: 1.5;
-    background: var(--code-bg);
+    background: rgb(44, 46, 51);
+    /* background: var(--code-bg); */
     border-radius: 2px;
 }
 
@@ -202,7 +220,7 @@
     display: block;
     margin: auto 0;
     padding: 10px;
-    color: rgb(213, 213, 214);
+    color: rgb(214, 213, 213);
     background: var(--hljs-bg) !important;
     border-radius: var(--radius);
     overflow-x: auto;
@@ -212,6 +230,7 @@
 .post-content blockquote {
     margin: 20px 0;
     padding: 0 14px;
+    color: rgb(223, 223, 223);
     border-inline-start: 3px solid var(--primary);
 }
 
@@ -375,6 +394,7 @@ h6:hover .anchor {
     padding-inline-start: 14px;
     padding-inline-end: 14px;
     border-radius: var(--radius);
+    transition: 0.3s ease-in-out;
 }
 
 .paginav .title {
