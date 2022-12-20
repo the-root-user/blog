@@ -16,12 +16,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>About Me | NewHorizonz</title>
+<title>About Me | New Horizonz</title>
 <meta name="keywords" content="">
 <meta name="description" content="author">
 <meta name="author" content=" ">
 <link rel="canonical" href="https://the-root-user.github.io/blog/author/">
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.18a86959464f181cb51424a7a1bd475c552b6c8135133e686671ac3edf84cfbf.css" integrity="sha256-GKhpWUZPGBy1FCSnob1HXFUrbIE1Ez5oZnGsPt&#43;Ez78=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.291713cc6c0b7e4e7b430dcbe2ce0e4f9aed67e7d0d4264c94183981a70e26d8.css" integrity="sha256-KRcTzGwLfk57Qw3L4s4OT5rtZ&#43;fQ1CZMlBg5gacOJtg=" rel="preload stylesheet" as="style">
 <script defer crossorigin="anonymous" src="/blog/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://the-root-user.github.io/blog/favicon.ico">
@@ -44,7 +44,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://the-root-user.github.io/blog/author/" /><meta property="og:image" content="https://the-root-user.github.io/blog/images/blog-cover.png"/><meta property="article:section" content="" />
 
-<meta property="og:site_name" content="NewHorizonz" />
+<meta property="og:site_name" content="New Horizonz" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://the-root-user.github.io/blog/images/blog-cover.png"/>
@@ -92,7 +92,7 @@
   },
   "publisher": {
     "@type": "Organization",
-    "name": "NewHorizonz",
+    "name": "New Horizonz",
     "logo": {
       "@type": "ImageObject",
       "url": "https://the-root-user.github.io/blog/favicon.ico"
@@ -184,7 +184,7 @@
     </main>
     
 <footer class="footer">
-    <span>&copy; 2022 <a href="https://the-root-user.github.io/blog">NewHorizonz</a></span>
+    <span>&copy; 2022 <a href="https://the-root-user.github.io/blog">New Horizonz</a></span>
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a>
@@ -194,8 +194,8 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
         <path d="M12 6H0l6-6z" />
     </svg>
-</a><script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.6/medium-zoom.min.js" integrity="sha512-N9IJRoc3LaP3NDoiGkcPa4gG94kapGpaA5Zq9/Dr04uf5TbLFU5q0o8AbRhLKUUlp8QFS2u7S+Yti0U7QtuZvQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+</a>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.6/medium-zoom.min.js" integrity="sha512-N9IJRoc3LaP3NDoiGkcPa4gG94kapGpaA5Zq9/Dr04uf5TbLFU5q0o8AbRhLKUUlp8QFS2u7S+Yti0U7QtuZvQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
 const images = Array.from(document.querySelectorAll(".post-content img"));
 images.forEach(img => {
@@ -208,6 +208,25 @@ images.forEach(img => {
   });
 });
 </script>
+
+
+
+
+<script>
+    const toc = document.querySelector('.toc')
+
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 70) {
+             toc.style.top = '40px'
+        } else {
+            toc.style.top = '175px'
+        }
+    })
+</script>
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
 
 <script>
     let menu = document.getElementById('menu')
@@ -238,6 +257,8 @@ images.forEach(img => {
     });
 
 </script>
+
+
 <script>
     var mybutton = document.getElementById("top-link");
     window.onscroll = function () {
@@ -251,18 +272,23 @@ images.forEach(img => {
     };
 
 </script>
+
+
+
+
 <script>
     document.querySelectorAll('pre > code').forEach((codeblock) => {
         const container = codeblock.parentNode.parentNode;
 
         const copybutton = document.createElement('button');
         copybutton.classList.add('copy-code');
-        copybutton.innerHTML = 'copy';
+        
+        copybutton.innerHTML = '<span style="margin: 5px"><ion-icon name=\"clipboard-outline\"></ion-icon><span style=\"font-size: 16px\"> copy</span></span>';
 
         function copyingDone() {
-            copybutton.innerHTML = 'copied!';
+            copybutton.innerHTML = '<span style="margin: 5px"><ion-icon name=\"checkmark-outline\"></ion-icon><span style=\"font-size: 16px\"> copied!</span></span>';
             setTimeout(() => {
-                copybutton.innerHTML = 'copy';
+                copybutton.innerHTML = '<span style="margin: 5px"><ion-icon name=\"clipboard-outline\"></ion-icon><span style=\"font-size: 16px\"> copy</span></span>';
             }, 2000);
         }
 

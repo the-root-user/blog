@@ -272,15 +272,21 @@
 }
 
 .toc {
-    margin: 0 2px 40px 2px;
-    border: 1px solid var(--border);
+    position: fixed;
+    overflow-y: auto;
+    right: 190px;
+    top: 175px;
+    width: 320px;
+    margin: 10px 2px 40px 2px;
     background: var(--code-bg);
     border-radius: var(--radius);
     padding: 0.4em;
+    padding-top: 0.7em;
 }
 
 .dark .toc {
-    background: var(--entry);
+    background: rgb(37, 37, 41);
+    /* background: var(--entry); */
 }
 
 .toc details summary {

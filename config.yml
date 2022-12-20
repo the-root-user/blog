@@ -1,6 +1,6 @@
 baseURL: https://the-root-user.github.io/blog
 languageCode: en-us
-title: NewHorizonz
+title: "New Horizonz"
 theme: "PaperMod"
 paginate: 5
 
@@ -23,7 +23,7 @@ minify:
 
 params:
     env: production # to enable google analytics, opengraph, twitter-cards and schema.
-    title: NewHorizonz
+    title: "New Horizonz"
     description: "A blog about adventures in Offensive Computers Security"
     keywords: [Blog, Ethical Hacking, Cyber Security, OSINT, Exploit Development, Reverse Engineering, CTF, Writeup, Hackthebox, Tryhackme]
     author: ["Signore"]
@@ -40,7 +40,7 @@ params:
 
     ShowReadingTime: true
     ShowShareButtons: true
-    ShareButtons: ["facebook","whatsapp","linkedin","twitter","reddit"]
+    ShareButtons: ["facebook","whatsapp","linkedin","twitter"] # reddit
     ShowPostNavLinks: true
     ShowBreadCrumbs: true
     ShowCodeCopyButtons: true
@@ -53,7 +53,7 @@ params:
     hidemeta: false
     hideSummary: false
     showtoc: true
-    tocopen: false
+    tocopen: true #false
 
     assets:
         # disableHLJS: true # to disable highlight.js
@@ -72,7 +72,7 @@ params:
     # profile-mode
     profileMode:
         enabled: false # needs to be explicitly set
-        title: NewHorizonz
+        title: "New Horizonz"
         subtitle: "Signore"
         imageUrl: ""
         imageWidth: 120
