@@ -75,11 +75,11 @@
 
 /* .post-content a, */
 .post-content a {
-    color: #f29492;
-    transition: 0.3s ease-in-out;
+    box-shadow: 0 1px 0;
+    transition: 0.2s ease-in-out;
 }
 .post-content a:hover {
-    box-shadow: 0 1px 0;
+    color: #f29492;
     /* box-shadow: 0 0 10px 5px rgba(0,0,0,0.7); */
 }
 
