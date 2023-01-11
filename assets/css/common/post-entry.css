@@ -39,14 +39,14 @@
     padding: var(--gap);
     background: var(--entry);
     border-radius: var(--radius);
-    transition: transform 0.1s;
     border: 1px solid var(--border);
-    transition: ease-in-out 0.2s;
+    transition: ease-in-out 0.3s;
 }
 
 .post-entry:hover {
+    /* transform: scale(1.01); */
     background: #34343a;
-    /* box-shadow: 0 5px 30px 5px rgba(25,25,25,0.3); */
+    box-shadow: 0 4px 32px 0 #34343a64;
 }
 
 .post-entry:active {
