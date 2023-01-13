@@ -87,7 +87,7 @@
     transition: 0.3s ease-in-out;
 }
 .toc a:hover {
-    box-shadow: 0 1px 0;
+    text-shadow: 0 1px 5px #f29492b3; /* #ffa2e3b3; */
     color: rgb(240, 240, 240);
 }
 
