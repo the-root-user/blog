@@ -66,7 +66,7 @@ body:not(.dark) #sun {
 }
 
 #menu li:hover{
-    text-shadow: 0 1px 5px #f29492b3;
+    text-shadow: 0 0 5px #ff79c6; /* #f29492b3; */
     transition: 0.1s ease;
 }
 

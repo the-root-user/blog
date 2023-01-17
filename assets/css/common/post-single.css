@@ -76,19 +76,19 @@
 /* .post-content a, */
 .post-content a {
     box-shadow: 0 1px 0;
-    transition: 0.2s ease-in-out;
+    transition: 0.3s ease-in-out;
 }
 .post-content a:hover {
-    color: #f29492;
+    color: #f29492; /* #ff79c6 */
     /* box-shadow: 0 0 10px 5px rgba(0,0,0,0.7); */
 }
 
 .toc a {
-    transition: 0.3s ease-in-out;
+    transition: 0.2s ease-in-out;
 }
 .toc a:hover {
-    text-shadow: 0 1px 5px #f29492b3; /* #ffa2e3b3; */
-    color: rgb(240, 240, 240);
+    text-shadow: 0 0 5px #ff79c6; /* #f29492b3 */
+    color: rgb(230, 230, 230);
 }
 
 .post-content a code {
