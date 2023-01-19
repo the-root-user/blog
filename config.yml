@@ -23,14 +23,12 @@ minify:
 
 params:
     env: production # to enable google analytics, opengraph, twitter-cards and schema.
-    title: "<img src=\"https://the-root-user.github.io/blog/Logo_NewHorizonz.gif\" height=\"28\"> </a>"
+    title: "New Horizonz"
     description: "A blog about adventures in Offensive Computers Security"
     keywords: [Blog, Ethical Hacking, Cyber Security, OSINT, Exploit Development, Reverse Engineering, CTF, Writeup, Hackthebox, Tryhackme]
     author: ["Signore"]
-    # images: ["https://images.unsplash.com/photo-1621360841013-c7683c659ec6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80"]
-    # images: ["https://images.unsplash.com/photo-1622737133809-d95047b9e673?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80"]
-    images: ["images/blog-cover.png"]
     # author: ["Me", "You"] # multiple authors
+    images: ["images/blog-cover.png"]
     # images: ["<link or path of image for opengraph, twitter-cards>"]
     DateFormat: "January 2, 2006"
     timeZone: Asia/Karachi
@@ -86,7 +84,8 @@ params:
 
     # home-info mode
     homeInfoParams:
-        Title: "New Horizonz" # "Hi there \U0001F44B"
+        # Title: "![New Horizonz](/blog/Logo_NewHorizonz.gif)" # "Hi there \U0001F44B"
+        Title: "[New Horizonz]()" # "Hi there \U0001F44B"
         Content: >
             A blog about Offensive Security Adventures
 
