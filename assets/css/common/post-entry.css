@@ -12,6 +12,7 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
+    text-shadow: 0 0 05px #dadadb32;
 }
 
 .first-entry .entry-header h1 {
