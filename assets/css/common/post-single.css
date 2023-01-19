@@ -274,14 +274,20 @@
 .toc {
     position: fixed;
     overflow-y: auto;
-    right: 190px;
-    top: 175px;
-    width: 320px;
+    right: 11.9rem;
+    top: 10.9rem;
+    width: 20rem;
     margin: 10px 2px 40px 2px;
     background: var(--code-bg);
     border-radius: var(--radius);
     padding: 0.4em;
     padding-top: 0.7em;
+}
+
+@media (max-width: 767px) {
+  .toc {
+      position: static;
+  }
 }
 
 .dark .toc {
