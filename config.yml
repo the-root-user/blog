@@ -23,7 +23,7 @@ minify:
 
 params:
     env: production # to enable google analytics, opengraph, twitter-cards and schema.
-    title: "New Horizonz"
+    title: "<img src=\"https://the-root-user.github.io/blog/Logo_NewHorizonz.gif\" height=\"28\"> </a>"
     description: "A blog about adventures in Offensive Computers Security"
     keywords: [Blog, Ethical Hacking, Cyber Security, OSINT, Exploit Development, Reverse Engineering, CTF, Writeup, Hackthebox, Tryhackme]
     author: ["Signore"]
