@@ -12,7 +12,7 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
-    text-shadow: 0 0 10px #ff79c632;
+    text-shadow: 0 0 05px #ff79c632;
     transition: ease 0.3s;
 }
 .first-entry .entry-header:hover {
