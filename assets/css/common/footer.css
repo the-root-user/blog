@@ -42,7 +42,7 @@
     padding: 12px;
     border-radius: 64px;
     transition: visibility 0.5s, opacity 0.8s linear;
-    transition: box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease-in-out;
 }
 
 .top-link,
