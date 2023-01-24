@@ -1,4 +1,4 @@
-.not-found {
+.not-found1 {
     position: absolute;
     left: 0;
     right: 0;
@@ -6,6 +6,9 @@
     align-items: center;
     justify-content: center;
     height: 80%;
+    text-shadow: 0 0 05px #ff79c680;
+}
+.not-found2 {
     font-size: 160px;
     font-weight: 700;
 }

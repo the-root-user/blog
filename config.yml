@@ -63,8 +63,8 @@ params:
         # safari_pinned_tab: "<link / abs url>"
 
     label:
-        text: " " #"New Horizonz" #"Home"
-        icon: "Logo_NewHorizonz.gif" # "apple-touch-icon-grey.png"
+        text: "Home" # "New Horizonz" " " "Home"
+        icon: "apple-touch-icon-grey.png" # "Logo_NewHorizonz.gif"
         iconHeight: 28
 
     # profile-mode

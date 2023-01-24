@@ -27,4 +27,11 @@ This blog serves the purpose of a medium for me to chronicle my journey into the
 
 [Here](../projects) are some projects of mine, if you wanna check out.
 
-> **Signore**
+<div class="hero-container">
+    <div class="environment"></div>
+    <span style="font-size: 25px; font-weight: 700" class="hero glitch layers" data-text="Signøre">
+        <blockquote>
+        <span>Signøre</span>
+        </blockquote>
+    </span>
+</div>
