@@ -5,7 +5,7 @@ A blog about Offensive Security Adventures
 The theme I am using for my blog is PaperMod, but with a lot of customizations.
 
 I am not a maintainer, I just keep modifying the theme for my own blog.
-If you want to use the theme, just delete the posts and feel free to use mine :)
+If you want to use the theme, just delete the posts (& google analytics tag) and feel free to use mine :)
 
 ## What's Changed
 
