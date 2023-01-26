@@ -2,16 +2,25 @@
 
 A blog about Offensive Security Adventures
 
-For any query/suggestion, hit me up on Twitter!
+The theme I am using for my blog is PaperMod, but with a lot of customizations.
 
-## Series
+## What's Changed
 
-[**Binary Exploitation Adventures**](https://the-root-user.github.io/blog/series/binary-exploitation-adventures/)
-
-## Posts
-
-[Pwn 0x00: Warmup](https://the-root-user.github.io/blog/posts/pwn-0x00-warmup/)
-
-[Pwn 0x01: Buffer Overflow](https://the-root-user.github.io/blog/posts/pwn-0x01-buffer-overflow/)
-
-[NCC CTF 2022 - Rev & BinExp Challenges Writeup](https://the-root-user.github.io/blog/posts/ncc-ctf-2022/)
+- Floating TOCs + Responsive, would be static on mobile
+- Enhanced copy button
+- Glow animation on:
+    - site title on home page
+    - posts in listing view
+    - buttons in header
+    - TOCs
+    - move-to-top button in footer
+- Color change animation on links in posts
+- Dracula theme (in highlight.js) for code syntax highlighting
+- Terminal box around code
+- Added a About Me page
+- Box animation on post names on Archive page
+- Count of posts removed on Archive page (I don't like it)
+- Author name removed (no need for a single writer when there is an about page)
+- Glitch animation for site title and some other elements
+- Images with more rounded corners
+- Better sharing button social icons 
