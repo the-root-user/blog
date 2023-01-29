@@ -21,7 +21,7 @@
 <meta name="description" content="A blog about adventures in Offensive Computers Security">
 <meta name="author" content="Signore">
 <link rel="canonical" href="https://the-root-user.github.io/blog/tags/rop/">
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.2b2cd5794afd2a1ac7629b94da99222028aa1f788edd0b204a38f64492967e9a.css" integrity="sha256-KyzVeUr9KhrHYpuU2pkiICiqH3iO3QsgSjj2RJKWfpo=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.bddb284285175c0fcc5f4ee98f58f0cc04f6950665fb2555bf61bf7825c04746.css" integrity="sha256-vdsoQoUXXA/MX07pj1jwzAT2lQZl&#43;yVVv2G/eCXAR0Y=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://the-root-user.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://the-root-user.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://the-root-user.github.io/blog/favicon-32x32.png">
@@ -139,13 +139,16 @@
         <path d="M12 6H0l6-6z" />
     </svg>
 </a>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.6/medium-zoom.min.js" integrity="sha512-N9IJRoc3LaP3NDoiGkcPa4gG94kapGpaA5Zq9/Dr04uf5TbLFU5q0o8AbRhLKUUlp8QFS2u7S+Yti0U7QtuZvQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="/blog/js/medium-zoom.min.js" data-no-instant
+></script>
+
 <script>
 const images = Array.from(document.querySelectorAll(".post-content img"));
 images.forEach(img => {
   mediumZoom(img, {
     margin: 10,  
-    background: '#121417e4',  
+    background: '#1c1c1fe5',  
     scrollOffset: 20,  
     container: null,  
     template: null  
@@ -167,9 +170,53 @@ images.forEach(img => {
         }
     })
 </script>
-
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script>
+    class Scroller {
+        static init() {
+        if(document.querySelector('.toc')) { 
+            this.toc = document.querySelectorAll('.toc a');
+            this.toc.forEach(link => link.classList.add('transition', 'duration-200'))
+            this.headers = Array.from(this.toc).map(link => {
+            return document.querySelector(`#${link.href.split('#')[1]}`);
+            })
+            this.ticking = false;
+            window.addEventListener('scroll', (e) => {
+            this.onScroll()
+            })
+        }
+        }
+    
+        static onScroll() {
+        if(!this.ticking) {
+            requestAnimationFrame(this.update.bind(this));
+            this.ticking = true;
+        }
+        }
+    
+        static update() {
+        this.activeHeader ||= this.headers[0];
+        let activeIndex = this.headers.findIndex((header) => {
+            return header.getBoundingClientRect().top > 180;
+        });
+        if(activeIndex == -1) {
+            activeIndex = this.headers.length - 1;
+        } else if(activeIndex > 0) {
+            activeIndex--;
+        }
+        let active = this.headers[activeIndex];
+        if(active !== this.activeHeader) {
+            this.activeHeader = active;
+            this.toc.forEach(link => link.classList.remove('toc-active'));
+            this.toc[activeIndex].classList.add('toc-active');
+        }
+        this.ticking = false;
+        }
+    }
+    
+    document.addEventListener('DOMContentLoaded', function(e) {
+        Scroller.init();
+    })
+  </script>
 
 
 <script>
