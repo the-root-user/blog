@@ -11,6 +11,10 @@
 .nav a {
     display: block;
 }
+.nav a:hover {
+    text-shadow: 0 0 5px #ff79c6; /* #f29492b3; */
+    color: rgb(230, 230, 230);
+}
 
 .logo,
 #menu {
@@ -25,6 +29,7 @@
 .logo a {
     font-size: 24px;
     font-weight: 700;
+    transition: 0.3s ease-in-out;
 }
 
 .logo a img {
@@ -65,22 +70,19 @@ body:not(.dark) #sun {
     margin-inline-start: var(--gap);
 }
 
-#menu li:hover{
-    text-shadow: 0 0 5px #ff79c6; /* #f29492b3; */
+#menu a {
+    font-size: 16px;
     transition: 0.1s ease-in-out;
 }
 
-#menu a {
-    font-size: 16px;
-}
-
-#menu a:hover {
-    font-color: #f29492;
-}
-
 #menu .active {
+    /* color: rgb(230, 230, 230); */
+    color: #96beff;
     font-weight: 500;
-    border-bottom: 2px solid currentColor;
+    /* background: #2a2b2e;
+    box-shadow: 0 0 0 10px #2a2b2e;
+    border-radius: 4px; */
+    box-shadow: 0 2px 0 #8AB4F8;
 }
 
 .lang-switch li,

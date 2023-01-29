@@ -33,9 +33,9 @@
     transition: 0.3s ease-in-out;
 }
 .archive-entry:hover {
-    background: #222325;
-    box-shadow: -10px 0 0 10px #222325;
-    border-radius: 8px;
+    background: #2a2b2e;
+    box-shadow: 0 0 0 5px #2a2b2e;
+    border-radius: 10px;
 }
 
 .archive-entry-title {

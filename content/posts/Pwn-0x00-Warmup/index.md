@@ -25,7 +25,7 @@ cover:
 
 ### Optional
 
-- Since, at first, we will be doing exploit development on Linux, it would be nice to learn the necessary things [here](https://tryhackme.com/module/linux-fundamentals).
+- Since, at first, we will be doing exploit development on Linux, it would be nice to learn the necessary things [here](https://tryhackme.com/module/linux-fundamentals)
 - Some Assembly knowledge will benefit you a lot - here is a nice [tutorial](https://www.tutorialspoint.com/assembly_programming/index.htm)
 - <abbr title="GNU Debugger">Gdb</abbr> is going to play a key role in our exploit dev - here's a lovely [tutorial](https://www.cs.umd.edu/~srhuang/teaching/cmsc212/gdb-tutorial-handout.pdf)
 

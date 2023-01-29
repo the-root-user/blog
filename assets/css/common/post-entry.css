@@ -43,7 +43,7 @@
     margin-bottom: var(--gap);
     padding: var(--gap);
     background: var(--entry);
-    border-radius: 12px;/* 14 var(--radius); */
+    border-radius: 14px; /* var(--radius); */
     border: 1px solid var(--border);
     transition: ease-in-out 0.3s;
 }

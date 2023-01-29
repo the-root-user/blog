@@ -75,20 +75,12 @@
 
 /* .post-content a, */
 .post-content a {
-    box-shadow: 0 1px 0;
+    color: #8AB4F8; /* #f29492; #ff79c6 */
     transition: 0.2s ease-in-out;
 }
 .post-content a:hover {
-    color: #8AB4F8; /* #f29492; #ff79c6 */
+    box-shadow: 0 1px 0;
     /* box-shadow: 0 0 10px 5px rgba(0,0,0,0.7); */
-}
-
-.toc a {
-    transition: 0.2s ease-in-out;
-}
-.toc a:hover {
-    text-shadow: 0 0 5px #ff79c6; /* #f29492b3 */
-    color: rgb(230, 230, 230);
 }
 
 .post-content a code {
@@ -213,7 +205,7 @@
     line-height: 1.5;
     background: rgb(44, 46, 51);
     /* background: var(--code-bg); */
-    border-radius: 2px;
+    border-radius: 6px;
 }
 
 .post-content pre code {
@@ -246,7 +238,7 @@
 }
 
 .post-content img {
-    border-radius: 5px;
+    border-radius: 10px;
     margin: 1rem 0;
 }
 
@@ -274,24 +266,25 @@
 .toc {
     position: fixed;
     overflow-y: auto;
-    right: 11.9rem;
+    right: 11rem;
     top: 10.9rem;
     width: 20rem;
     margin: 10px 2px 40px 2px;
     background: var(--code-bg);
-    border-radius: var(--radius);
+    border-radius: 12px; /* var(--radius); */
     padding: 0.4em;
     padding-top: 0.7em;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1900px) {
   .toc {
-      position: static;
+    position: static;
+    width: auto;
   }
 }
 
 .dark .toc {
-    background: rgb(37, 37, 41);
+    background: rgb(38, 39, 42);
     /* background: var(--entry); */
 }
 
@@ -320,6 +313,25 @@
 
 .toc summary:focus {
     outline: 0;
+}
+
+.toc a {
+    transition: 0.2s ease-in-out;
+}
+.toc li a:hover {
+    text-shadow: 0 0 5px #ff79c6; /* #4169E1 #00FFFF #40E0D0 #f29492b3 */
+    color: rgb(230, 230, 230);
+}
+/* .toc li a.active {
+    background-color: rgb(50, 51, 54);
+} */
+.toc-active {
+    color: #8AB4F8;
+    display: flex;
+    background-color: #8ab4f81a;
+    width: auto;
+    box-shadow: -3px 0 0 3px #8ab4f81a;
+    border-radius: 4px;
 }
 
 .post-footer {
@@ -365,6 +377,10 @@
 
 .share-buttons a {
     margin-top: 10px;
+}
+.share-buttons a :hover {
+    color: rgb(235, 235, 235);
+    /* text-shadow: 0 0 10px 1px; */
 }
 
 .share-buttons a:not(:last-of-type) {

@@ -2,13 +2,18 @@
 {{- /*     Insert any custom code web-analytics, resources, etc. here */ -}}
 
 <!-- Zoom Images -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.0.6/medium-zoom.min.js" integrity="sha512-N9IJRoc3LaP3NDoiGkcPa4gG94kapGpaA5Zq9/Dr04uf5TbLFU5q0o8AbRhLKUUlp8QFS2u7S+Yti0U7QtuZvQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{{/* Load mediumZoom script */}}
+{{- $imagezoom := resources.Get "js/medium-zoom.min.js" }}
+<script src="{{ $imagezoom.RelPermalink }}" data-no-instant
+  {{- if site.Params.assets.disableFingerprinting }}integrity="{{ $imagezoom.Data.Integrity }}"{{- end }}
+></script>
+
 <script>
 const images = Array.from(document.querySelectorAll(".post-content img"));
 images.forEach(img => {
   mediumZoom(img, {
     margin: 10, /* The space outside the zoomed image */
-    background: '#121417e4', /* Color is slightly darker than the theme backgound color */
+    background: '#1c1c1fe5', /* Color is slightly darker than the theme backgound color */
     scrollOffset: 20, /* The number of pixels to scroll to close the zoom */
     container: null, /* The viewport to render the zoom in */
     template: null /* The template element to display on zoom */
@@ -29,7 +34,7 @@ lazySizes.init({
 });
 </script> -->
 
-<!-- Floating TOCs -->
+{{/* Floating TOCs */}}
 <script>
     const toc = document.querySelector('.toc')
 
@@ -42,7 +47,53 @@ lazySizes.init({
     })
 </script>
 
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
 {{- /* Footer custom content area end */ -}}
+
+{{/* TOC highlight */}}
+<script>
+    class Scroller {
+        static init() {
+        if(document.querySelector('.toc')) { // .toc
+            this.toc = document.querySelectorAll('.toc a');
+            this.toc.forEach(link => link.classList.add('transition', 'duration-200'))
+            this.headers = Array.from(this.toc).map(link => {
+            return document.querySelector(`#${link.href.split('#')[1]}`);
+            })
+            this.ticking = false;
+            window.addEventListener('scroll', (e) => {
+            this.onScroll()
+            })
+        }
+        }
+    
+        static onScroll() {
+        if(!this.ticking) {
+            requestAnimationFrame(this.update.bind(this));
+            this.ticking = true;
+        }
+        }
+    
+        static update() {
+        this.activeHeader ||= this.headers[0];
+        let activeIndex = this.headers.findIndex((header) => {
+            return header.getBoundingClientRect().top > 180;
+        });
+        if(activeIndex == -1) {
+            activeIndex = this.headers.length - 1;
+        } else if(activeIndex > 0) {
+            activeIndex--;
+        }
+        let active = this.headers[activeIndex];
+        if(active !== this.activeHeader) {
+            this.activeHeader = active;
+            this.toc.forEach(link => link.classList.remove('toc-active'));
+            this.toc[activeIndex].classList.add('toc-active');
+        }
+        this.ticking = false;
+        }
+    }
+    
+    document.addEventListener('DOMContentLoaded', function(e) {
+        Scroller.init();
+    })
+  </script>
