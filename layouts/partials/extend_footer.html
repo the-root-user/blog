@@ -26,8 +26,13 @@ images.forEach(img => {
 const images = Array.from(document.querySelectorAll(".post-content img"));
 images.forEach(img => {
   img.setAttribute("data-src", img.src);
+  img.classList.add("lazy");
 });
-</script>
+
+lazySizes.init({
+  expand: 200
+});
+</script> -->
 
 {{/* Floating TOCs */}}
 <script>
@@ -40,7 +45,7 @@ images.forEach(img => {
             toc.style.top = '10.9rem'
         }
     })
-</script> -->
+</script>
 
 {{- /* Footer custom content area end */ -}}
 
