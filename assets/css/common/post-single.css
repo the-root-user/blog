@@ -276,11 +276,23 @@
     padding-top: 0.7em;
 }
 
-@media (max-width: 1900px) {
-  .toc {
-    position: static;
-    width: auto;
-  }
+@media (max-width: 1800px) {
+    .toc {
+        right: 3rem;
+        width: 18rem;
+    }
+}
+@media (max-width: 1500px) {
+    .toc {
+        right: 1rem;
+        width: 13rem;
+    }
+}
+@media (max-width: 1200px) {
+    .toc {
+        position: static;
+        width: auto;
+    }
 }
 
 .dark .toc {
