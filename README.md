@@ -11,7 +11,15 @@ If you want to use the theme, just delete the posts (& google analytics tag) and
 
 - Floating TOCs + Responsive, static on mobile
 - Medium-like Zoom for Images
-- Enhanced copy button
+- Dracula theme (in highlight.js) for code syntax highlighting
+- Terminal box around code
+- Added a About Me page
+- A Projects page
+- Enhanced:
+    - copy button
+    - <code\> bg
+    - <abbr\> and <a\> tags
+- Glitch animation for site title and some other elements
 - Glow animation on:
     - site title on home page
     - posts in listing view
@@ -20,13 +28,8 @@ If you want to use the theme, just delete the posts (& google analytics tag) and
     - copy button
     - move-to-top button in footer
 - Color change animation on links in posts
-- Dracula theme (in highlight.js) for code syntax highlighting
-- Terminal box around code
-- Added a About Me page
-- A Projects page
 - Box animation on post names on Archive page
 - Count of posts removed on Archive page (I don't like it)
 - Author name removed (no need for a single writer when there is an about page)
-- Glitch animation for site title and some other elements
-- Images with more rounded corners
-- Better sharing button social icons 
+- Images (and many other elements) with more rounded corners
+- Better sharing button social icons
