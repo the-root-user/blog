@@ -52,6 +52,7 @@
     /* transform: scale(1.01); */
     background: #34343a;
     box-shadow: 0 2px 32px 0 #34343a64;
+    /* margin-left: 10px; */
 }
 
 .post-entry:active {
