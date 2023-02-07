@@ -9,18 +9,21 @@ If you want to use the theme, just delete the posts (& google analytics tag) and
 
 ## What's Changed
 
-- Floating TOCs + Responsive, would be static on mobile
+- Floating TOCs + Responsive, static on mobile
+- Medium-like Zoom for Images
 - Enhanced copy button
 - Glow animation on:
     - site title on home page
     - posts in listing view
     - buttons in header
     - TOCs
+    - copy button
     - move-to-top button in footer
 - Color change animation on links in posts
 - Dracula theme (in highlight.js) for code syntax highlighting
 - Terminal box around code
 - Added a About Me page
+- A Projects page
 - Box animation on post names on Archive page
 - Count of posts removed on Archive page (I don't like it)
 - Author name removed (no need for a single writer when there is an about page)
