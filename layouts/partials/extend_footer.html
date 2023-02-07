@@ -2,7 +2,7 @@
 {{- /*     Insert any custom code web-analytics, resources, etc. here */ -}}
 
 <!-- Zoom Images -->
-{{/* Load mediumZoom script */}}
+{{- /* MediumZoom for Images */ -}}
 {{- $imagezoom := resources.Get "js/medium-zoom.min.js" }}
 <script src="{{ $imagezoom.RelPermalink }}" data-no-instant
   {{- if site.Params.assets.disableFingerprinting }}integrity="{{ $imagezoom.Data.Integrity }}"{{- end }}
@@ -21,6 +21,7 @@ images.forEach(img => {
 });
 </script>
 
+{{- /* Lazysizes.js */ -}}
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js" integrity="sha512-BV+srhYX9yVpDyLJh1aFpRZu+tZ4J20Zu4tV3qQHG9BBhS3LdAiVwH/Ot8m4tO4xzoZuV7q3a2OeO7Sg1hM+lw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
 const images = Array.from(document.querySelectorAll(".post-content img"));
@@ -34,7 +35,7 @@ lazySizes.init({
 });
 </script> -->
 
-{{/* Floating TOCs */}}
+{{- /* Floating TOCs */ -}}
 <script>
     const toc = document.querySelector('.toc')
 
@@ -49,7 +50,7 @@ lazySizes.init({
 
 {{- /* Footer custom content area end */ -}}
 
-{{/* TOC highlight */}}
+{{- /* TOC highlight */ -}}
 <script>
     class Scroller {
         static init() {
@@ -97,3 +98,21 @@ lazySizes.init({
         Scroller.init();
     })
   </script>
+
+{{- /* Color Theif script */ -}}
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
+<script>
+    const colorThief = new ColorThief();
+    const img = document.querySelector('img');
+
+    // Make sure image is finished loading
+    if (img.complete) {
+      colorThief.getColor(img);
+    } else {
+      image.addEventListener('load', function() {
+        colorThief.getColor(img);
+      });
+    }
+</script> -->
+
+{{- /* Footer custom content area end */ -}}
