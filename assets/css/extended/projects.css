@@ -1,0 +1,33 @@
+.project {
+    background-color: var(--entry); border-radius: 16px;
+    margin: 10px; margin-top: 30px;
+    padding: 25px; padding-bottom: 10px;
+    /* padding-right: 25px; padding-left: 25px; */
+    /* text-align: center; font-size: 20px; */
+    border-left: solid 5px #64646a;
+}
+
+.project:hover {
+    background: #313137;
+    box-shadow: 0 2px 40px 0 #31313780;
+}
+
+.project a {
+    font-size: 18px;
+    /* margin: 5px; */
+}
+
+.project p {
+    color: var(--secondary);
+    font-size: 16px;
+    row-gap: 10px;
+}
+
+.project img {
+    border-radius: var(--radius);
+    pointer-events: none;
+    width: 100%;
+    height: auto;
+}
+
+

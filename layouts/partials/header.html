@@ -67,7 +67,12 @@
                     height="{{- site.Params.label.iconHeight | default "30" -}}">
                 {{- end -}}
                 {{- end -}}
+                {{- if .IsHome }}
                 {{- $label_text -}}
+                {{- end }}
+                {{- if not .IsHome }}
+                {{- site.Title }}
+                {{- end }}
             </a>
             {{- end }}
             <div class="logo-switches">

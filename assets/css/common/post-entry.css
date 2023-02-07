@@ -51,7 +51,7 @@
 .post-entry:hover {
     /* transform: scale(1.01); */
     background: #34343a;
-    box-shadow: 0 4px 32px 0 #34343a64;
+    box-shadow: 0 2px 32px 0 #34343a64;
 }
 
 .post-entry:active {
