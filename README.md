@@ -14,7 +14,7 @@ If you want to use the theme, just delete the posts (& google analytics tag) and
 - Dracula theme (in highlight.js) for code syntax highlighting
 - Terminal box around code
 - Added a About Me page
-- A Projects page
+- A Projects page with custom layout and UI + External Links support
 - Enhanced:
     - copy button
     - <code\> bg

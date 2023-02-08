@@ -58,5 +58,14 @@
     
     
     
+    <item>
+      <title>Sweet-HTB: Modern theme for Hackers</title>
+      <link>https://the-root-user.github.io/blog/projects/p01-sweet-htb/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://the-root-user.github.io/blog/projects/p01-sweet-htb/</guid>
+      <description>Modern theme for Hackers, with dark colors - Inspired from the UI of Hackthebox</description>
+    </item>
+    
   </channel>
 </rss>
