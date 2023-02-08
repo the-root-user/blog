@@ -3,17 +3,27 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://the-root-user.github.io/blog/projects/p03-expdev/</loc>
+    <lastmod>2022-12-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://the-root-user.github.io/blog/projects/</loc>
+    <lastmod>2022-12-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://the-root-user.github.io/blog/</loc>
+    <lastmod>2022-12-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://the-root-user.github.io/blog/series/binary-exploitation-adventures/</loc>
     <lastmod>2022-08-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://the-root-user.github.io/blog/tags/buffer-overflow/</loc>
-    <lastmod>2022-08-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://the-root-user.github.io/blog/</loc>
     <lastmod>2022-08-22T00:00:00+00:00</lastmod>
   </url>
   
@@ -45,6 +55,11 @@
   <url>
     <loc>https://the-root-user.github.io/blog/tags/</loc>
     <lastmod>2022-08-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://the-root-user.github.io/blog/projects/p02-sweet-htb/</loc>
+    <lastmod>2022-07-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -93,6 +108,11 @@
   </url>
   
   <url>
+    <loc>https://the-root-user.github.io/blog/projects/p01-nmap-auto/</loc>
+    <lastmod>2022-03-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://the-root-user.github.io/blog/author/</loc>
   </url>
   
@@ -101,15 +121,7 @@
   </url>
   
   <url>
-    <loc>https://the-root-user.github.io/blog/projects/</loc>
-  </url>
-  
-  <url>
     <loc>https://the-root-user.github.io/blog/search/</loc>
-  </url>
-  
-  <url>
-    <loc>https://the-root-user.github.io/blog/projects/p01-sweet-htb/</loc>
   </url>
   
 </urlset>
