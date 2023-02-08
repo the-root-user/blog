@@ -1,5 +1,5 @@
 ---
-title: "Sweet-HTB: Modern theme for Hackers"
+title: "Sweet-HTB"
 # layout: "list"
 # url: "/projects"
 externallink: "https://github.com/the-root-user/sweet-htb"
@@ -9,12 +9,9 @@ ShowReadingTime: false
 ShowToc: false
 shareButtons: " "
 cover:
-  image: "/blog/projects/P01-Cover.png"
+  image: "/blog/projects/P02-Cover.png"
   caption: "cover"
-
+date: 2022-07-29
 ---
 
-<!-- Github <br> -->
-[Sweet-HTB](https://github.com/the-root-user/sweet-htb) <br>
-Modern theme for Hackers, with dark colors - Inspired from the UI of Hackthebox
-<!-- ![](sweet-htb.png) -->
+[Sweet-HTB](https://github.com/the-root-user/sweet-htb)

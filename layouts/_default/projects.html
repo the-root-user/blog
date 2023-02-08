@@ -36,6 +36,7 @@
 </div>
 {{- end }}
 
+<ul>
 {{- $pages := union .RegularPages .Sections }}
 
 {{- if .IsHome }}
@@ -60,7 +61,7 @@
 {{- else if $term }}
 {{- $class = "project-entry tag-entry" }}
 {{- end }}
-<ul>
+
 <li><article class="{{ $class }}">
   <header class="project-entry-header">
     <h2>
@@ -77,9 +78,9 @@
   </div>
   {{- end }}
   {{- if not (.Param "hideMeta") }}
-  <footer class="entry-footer">
+  <!-- <footer class="entry-footer">
     {{- partial "post_meta.html" . -}}
-  </footer>
+  </footer> -->
   {{- end }}
   <!-- If external link exists in post matter -->
   {{ if isset .Params "externallink" }}
