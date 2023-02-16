@@ -2,16 +2,11 @@
 title: "About Me"
 layout: "author"
 url: "/author"
-summary: "author"
-ShowReadingTime: false
-ShowBreadcrumbs: false
-ShowToc: false
-author: " "
+summary: "Author"
+Author_name: "Signøre"
+Avatar_link: "/blog/images/avatar.jpg"
+ShowBreadCrumbs: false
 searchHidden: true
-params:
-  ShowShareButtons: false
-
-sharebuttons: " "
 
 ---
 
@@ -26,12 +21,3 @@ I have a passion for Computer Security and am a hacker driven by curiosity. I lo
 This blog serves the purpose of a medium for me to chronicle my journey into the world of Cyber Security and to share CTF write-ups as well as anything interesting I come across in my studies or research. I hope you find my posts informative :slightly_smiling_face:
 
 [Here](../projects) are some projects of mine, if you wanna check out.
-
-<div class="hero-container">
-    <div class="environment"></div>
-    <span style="font-size: 25px; font-weight: 700" class="hero glitch layers" data-text="Signøre">
-        <blockquote>
-        <span>Signøre</span>
-        </blockquote>
-    </span>
-</div>
