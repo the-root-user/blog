@@ -6,11 +6,15 @@
     padding: 14px; padding-left: 10px;
     border: solid 1px #252525;
     overflow: hidden;
+    box-shadow: 0 4px 40px 0 #1f1f1f;
 }
 
 .container:hover {
     /* background: #1e1e1e; */
-    box-shadow: 0 4px 40px 0 #1c1c1c;
+    box-shadow: 0 4px 40px 0 #1e1e1e;
+}
+.container:hover .bg-img {
+    transform: scale(1.05);
 }
 
 .bg-img {
@@ -24,6 +28,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     filter: blur(15px);
+    transition: transform 0.5s;
 }
 
 .content {
