@@ -3,6 +3,10 @@
     margin: 24px auto var(--content-gap) auto;
 }
 
+.post-header {
+    margin-top: 34px;
+}
+
 * {
     transition: 0.3s ease-in-out;
 }
@@ -274,7 +278,7 @@
     position: fixed;
     overflow-y: auto;
     right: 11rem;
-    top: 10.9rem;
+    top: 11.6rem;
     width: 20rem;
     margin: 10px 2px 40px 2px;
     background: var(--code-bg);
@@ -303,8 +307,9 @@
 }
 
 .dark .toc {
-    background: rgb(38, 39, 42);
+    background: #27292e;
     /* background: var(--entry); */
+    border: solid 1px #282a2f;
 }
 
 .toc details summary {
