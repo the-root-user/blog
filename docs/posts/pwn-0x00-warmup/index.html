@@ -21,7 +21,7 @@
 <meta name="description" content="Let&rsquo;s get ready to Pwn">
 <meta name="author" content="Signore">
 <link rel="canonical" href="https://the-root-user.github.io/blog/posts/pwn-0x00-warmup/">
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.a4de1ed2bd48ace7696da78608db0eb4e8296e1a98baa0896440397445d5ddcf.css" integrity="sha256-pN4e0r1IrOdpbaeGCNsOtOgpbhqYuqCJZEA5dEXV3c8=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.daae1adc3809a4ceb2b3217999cbb90da2432a59d9a193e8acf653241fd9d625.css" integrity="sha256-2q4a3DgJpM6ysyF5mcu5DaJDKlnZoZPorPZTJB/Z1iU=" rel="preload stylesheet" as="style">
 <script defer crossorigin="anonymous" src="/blog/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://the-root-user.github.io/blog/favicon.ico">
@@ -84,7 +84,7 @@
   "keywords": [
     "pwn", "binary", "memory", "x32", "x64", "gdb", "binary exploitation", "exploit development"
   ],
-  "articleBody": "! We will not be diving deep into things but only as much as necessary. For further learning, I’ll link relevant resources.\n0.1 Prerequisites  Basic Computer Science knowledge Fundamental knowledge of C - here is a nice tutorial   Curiosity - Consistency  Optional  Since, at first, we will be doing exploit development on Linux, it would be nice to learn the necessary things here   Some Assembly knowledge will benefit you a lot - here is a nice tutorial   Gdb is going to play a key role in our exploit dev - here’s a lovely tutorial    0.2 Memory Structure High-level overview  More here    0.3 Architectures Comparison Here’s a C program:\n    program.c  #include  void print_user_data(char* arg1, char* arg2, char* arg3){ printf(\"Here is Your data\\n\"); printf(\"Name: %s Age: %s Job: %s\\n\", arg1, arg2, arg3); } void main(int argc, char **argv){ if (argc!=4) { printf(\"Please provide 3 inputs\\n\"); } else { print_user_data(argv[1], argv[2], argv[3]); } }    The program takes some command line arguments from the user, checks if they are equivalent to 3 and then passes them to another function which prints some data on the console.\n After compiling the code with gcc as:     Terminal  gcc code.c -o code    or     Terminal  make code    make command is just another shortcut for us (for gcc)\n Here’s what it does:     Terminal    Simple enough, right?\nWhen we execute a binary, the binary name and the arguments to its function(s) are stored on the stack (in memory). They are accessed differently in different architectures.\nAfter seeing the disassembled binaries of both archs, you will notice that the length of memory addresses changes. But.. wait\n How are the command line arguments being parsed in memory?\n Let’s compile the code, disassemble it, and see what’s happening under the curtains.\nx32 Compile the code with the command: gcc -m32 code.c -o code\nWhy -m32? When we're on a 64-bit OS, the -m32 flag tells the compiler (gcc) to compile the code and give us a 32-bit binary. If you are on 32-bit machine, you can skip it.  Disassembly You can just follow along with the tutorial, but if you’re curious how I disassembled the binary, here you go.\nThere are many a ways/tools to disassemble a binary. Here, I have used gdb in the following way:     Terminal  gdb code # 'code' is the name of our binary b main # instructing gdb to break at main function disassemble main # disassemble the main function    \n    Terminal    In the case of 32-bit binary, we can see that first, the arguments are being pushed onto the stack and then the call to our function print_user_data is made. They are later popped off the stack before the program exits.\nx64 Compile the code with the command: gcc code.c -o code\nDisassembly     Terminal    On the other hand, in the case of 64-bit binary, arguments are first moved into registers and then our function print_user_data is called.\nNow that you understand the distinction between the two, it will come in handy later on, as we will be putting 32-bit binaries to test more frequently for simplicity.\n0.4 ELF The last thing to be aware of are the ELF files. Wondering what they are?\nELF files, short for Executable and Linkable Format, are standard executables for Linux and other Unix OSs (not exactly but, think of them as the EXE files on Windows).\nAnd as for our current program, since we compiled it on Linux, it also is an ELF file.     Terminal    We might discuss ELF files in detail later on. For further study, here’s a nice video  .\n",
+  "articleBody": "! We will not be diving deep into things but only as much as necessary. For further learning, I’ll link relevant resources.\n0.1 Prerequisites Basic Computer Science knowledge Fundamental knowledge of C - here is a nice tutorial Curiosity - Consistency Optional Since, at first, we will be doing exploit development on Linux, it would be nice to learn the necessary things here Some Assembly knowledge will benefit you a lot - here is a nice tutorial Gdb is going to play a key role in our exploit dev - here’s a lovely tutorial 0.2 Memory Structure High-level overview More here 0.3 Architectures Comparison Here’s a C program:\nprogram.c #include void print_user_data(char* arg1, char* arg2, char* arg3){ printf(\"Here is Your data\\n\"); printf(\"Name: %s Age: %s Job: %s\\n\", arg1, arg2, arg3); } void main(int argc, char **argv){ if (argc!=4) { printf(\"Please provide 3 inputs\\n\"); } else { print_user_data(argv[1], argv[2], argv[3]); } } The program takes some command line arguments from the user, checks if they are equivalent to 3 and then passes them to another function which prints some data on the console.\nAfter compiling the code with gcc as: Terminal gcc code.c -o code or Terminal make code make command is just another shortcut for us (for gcc)\nHere’s what it does: Terminal Simple enough, right?\nWhen we execute a binary, the binary name and the arguments to its function(s) are stored on the stack (in memory). They are accessed differently in different architectures.\nAfter seeing the disassembled binaries of both archs, you will notice that the length of memory addresses changes. But.. wait\nHow are the command line arguments being parsed in memory?\nLet’s compile the code, disassemble it, and see what’s happening under the curtains.\nx32 Compile the code with the command: gcc -m32 code.c -o code\nWhy -m32? When we're on a 64-bit OS, the -m32 flag tells the compiler (gcc) to compile the code and give us a 32-bit binary. If you are on 32-bit machine, you can skip it. Disassembly You can just follow along with the tutorial, but if you’re curious how I disassembled the binary, here you go.\nThere are many a ways/tools to disassemble a binary. Here, I have used gdb in the following way: Terminal gdb code # 'code' is the name of our binary b main # instructing gdb to break at main function disassemble main # disassemble the main function Terminal In the case of 32-bit binary, we can see that first, the arguments are being pushed onto the stack and then the call to our function print_user_data is made. They are later popped off the stack before the program exits.\nx64 Compile the code with the command: gcc code.c -o code\nDisassembly Terminal On the other hand, in the case of 64-bit binary, arguments are first moved into registers and then our function print_user_data is called.\nNow that you understand the distinction between the two, it will come in handy later on, as we will be putting 32-bit binaries to test more frequently for simplicity.\n0.4 ELF The last thing to be aware of are the ELF files. Wondering what they are?\nELF files, short for Executable and Linkable Format, are standard executables for Linux and other Unix OSs (not exactly but, think of them as the EXE files on Windows).\nAnd as for our current program, since we compiled it on Linux, it also is an ELF file. Terminal We might discuss ELF files in detail later on. For further study, here’s a nice video .\n",
   "wordCount" : "590",
   "inLanguage": "en",
   "image":"https://the-root-user.github.io/blog/images/cover-binexp-00.png","datePublished": "2022-07-03T00:00:00Z",
@@ -258,22 +258,22 @@
         <div class="title">program.c</div>
     </div>
     <div class="terminalbody">
-        <div class="highlight"><pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-</span><span class="cp"></span>
-<span class="kt">void</span> <span class="nf">print_user_data</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span> <span class="n">arg1</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">arg2</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">arg3</span><span class="p">){</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Here is Your data</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Name: %s  Age: %s  Job: %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">,</span> <span class="n">arg3</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">){</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">argc</span><span class="o">!=</span><span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Please provide 3 inputs</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="k">else</span> <span class="p">{</span>
-        <span class="n">print_user_data</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
+        <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">print_user_data</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span> <span class="n">arg1</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">arg2</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">arg3</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Here is Your data</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Name: %s  Age: %s  Job: %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">,</span> <span class="n">arg3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">argc</span><span class="o">!=</span><span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Please provide 3 inputs</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">print_user_data</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div>
     </div>
 </div>
 
@@ -294,8 +294,8 @@
         <div class="title">Terminal</div>
     </div>
     <div class="terminalbody">
-        <div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">gcc code.c -o code
-</code></pre></div>
+        <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">gcc code.c -o code
+</span></span></code></pre></div>
     </div>
 </div>
 </p>
@@ -313,8 +313,8 @@
         <div class="title">Terminal</div>
     </div>
     <div class="terminalbody">
-        <div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">make code
-</code></pre></div>
+        <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">make code
+</span></span></code></pre></div>
     </div>
 </div>
 
@@ -334,7 +334,7 @@ make command is just another shortcut for us (for gcc)</p>
         <div class="title">Terminal</div>
     </div>
     <div class="terminalbody">
-        <img src="code.png" alt="code">
+        <img loading="lazy" src="code.png" alt="code"  />
     </div>
 </div>
 </p>
@@ -367,10 +367,10 @@ When we're on a 64-bit <abbr title="Operating System">OS</abbr>, the -m32 flag t
         <div class="title">Terminal</div>
     </div>
     <div class="terminalbody">
-        <div class="highlight"><pre class="chroma"><code class="language-shell" data-lang="shell">gdb code            <span class="c1"># &#39;code&#39; is the name of our binary</span>
-b main              <span class="c1"># instructing gdb to break at main function</span>
-disassemble main    <span class="c1"># disassemble the main function</span>
-</code></pre></div>
+        <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">gdb code            <span class="c1"># &#39;code&#39; is the name of our binary</span>
+</span></span><span class="line"><span class="cl">b main              <span class="c1"># instructing gdb to break at main function</span>
+</span></span><span class="line"><span class="cl">disassemble main    <span class="c1"># disassemble the main function</span>
+</span></span></code></pre></div>
     </div>
 </div>
 </p>
@@ -388,7 +388,7 @@ disassemble main    <span class="c1"># disassemble the main function</span>
         <div class="title">Terminal</div>
     </div>
     <div class="terminalbody">
-        <img src="args-x32.png" alt="arguments-32">
+        <img loading="lazy" src="args-x32.png" alt="arguments-32"  />
     </div>
 </div>
 
@@ -409,7 +409,7 @@ disassemble main    <span class="c1"># disassemble the main function</span>
         <div class="title">Terminal</div>
     </div>
     <div class="terminalbody">
-        <img src="args-x64.png" alt="arguments-64">
+        <img loading="lazy" src="args-x64.png" alt="arguments-64"  />
     </div>
 </div>
 </p>
@@ -432,7 +432,7 @@ disassemble main    <span class="c1"># disassemble the main function</span>
         <div class="title">Terminal</div>
     </div>
     <div class="terminalbody">
-        <img src="elf.png" alt="elf">
+        <img loading="lazy" src="elf.png" alt="elf"  />
     </div>
 </div>
 </p>
@@ -515,7 +515,7 @@ images.forEach(img => {
         if (window.scrollY > 70) {
              toc.style.top = '2.5rem'
         } else {
-            toc.style.top = '10.9rem'
+            toc.style.top = '11.6rem'
         }
     })
 </script><script>
