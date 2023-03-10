@@ -11,7 +11,7 @@ If you want to use the theme, just delete the posts (& google analytics tag) and
 
 - Floating TOCs + Responsive, static on mobile
 - Medium-like Zoom for Images
-- Dracula theme (in highlight.js) for code syntax highlighting
+- ~~Dracula, felt rather too bright~~  Atom One Dark theme (in highlight.js) for code syntax highlighting
 - Terminal box around code
 - Added a glamorous About Me page ;)
 - A Projects page with custom layout and UI + External Links support
