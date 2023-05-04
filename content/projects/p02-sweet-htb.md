@@ -9,7 +9,7 @@ ShowReadingTime: false
 ShowToc: false
 shareButtons: " "
 cover:
-  image: "/blog/projects/p02-cover.png"
+  image: "/blog/projects/p02-cover.jpg"
   caption: "cover"
 date: 2022-07-29
 ---
