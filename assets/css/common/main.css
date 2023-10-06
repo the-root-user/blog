@@ -4,6 +4,12 @@
     max-width: calc(var(--main-width) + var(--gap) * 2);
     margin: auto;
     padding: var(--gap);
+    opacity: 0;
+/*    transition: opacity 0.5s ease-in-out;*/
+}
+
+.about p {
+    font-size: 19px;
 }
 
 .page-header h1 {

@@ -23,10 +23,12 @@
     {{- partial "cover.html" (dict "cxt" . "IsHome" false "isHidden" $isHidden) }}
 
     {{- if .Content }}
-    <div class="post-content tooltip">
-        {{- if not (.Param "disableAnchoredHeadings") }}
-        {{- partial "anchored_headings.html" .Content -}}
-        {{- else }}{{ .Content }}{{ end }}
+    <div class="about">
+        <div class="post-content tooltip">
+            {{- if not (.Param "disableAnchoredHeadings") }}
+            {{- partial "anchored_headings.html" .Content -}}
+            {{- else }}{{ .Content }}{{ end }}
+        </div>
     </div>
     {{- end }}
 

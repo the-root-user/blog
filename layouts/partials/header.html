@@ -68,10 +68,11 @@
                 {{- end -}}
                 {{- end -}}
                 {{- if .IsHome }}
-                {{- $label_text -}}
+                {{- "~" -}}
+                <!-- {{- site.Title }} -->
                 {{- end }}
                 {{- if not .IsHome }}
-                {{- site.Title }}
+                {{- $label_text -}}
                 {{- end }}
             </a>
             {{- end }}

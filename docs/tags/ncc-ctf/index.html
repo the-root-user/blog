@@ -21,7 +21,7 @@
 <meta name="description" content="A blog about adventures in Offensive Computers Security">
 <meta name="author" content="Signore">
 <link rel="canonical" href="https://the-root-user.github.io/blog/tags/ncc-ctf/">
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.a451f10ebd5e2cd097a05d419e3e79d25bb0243ac8bd133baee2162ba4bcb159.css" integrity="sha256-pFHxDr1eLNCXoF1Bnj550luwJDrIvRM7ruIWK6S8sVk=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.6a1e184dd9d9e0e24049bdba3f5e99ef03710f6120836795f34d92ac59c88987.css" integrity="sha256-ah4YTdnZ4OJASb26P16Z7wNxD2Egg2eV802SrFnIiYc=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://the-root-user.github.io/blog/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://the-root-user.github.io/blog/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://the-root-user.github.io/blog/favicon-32x32.png">
@@ -56,9 +56,9 @@
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://the-root-user.github.io/blog" accesskey="h" title="Home (Alt + H)">
+            <a href="https://the-root-user.github.io/blog" accesskey="h" title="home (Alt + H)">
                 <img src="https://the-root-user.github.io/blog/apple-touch-icon-grey.png" alt="logo" aria-label="logo"
-                    height="28">New Horizonz
+                    height="28">home
             </a>
             <div class="logo-switches">
             </div>
@@ -219,6 +219,30 @@ images.forEach(img => {
         Scroller.init();
     })
   </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const elementToFade = document.querySelectorAll(".main");
+
+        
+        setTimeout(function () {
+            elementToFade.forEach(function (element) {
+                element.style.transition = "opacity 0.3s ease-out";
+                element.style.opacity = 1;
+            });
+        }, 50);
+
+        
+        window.addEventListener("beforeunload", function () {
+            elementToFade.forEach(function (element) {
+                setTimeout(function () {
+                    element.style.transition = "opacity 0.5s ease-in";
+                    element.style.opacity = 0;
+                }, 10);
+            });
+        });
+
+    });
+</script>
 
 
 <script>

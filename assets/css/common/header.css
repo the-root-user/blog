@@ -24,6 +24,8 @@
 
 .logo {
     flex-wrap: inherit;
+    transition: 0.3s ease-in-out;
+    margin-top: 2px;
 }
 
 .logo a {

@@ -116,3 +116,29 @@ lazySizes.init({
 </script> -->
 
 {{- /* Footer custom content area end */ -}}
+
+<!-- Fade in & out -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const elementToFade = document.querySelectorAll(".main");
+
+        // fade in
+        setTimeout(function () {
+            elementToFade.forEach(function (element) {
+                element.style.transition = "opacity 0.3s ease-out";
+                element.style.opacity = 1;
+            });
+        }, 50);
+
+        // fade out
+        window.addEventListener("beforeunload", function () {
+            elementToFade.forEach(function (element) {
+                setTimeout(function () {
+                    element.style.transition = "opacity 0.5s ease-in";
+                    element.style.opacity = 0;
+                }, 10);
+            });
+        });
+
+    });
+</script>
