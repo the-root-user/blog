@@ -14,7 +14,14 @@
     box-shadow: 0 4px 40px 0 #1e1e1e;
 }
 .container:hover .bg-img {
-    transform: scale(1.05);
+    transform: scale(1.10);
+    rotate: -2deg;
+}
+.container:hover .avatar {
+    /* border: 1px dashed #446; */
+    /* rotate: -360deg; */
+    transform: scale(1.005);
+    box-shadow: 0 0 5px 1px #223;
 }
 
 .bg-img {
@@ -27,8 +34,8 @@
     background-position: 0% 50%;
     background-repeat: no-repeat;
     background-size: cover;
-    filter: blur(15px);
-    transition: transform 0.5s;
+    filter: blur(16px);
+    transition: ease-out 1.5s;
 }
 
 .content {
@@ -51,7 +58,8 @@
     border-radius: 50%;
     pointer-events: none;
     /* margin-right: 20px; */
-    border: 1px solid #222;
+    border: 1px solid #223;
+    transition: ease-out 1s;
 }
 
 .name {
