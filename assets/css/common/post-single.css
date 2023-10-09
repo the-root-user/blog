@@ -80,11 +80,15 @@
 /* .post-content a, */
 .post-content a {
     color: #8AB4F8; /* #f29492; #ff79c6 */
+    /* text-decoration: none; */
     transition: 0.2s ease-in-out;
 }
+
+/* .toc a:hover, */
 .post-content a:hover {
     box-shadow: 0 1px 0;
-    /* box-shadow: 0 0 10px 5px rgba(0,0,0,0.7); */
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
 }
 
 .post-content abbr {
