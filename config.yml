@@ -89,15 +89,17 @@ params:
         Content: >
             A blog about Offensive Security Adventures
 
-            - For any query/suggestion, hit me up on Twitter!
+            - Feel free to get in contact!
 
     socialIcons:
-        - name: email
-          url: "mailto:umer@gmail.com"
         - name: github
           url: "https://github.com/the-root-user"
-        - name: x
-          url: "https://x.com/@therootuser_"
+        # - name: x
+        #   url: "https://x.com/@therootuser_"
+        - name: linkedin
+          url: "https://www.linkedin.com/in/umerrfarooqq"
+        - name: email
+          url: ""
 
     # analytics:
         # google:
@@ -153,10 +155,10 @@ menu:
           name: Archive
           url: archives/
           weight: 7
-        - identifier: series
-          name: Series
-          url: series/
-          weight: 10
+        # - identifier: series
+        #   name: Series
+        #   url: series/
+        #   weight: 10
         - identifier: categories
           name: Categories
           url: categories/

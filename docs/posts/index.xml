@@ -47,5 +47,14 @@
       <description>Let&amp;rsquo;s get ready to Pwn</description>
     </item>
     
+    <item>
+      <title>GEOINT: Geo-locating Images Using Landmarks</title>
+      <link>https://the-root-user.github.io/blog/posts/geoint/</link>
+      <pubDate>Wed, 17 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://the-root-user.github.io/blog/posts/geoint/</guid>
+      <description>A byte sized lesson on geolocating images</description>
+    </item>
+    
   </channel>
 </rss>

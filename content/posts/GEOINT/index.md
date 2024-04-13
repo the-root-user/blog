@@ -5,17 +5,20 @@ date: 2021-11-17
 summary: "A byte sized lesson on geolocating images"
 description: ""
 categories: [""]
-tags: ["OSINT", "GEOINT"]
+tags: ["OSINT"]
 series: [""]
 keywords: ["OSINT", "GEOINT"]
 ShowToc: true
 cover:
   image: "images/cover-geoint-urban-city.png"
   caption: "cover"
+params:
+  hiddenInSingle: false
 
 ---
 
-![cover](../../../static/images/cover-geoint-urban-city.png)
+![cover](../../images/cover-geoint-urban-city.png)
+The awesome Urban Shot used in this article was created by [Artua](https://dribbble.com/Artua)
 
 This article is going to be focused on geolocating images, specifically using Landmarks.
 
