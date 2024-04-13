@@ -92,10 +92,12 @@ params:
             - For any query/suggestion, hit me up on Twitter!
 
     socialIcons:
-        - name: twitter
-          url: "https://twitter.com/@therootuser_"
+        - name: email
+          url: "mailto:umer@gmail.com"
         - name: github
           url: "https://github.com/the-root-user"
+        - name: x
+          url: "https://x.com/@therootuser_"
 
     # analytics:
         # google:
