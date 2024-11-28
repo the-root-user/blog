@@ -20,18 +20,17 @@
 <meta name="keywords" content="pwn, binary, memory, x32, x64, gdb, binary exploitation, exploit development">
 <meta name="description" content="Let&rsquo;s get ready to Pwn">
 <meta name="author" content="Signore">
-<link rel="canonical" href="https://the-root-user.github.io/blog/posts/pwn-0x00-warmup/">
-<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.f4b78c5d850152976b0e307f9d0530024c406cc77a4159ae5ea0cb4adc05fb53.css" integrity="sha256-9LeMXYUBUpdrDjB/nQUwAkxAbMd6QVmuXqDLStwF&#43;1M=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="https://signore.me/blog/posts/pwn-0x00-warmup/">
+<link crossorigin="anonymous" href="/blog/assets/css/stylesheet.8dcc6d7d468537ccb0c21c5217c66efcd9c2fca4e5593b32bfd3de3a573ff803.css" integrity="sha256-jcxtfUaFN8ywwhxSF8Zu/NnC/KTlWTsyv9PeOlc/&#43;AM=" rel="preload stylesheet" as="style">
 <script defer crossorigin="anonymous" src="/blog/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
     onload="hljs.initHighlightingOnLoad();"></script>
-<link rel="icon" href="https://the-root-user.github.io/blog/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://the-root-user.github.io/blog/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://the-root-user.github.io/blog/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://the-root-user.github.io/blog/apple-touch-icon.png">
-<link rel="mask-icon" href="https://the-root-user.github.io/blog/safari-pinned-tab.svg">
+<link rel="icon" href="https://signore.me/blog/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://signore.me/blog/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://signore.me/blog/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://signore.me/blog/apple-touch-icon.png">
+<link rel="mask-icon" href="https://signore.me/blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://the-root-user.github.io/blog/posts/pwn-0x00-warmup/">
 <noscript>
     <style>
         #theme-toggle,
@@ -43,14 +42,14 @@
 </noscript><meta property="og:title" content="Pwn 0x00: Warmup" />
 <meta property="og:description" content="Let&rsquo;s get ready to Pwn" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://the-root-user.github.io/blog/posts/pwn-0x00-warmup/" />
-<meta property="og:image" content="https://the-root-user.github.io/blog/images/cover-binexp-00.png" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://signore.me/blog/posts/pwn-0x00-warmup/" />
+<meta property="og:image" content="https://signore.me/blog/images/cover-binexp-00.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-07-03T00:00:00+00:00" />
 <meta property="article:modified_time" content="2022-07-03T00:00:00+00:00" /><meta property="og:site_name" content="New Horizonz" />
-
+<meta property="og:see_also" content="https://signore.me/blog/posts/pwn-0x02-nx-bypass/" /><meta property="og:see_also" content="https://signore.me/blog/posts/pwn-0x01-buffer-overflow/" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://the-root-user.github.io/blog/images/cover-binexp-00.png" />
+<meta name="twitter:image" content="https://signore.me/blog/images/cover-binexp-00.png" />
 <meta name="twitter:title" content="Pwn 0x00: Warmup"/>
 <meta name="twitter:description" content="Let&rsquo;s get ready to Pwn"/>
 
@@ -59,18 +58,18 @@
 {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://the-root-user.github.io/blog/posts/"
-    }, 
+  "itemListElement": [, 
     {
       "@type": "ListItem",
       "position":  2 ,
+      "name": "Posts",
+      "item": "https://signore.me/blog/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
       "name": "Pwn 0x00: Warmup",
-      "item": "https://the-root-user.github.io/blog/posts/pwn-0x00-warmup/"
+      "item": "https://signore.me/blog/posts/pwn-0x00-warmup/"
     }
   ]
 }
@@ -88,7 +87,7 @@
   "articleBody": "! We will not be diving deep into things but only as much as necessary. For further learning, I’ll link relevant resources.\n0.1 Prerequisites Basic Computer Science knowledge Fundamental knowledge of C - here is a nice tutorial Curiosity - Consistency Optional Since, at first, we will be doing exploit development on Linux, it would be nice to learn the necessary things here Some Assembly knowledge will benefit you a lot - here is a nice tutorial Gdb is going to play a key role in our exploit dev - here’s a lovely tutorial 0.2 Memory Structure High-level overview More here 0.3 Architectures Comparison Here’s a C program:\nprogram.c #include void print_user_data(char* arg1, char* arg2, char* arg3){ printf(\"Here is Your data\\n\"); printf(\"Name: %s Age: %s Job: %s\\n\", arg1, arg2, arg3); } void main(int argc, char **argv){ if (argc!=4) { printf(\"Please provide 3 inputs\\n\"); } else { print_user_data(argv[1], argv[2], argv[3]); } } The program takes some command line arguments from the user, checks if they are equivalent to 3 and then passes them to another function which prints some data on the console.\nAfter compiling the code with gcc as: Terminal gcc code.c -o code or Terminal make code make command is just another shortcut for us (for gcc)\nHere’s what it does: Terminal Simple enough, right?\nWhen we execute a binary, the binary name and the arguments to its function(s) are stored on the stack (in memory). They are accessed differently in different architectures.\nAfter seeing the disassembled binaries of both archs, you will notice that the length of memory addresses changes. But.. wait\nHow are the command line arguments being parsed in memory?\nLet’s compile the code, disassemble it, and see what’s happening under the curtains.\nx32 Compile the code with the command: gcc -m32 code.c -o code\nWhy -m32? When we're on a 64-bit OS, the -m32 flag tells the compiler (gcc) to compile the code and give us a 32-bit binary. If you are on 32-bit machine, you can skip it. Disassembly You can just follow along with the tutorial, but if you’re curious how I disassembled the binary, here you go.\nThere are many a ways/tools to disassemble a binary. Here, I have used gdb in the following way: Terminal gdb code # 'code' is the name of our binary b main # instructing gdb to break at main function disassemble main # disassemble the main function Terminal In the case of 32-bit binary, we can see that first, the arguments are being pushed onto the stack and then the call to our function print_user_data is made. They are later popped off the stack before the program exits.\nx64 Compile the code with the command: gcc code.c -o code\nDisassembly Terminal On the other hand, in the case of 64-bit binary, arguments are first moved into registers and then our function print_user_data is called.\nNow that you understand the distinction between the two, it will come in handy later on, as we will be putting 32-bit binaries to test more frequently for simplicity.\n0.4 ELF The last thing to be aware of are the ELF files. Wondering what they are?\nELF files, short for Executable and Linkable Format, are standard executables for Linux and other Unix OSs (not exactly but, think of them as the EXE files on Windows).\nAnd as for our current program, since we compiled it on Linux, it also is an ELF file. Terminal We might discuss ELF files in detail later on. For further study, here’s a nice video.\n",
   "wordCount" : "589",
   "inLanguage": "en",
-  "image":"https://the-root-user.github.io/blog/images/cover-binexp-00.png","datePublished": "2022-07-03T00:00:00Z",
+  "image":"https://signore.me/blog/images/cover-binexp-00.png","datePublished": "2022-07-03T00:00:00Z",
   "dateModified": "2022-07-03T00:00:00Z",
   "author":{
     "@type": "Person",
@@ -96,14 +95,14 @@
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://the-root-user.github.io/blog/posts/pwn-0x00-warmup/"
+    "@id": "https://signore.me/blog/posts/pwn-0x00-warmup/"
   },
   "publisher": {
     "@type": "Organization",
     "name": "New Horizonz",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://the-root-user.github.io/blog/favicon.ico"
+      "url": "https://signore.me/blog/favicon.ico"
     }
   }
 }
@@ -115,39 +114,36 @@
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://the-root-user.github.io/blog/" accesskey="h" title="home (Alt + H)">
-                <img src="https://the-root-user.github.io/blog/apple-touch-icon-grey.png" alt="logo" aria-label="logo"
+            <a href="https://signore.me/blog" accesskey="h" title="home (Alt + H)">
+                <img src="https://signore.me/blog/apple-touch-icon-grey.png" alt="logo" aria-label="logo"
                     height="28">home
             </a>
             <div class="logo-switches">
-                <ul class="lang-switch">
-                    
-                </ul>
             </div>
         </div>
         <ul id="menu">
             <li>
-                <a href="https://the-root-user.github.io/blog/author/">
+                <a href="https://signore.me/blog/author/">
                     <span>About Me</span>
                 </a>
             </li>
             <li>
-                <a href="https://the-root-user.github.io/blog/archives/">
+                <a href="https://signore.me/blog/archives/">
                     <span>Archive</span>
                 </a>
             </li>
             <li>
-                <a href="https://the-root-user.github.io/blog/categories/">
+                <a href="https://signore.me/blog/categories/">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="https://the-root-user.github.io/blog/tags/">
+                <a href="https://signore.me/blog/tags/">
                     <span>Tags</span>
                 </a>
             </li>
             <li>
-                <a href="https://the-root-user.github.io/blog/search/" accesskey=/>
+                <a href="https://signore.me/blog/search/" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
@@ -158,7 +154,7 @@
 
 <article class="post-single">
   <header class="post-header">
-    <div class="breadcrumbs"><a href="https://the-root-user.github.io/blog/">Home</a>&nbsp;»&nbsp;<a href="https://the-root-user.github.io/blog/posts/">Posts</a></div>
+    <div class="breadcrumbs"><a href="https://signore.me/blog">Home</a>&nbsp;»&nbsp;<a href="https://signore.me/blog/posts/">Posts</a></div>
     <h1 class="post-title">
       Pwn 0x00: Warmup
     </h1>
@@ -433,16 +429,16 @@ video</a>.</p>
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://the-root-user.github.io/blog/tags/memory/">Memory</a></li>
-      <li><a href="https://the-root-user.github.io/blog/tags/pwn/">Pwn</a></li>
+      <li><a href="https://signore.me/blog/tags/memory/">memory</a></li>
+      <li><a href="https://signore.me/blog/tags/pwn/">pwn</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="https://the-root-user.github.io/blog/posts/pwn-0x01-buffer-overflow/">
+  <a class="prev" href="https://signore.me/blog/posts/pwn-0x01-buffer-overflow/">
     <span class="title">« Prev</span>
     <br>
     <span>Pwn 0x01: Buffer Overflow</span>
   </a>
-  <a class="next" href="https://the-root-user.github.io/blog/posts/geoint/">
+  <a class="next" href="https://signore.me/blog/posts/geoint/">
     <span class="title">Next »</span>
     <br>
     <span>GEOINT: Geo-locating Images Using Landmarks</span>
@@ -452,20 +448,20 @@ video</a>.</p>
 
 <div class="share-buttons">
     <a target="_blank" rel="noopener noreferrer" aria-label="share Pwn 0x00: Warmup on twitter" title="share on X"
-        href="https://x.com/intent/tweet/?text=Pwn%200x00%3a%20Warmup&amp;url=https%3a%2f%2fthe-root-user.github.io%2fblog%2fposts%2fpwn-0x00-warmup%2f&amp;hashtags=memory%2cpwn">
+        href="https://x.com/intent/tweet/?text=Pwn%200x00%3a%20Warmup&amp;url=https%3a%2f%2fsignore.me%2fblog%2fposts%2fpwn-0x00-warmup%2f&amp;hashtags=memory%2cpwn">
         <svg viewBox="0 0 512 512" fill="currentColor"><path d="M 469.33334,94.794994 V 417.20514 c 0,28.76996 -23.35824,52.1282 -52.1282,52.1282 H 94.794994 c -28.769985,0 -52.128327,-23.35824 -52.128327,-52.1282 V 94.794994 c 0,-28.769985 23.357511,-52.128327 52.128327,-52.128327 H 417.20514 c 28.77059,0 52.1282,23.358342 52.1282,52.128327 z M 267.62578,201.62494 194.8058,105.34667 H 89.333335 L 215.34659,270.12486 95.916664,406.65254 h 51.138346 l 92.19507,-105.33342 80.55579,105.33342 h 102.8608 L 291.30578,232.97245 402.97246,105.34667 h -51.11153 z m -118.59827,-67.2916 h 30.38999 l 182.8166,241.7208 h -28.31744 z"/>
         </svg>
     </a>
     <a target="_blank" rel="noopener noreferrer" aria-label="share Pwn 0x00: Warmup on linkedin" title="share on Linkedin"
-        href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fthe-root-user.github.io%2fblog%2fposts%2fpwn-0x00-warmup%2f&amp;title=Pwn%200x00%3a%20Warmup&amp;summary=Pwn%200x00%3a%20Warmup&amp;source=https%3a%2f%2fthe-root-user.github.io%2fblog%2fposts%2fpwn-0x00-warmup%2f">
+        href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fsignore.me%2fblog%2fposts%2fpwn-0x00-warmup%2f&amp;title=Pwn%200x00%3a%20Warmup&amp;summary=Pwn%200x00%3a%20Warmup&amp;source=https%3a%2f%2fsignore.me%2fblog%2fposts%2fpwn-0x00-warmup%2f">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M417.2 64H96.8C79.3 64 64 76.6 64 93.9V415c0 17.4 15.3 32.9 32.8 32.9h320.3c17.6 0 30.8-15.6 30.8-32.9V93.9C448 76.6 434.7 64 417.2 64zM183 384h-55V213h55v171zm-25.6-197h-.4c-17.6 0-29-13.1-29-29.5 0-16.7 11.7-29.5 29.7-29.5s29 12.7 29.4 29.5c0 16.4-11.4 29.5-29.7 29.5zM384 384h-55v-93.5c0-22.4-8-37.7-27.9-37.7-15.2 0-24.2 10.3-28.2 20.3-1.5 3.6-1.9 8.5-1.9 13.5V384h-55V213h55v23.8c8-11.4 20.5-27.8 49.6-27.8 36.1 0 63.4 23.8 63.4 75.1V384z"/></svg>
     </a>
     <a target="_blank" rel="noopener noreferrer" aria-label="share Pwn 0x00: Warmup on facebook" title="share on Facebook"
-        href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fthe-root-user.github.io%2fblog%2fposts%2fpwn-0x00-warmup%2f">
+        href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fsignore.me%2fblog%2fposts%2fpwn-0x00-warmup%2f">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M426.8 64H85.2C73.5 64 64 73.5 64 85.2v341.6c0 11.7 9.5 21.2 21.2 21.2H256V296h-45.9v-56H256v-41.4c0-49.6 34.4-76.6 78.7-76.6 21.2 0 44 1.6 49.3 2.3v51.8h-35.3c-24.1 0-28.7 11.4-28.7 28.2V240h57.4l-7.5 56H320v152h106.8c11.7 0 21.2-9.5 21.2-21.2V85.2c0-11.7-9.5-21.2-21.2-21.2z"/></svg>
     </a>
     <a target="_blank" rel="noopener noreferrer" aria-label="share Pwn 0x00: Warmup on whatsapp" title="share on Whatsapp"
-        href="https://api.whatsapp.com/send?text=Pwn%200x00%3a%20Warmup%20-%20https%3a%2f%2fthe-root-user.github.io%2fblog%2fposts%2fpwn-0x00-warmup%2f">
+        href="https://api.whatsapp.com/send?text=Pwn%200x00%3a%20Warmup%20-%20https%3a%2f%2fsignore.me%2fblog%2fposts%2fpwn-0x00-warmup%2f">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M260.062 32C138.605 32 40.134 129.701 40.134 250.232c0 41.23 11.532 79.79 31.559 112.687L32 480l121.764-38.682c31.508 17.285 67.745 27.146 106.298 27.146C381.535 468.464 480 370.749 480 250.232 480 129.701 381.535 32 260.062 32zm109.362 301.11c-5.174 12.827-28.574 24.533-38.899 25.072-10.314.547-10.608 7.994-66.84-16.434-56.225-24.434-90.052-83.844-92.719-87.67-2.669-3.812-21.78-31.047-20.749-58.455 1.038-27.413 16.047-40.346 21.404-45.725 5.351-5.387 11.486-6.352 15.232-6.413 4.428-.072 7.296-.132 10.573-.011 3.274.124 8.192-.685 12.45 10.639 4.256 11.323 14.443 39.153 15.746 41.989 1.302 2.839 2.108 6.126.102 9.771-2.012 3.653-3.042 5.935-5.961 9.083-2.935 3.148-6.174 7.042-8.792 9.449-2.92 2.665-5.97 5.572-2.9 11.269 3.068 5.693 13.653 24.356 29.779 39.736 20.725 19.771 38.598 26.329 44.098 29.317 5.515 3.004 8.806 2.67 12.226-.929 3.404-3.599 14.639-15.746 18.596-21.169 3.955-5.438 7.661-4.373 12.742-2.329 5.078 2.052 32.157 16.556 37.673 19.551 5.51 2.989 9.193 4.529 10.51 6.9 1.317 2.38.901 13.531-4.271 26.359z"/></svg>
     </a>
 </div>
@@ -475,7 +471,7 @@ video</a>.</p>
     </main>
     
 <footer class="footer">
-    <span>&copy; 2024 <a href="https://the-root-user.github.io/blog/">New Horizonz</a></span>
+    <span>&copy; 2024 <a href="https://signore.me/blog">New Horizonz</a></span>
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a>

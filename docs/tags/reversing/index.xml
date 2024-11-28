@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Reversing on New Horizonz</title>
-    <link>https://the-root-user.github.io/blog/tags/reversing/</link>
-    <description>Recent content in Reversing on New Horizonz</description>
+    <title>reversing on New Horizonz</title>
+    <link>https://signore.me/blog/tags/reversing/</link>
+    <description>Recent content in reversing on New Horizonz</description>
     <image>
-      <url>https://the-root-user.github.io/blog/images/blog-cover.png</url>
-      <link>https://the-root-user.github.io/blog/images/blog-cover.png</link>
+      <url>https://signore.me/blog/images/blog-cover.png</url>
+      <link>https://signore.me/blog/images/blog-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 20 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://the-root-user.github.io/blog/tags/reversing/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 20 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://signore.me/blog/tags/reversing/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>NCC CTF 2022 - Rev &amp; BinExp Challenges Writeup</title>
-      <link>https://the-root-user.github.io/blog/posts/ncc-ctf-2022/</link>
+      <link>https://signore.me/blog/posts/ncc-ctf-2022/</link>
       <pubDate>Wed, 20 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://the-root-user.github.io/blog/posts/ncc-ctf-2022/</guid>
+      <guid>https://signore.me/blog/posts/ncc-ctf-2022/</guid>
       <description>Walkthrough of Reversing &amp;amp; Binary Exploitation challenges presented at NED Cyber Community CTF 2022</description>
     </item>
     

@@ -1,5 +1,6 @@
 title: "New Horizonz"
-baseURL: https://the-root-user.github.io/blog
+#baseURL: https://the-root-user.github.io/blog
+baseURL: https://signore.me/blog
 languageCode: en-us
 theme: "PaperMod"
 paginate: 5

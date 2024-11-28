@@ -24,7 +24,7 @@ This article is going to be focused on geolocating images, specifically using La
 
 Geolocation means finding the real world location of an object, such as the place where a photograph was taken. This process is rather straightforward but there are various methods - some more creative than others - of doing so. You don't always get enough clues from an image's metadata (data about data) and most images won't typically show a famous landmark in the background to help you locate the area, town or even country.
 
-According to GEOINT Analyst *Benjamin Strick*, there are 5 key elements one should consider when looking at an image:
+According to GEOINT Analyst *Benjamin Strick*[^1], there are 5 key elements one should consider when looking at an image:
 - Context
 - Foreground
 - Background
@@ -51,9 +51,11 @@ Be creative and scan the image for visual clues. Look for Point-Of-Interests in 
 One of the methods for geolocating an image is to do an image reverse search. This means that if the image has been indexed by search engines we may find the exact image or we can do a visual or crop search to help us find similar images. Remember that changing the crop and the keywords for searching an image may yield completely different results.
 
 I like to use this browser addon to ease the workflow when I find images online that I want to do an image reverse on:
-Addon description: "Perform a search by image. Choose between the image search engines Google, Bing, Yandex, TinEye and Baidu."
-- Chrome: https://chrome.google.com/webstore/search/RevEye%20Reverse%20Image%20Search?hl=no
-- Firefox: https://addons.mozilla.org/nb-NO/firefox/addon/reveye-ris/
+
+<abbr title="Perform a search by image">RevEye Reverse Image Search</abbr>
+
+For [Chrome](https://chrome.google.com/webstore/search/RevEye%20Reverse%20Image%20Search?hl=no),
+For [Firefox](https://addons.mozilla.org/nb-NO/firefox/addon/reveye-ris/)
 
 ### Let's see an Example
 Consider we are provided below image for analysis:
@@ -104,3 +106,5 @@ To be good at geolocation, we've got to open our eyes to all that could be. In y
 - Google Earth: https://earth.google.com/
 - Google Maps: https://www.google.com/maps
 - Bellingcat: https://www.bellingcat.com/
+
+*\* This article was originally published in [this](https://www.amazon.com/dp/B09PHHDFBM) Cyber Secrets Edition.*
