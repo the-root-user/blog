@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Series on New Horizonz</title>
-    <link>https://signore.me/blog/series/</link>
+    <link>https://signore.me/series/</link>
     <description>Recent content in Series on New Horizonz</description>
     <image>
-      <url>https://signore.me/blog/images/blog-cover.png</url>
-      <link>https://signore.me/blog/images/blog-cover.png</link>
+      <url>https://signore.me/images/blog-cover.png</url>
+      <link>https://signore.me/images/blog-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 22 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://signore.me/blog/series/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 22 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://signore.me/series/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Binary Exploitation Adventures</title>
-      <link>https://signore.me/blog/series/binary-exploitation-adventures/</link>
+      <link>https://signore.me/series/binary-exploitation-adventures/</link>
       <pubDate>Mon, 22 Aug 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://signore.me/blog/series/binary-exploitation-adventures/</guid>
+      <guid>https://signore.me/series/binary-exploitation-adventures/</guid>
       <description></description>
     </item>
     

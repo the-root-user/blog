@@ -2,82 +2,82 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://signore.me/blog/projects/p03-expdev/</loc>
+    <loc>https://signore.me/projects/p03-expdev/</loc>
     <lastmod>2022-12-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://signore.me/blog/projects/</loc>
+    <loc>https://signore.me/projects/</loc>
     <lastmod>2022-12-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://signore.me/blog/</loc>
+    <loc>https://signore.me/</loc>
     <lastmod>2022-12-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://signore.me/blog/series/binary-exploitation-adventures/</loc>
+    <loc>https://signore.me/series/binary-exploitation-adventures/</loc>
     <lastmod>2022-08-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://signore.me/blog/tags/buffer-overflow/</loc>
+    <loc>https://signore.me/tags/buffer-overflow/</loc>
     <lastmod>2022-08-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://signore.me/blog/posts/</loc>
+    <loc>https://signore.me/posts/</loc>
     <lastmod>2022-08-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://signore.me/blog/tags/pwn/</loc>
+    <loc>https://signore.me/tags/pwn/</loc>
     <lastmod>2022-08-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://signore.me/blog/posts/pwn-0x02-nx-bypass/</loc>
+    <loc>https://signore.me/posts/pwn-0x02-nx-bypass/</loc>
     <lastmod>2022-08-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://signore.me/blog/tags/ret2libc/</loc>
+    <loc>https://signore.me/tags/ret2libc/</loc>
     <lastmod>2022-08-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://signore.me/blog/series/</loc>
+    <loc>https://signore.me/series/</loc>
     <lastmod>2022-08-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://signore.me/blog/tags/</loc>
+    <loc>https://signore.me/tags/</loc>
     <lastmod>2022-08-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://signore.me/blog/projects/p02-sweet-htb/</loc>
+    <loc>https://signore.me/projects/p02-sweet-htb/</loc>
     <lastmod>2022-07-29T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://signore.me/blog/categories/</loc>
+    <loc>https://signore.me/categories/</loc>
     <lastmod>2022-07-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://signore.me/blog/categories/ctf-writeups/</loc>
+    <loc>https://signore.me/categories/ctf-writeups/</loc>
     <lastmod>2022-07-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://signore.me/blog/tags/ncc-ctf/</loc>
+    <loc>https://signore.me/tags/ncc-ctf/</loc>
     <lastmod>2022-07-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://signore.me/blog/posts/ncc-ctf-2022/</loc>
+    <loc>https://signore.me/posts/ncc-ctf-2022/</loc>
     <lastmod>2022-07-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://signore.me/blog/tags/reversing/</loc>
+    <loc>https://signore.me/tags/reversing/</loc>
     <lastmod>2022-07-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://signore.me/blog/tags/rop/</loc>
+    <loc>https://signore.me/tags/rop/</loc>
     <lastmod>2022-07-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://signore.me/blog/posts/pwn-0x01-buffer-overflow/</loc>
+    <loc>https://signore.me/posts/pwn-0x01-buffer-overflow/</loc>
     <lastmod>2022-07-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://signore.me/blog/tags/memory/</loc>
+    <loc>https://signore.me/tags/memory/</loc>
     <lastmod>2022-07-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://signore.me/blog/posts/pwn-0x00-warmup/</loc>
+    <loc>https://signore.me/posts/pwn-0x00-warmup/</loc>
     <lastmod>2022-07-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://signore.me/blog/projects/p01-nmap-auto/</loc>
+    <loc>https://signore.me/projects/p01-nmap-auto/</loc>
     <lastmod>2022-03-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://signore.me/blog/posts/geoint/</loc>
+    <loc>https://signore.me/posts/geoint/</loc>
     <lastmod>2021-11-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://signore.me/blog/tags/osint/</loc>
+    <loc>https://signore.me/tags/osint/</loc>
     <lastmod>2021-11-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://signore.me/blog/author/</loc>
+    <loc>https://signore.me/author/</loc>
   </url><url>
-    <loc>https://signore.me/blog/archives/</loc>
+    <loc>https://signore.me/archives/</loc>
   </url><url>
-    <loc>https://signore.me/blog/search/</loc>
+    <loc>https://signore.me/search/</loc>
   </url>
 </urlset>
