@@ -4,7 +4,7 @@ layout: "author"
 url: "/author"
 summary: "Author"
 Author_name: "Signøre"
-Avatar_link: "/blog/images/avatar.jpg"
+Avatar_link: "images/avatar.jpg"
 ShowBreadCrumbs: false
 searchHidden: true
 
