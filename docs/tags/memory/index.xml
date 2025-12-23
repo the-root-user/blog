@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>memory on New Horizonz</title>
-    <link>https://signore.me/tags/memory/</link>
-    <description>Recent content in memory on New Horizonz</description>
+    <title>Memory on New Horizonz</title>
+    <link>http://localhost:1313/tags/memory/</link>
+    <description>Recent content in Memory on New Horizonz</description>
     <image>
-      <url>https://signore.me/images/blog-cover.png</url>
-      <link>https://signore.me/images/blog-cover.png</link>
+      <url>http://localhost:1313/images/blog-cover.png</url>
+      <link>http://localhost:1313/images/blog-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 03 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://signore.me/tags/memory/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 03 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/memory/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Pwn 0x00: Warmup</title>
-      <link>https://signore.me/posts/pwn-0x00-warmup/</link>
+      <link>http://localhost:1313/posts/pwn-0x00-warmup/</link>
       <pubDate>Sun, 03 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://signore.me/posts/pwn-0x00-warmup/</guid>
+      <guid>http://localhost:1313/posts/pwn-0x00-warmup/</guid>
       <description>Let&amp;rsquo;s get ready to Pwn</description>
     </item>
     

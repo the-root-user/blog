@@ -3,7 +3,7 @@ title: "New Horizonz"
 baseURL: https://signore.co.uk
 languageCode: en-us
 theme: "PaperMod"
-paginate: 5
+pagination.pagerSize: 5
 
 publishDir: "docs"
 enableInlineShortcodes: true
@@ -92,7 +92,7 @@ params:
 
             - Feel free to get in contact!
 
-    socialIcons:
+    scialIcons:
         - name: github
           url: "https://github.com/the-root-user"
         # - name: x
