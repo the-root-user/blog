@@ -13,7 +13,10 @@ buildFuture: false
 buildExpired: false
 enableEmoji: true
 pygmentsUseClasses: true # Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
-# googleAnalytics: G-48LCDX0T0B
+
+services:
+  googleAnalytics:
+    id: G-48LCDX0T0B
 
 minify:
     disableXML: true
@@ -98,17 +101,17 @@ params:
         # - name: x
         #   url: "https://x.com/@therootuser_"
         - name: linkedin
-          url: "https://www.linkedin.com/in/umerrfarooqq"
+          url: "https://linkedin.com/in/umerrfarooqq"
         - name: email
           url: ""
 
-    # analytics:
-        # google:
-        # SiteVerificationTag: "XYZabc"
+    analytics:
+        google:
+            SiteVerificationTag: "tMHAv1yKyGLEQa4u4DMm_H9UwwX9FXyeMRCiIvg4vRc"
         # bing:
-        # SiteVerificationTag: "XYZabc"
+        #    SiteVerificationTag: "XYZabc"
         # yandex:
-        # SiteVerificationTag: "XYZabc"
+        #    SiteVerificationTag: "XYZabc"
 
     cover:
         hidden: true # hide everywhere but not in structured data
