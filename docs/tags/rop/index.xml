@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Rop on New Horizonz</title>
-    <link>http://localhost:1313/tags/rop/</link>
+    <link>https://signore.co.uk/tags/rop/</link>
     <description>Recent content in Rop on New Horizonz</description>
     <image>
-      <url>http://localhost:1313/images/blog-cover.png</url>
-      <link>http://localhost:1313/images/blog-cover.png</link>
+      <url>https://signore.co.uk/images/blog-cover.png</url>
+      <link>https://signore.co.uk/images/blog-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 20 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/rop/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 20 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://signore.co.uk/tags/rop/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>NCC CTF 2022 - Rev &amp; BinExp Challenges Writeup</title>
-      <link>http://localhost:1313/posts/ncc-ctf-2022/</link>
+      <link>https://signore.co.uk/posts/ncc-ctf-2022/</link>
       <pubDate>Wed, 20 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/ncc-ctf-2022/</guid>
+      <guid>https://signore.co.uk/posts/ncc-ctf-2022/</guid>
       <description>Walkthrough of Reversing &amp;amp; Binary Exploitation challenges presented at NED Cyber Community CTF 2022</description>
     </item>
     

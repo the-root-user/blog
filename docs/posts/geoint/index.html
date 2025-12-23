@@ -20,18 +20,18 @@
 <meta name="keywords" content="OSINT, GEOINT">
 <meta name="description" content="A byte sized lesson on geolocating images">
 <meta name="author" content="Signore">
-<link rel="canonical" href="http://localhost:1313/posts/geoint/">
+<link rel="canonical" href="https://signore.co.uk/posts/geoint/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.f4b78c5d850152976b0e307f9d0530024c406cc77a4159ae5ea0cb4adc05fb53.css" integrity="sha256-9LeMXYUBUpdrDjB/nQUwAkxAbMd6QVmuXqDLStwF&#43;1M=" rel="preload stylesheet" as="style">
 <script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
     onload="hljs.initHighlightingOnLoad();"></script>
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<link rel="icon" href="https://signore.co.uk/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://signore.co.uk/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://signore.co.uk/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://signore.co.uk/apple-touch-icon.png">
+<link rel="mask-icon" href="https://signore.co.uk/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/geoint/">
+<link rel="alternate" hreflang="en" href="https://signore.co.uk/posts/geoint/">
 <noscript>
     <style>
         #theme-toggle,
@@ -43,14 +43,14 @@
 </noscript><meta property="og:title" content="GEOINT: Geo-locating Images Using Landmarks" />
 <meta property="og:description" content="A byte sized lesson on geolocating images" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/posts/geoint/" />
-<meta property="og:image" content="http://localhost:1313/images/cover-geoint-urban-city.png" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://signore.co.uk/posts/geoint/" />
+<meta property="og:image" content="https://signore.co.uk/images/cover-geoint-urban-city.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-11-17T00:00:00+00:00" />
 <meta property="article:modified_time" content="2021-11-17T00:00:00+00:00" /><meta property="og:site_name" content="New Horizonz" />
 
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="http://localhost:1313/images/cover-geoint-urban-city.png" />
+<meta name="twitter:image" content="https://signore.co.uk/images/cover-geoint-urban-city.png" />
 <meta name="twitter:title" content="GEOINT: Geo-locating Images Using Landmarks"/>
 <meta name="twitter:description" content="A byte sized lesson on geolocating images"/>
 
@@ -64,13 +64,13 @@
       "@type": "ListItem",
       "position":  1 ,
       "name": "Posts",
-      "item": "http://localhost:1313/posts/"
+      "item": "https://signore.co.uk/posts/"
     }, 
     {
       "@type": "ListItem",
       "position":  2 ,
       "name": "GEOINT: Geo-locating Images Using Landmarks",
-      "item": "http://localhost:1313/posts/geoint/"
+      "item": "https://signore.co.uk/posts/geoint/"
     }
   ]
 }
@@ -88,7 +88,7 @@
   "articleBody": " The awesome Urban Shot used in this article was created by Artua\nThis article is going to be focused on geolocating images, specifically using Landmarks.\nGeolocation means finding the real world location of an object, such as the place where a photograph was taken. This process is rather straightforward but there are various methods - some more creative than others - of doing so. You don’t always get enough clues from an image’s metadata (data about data) and most images won’t typically show a famous landmark in the background to help you locate the area, town or even country.\nAccording to GEOINT Analyst Benjamin Strick[^1], there are 5 key elements one should consider when looking at an image:\nContext Foreground Background Map markings Trial and error Methodology: Reduce Your Area of Interest Context Usually we have a context in which the image was produced or shared, called context clues. For example, things like type of architecture, important landmarks and any other clues where this location could be in relation to land. Any piece of information, no matter how minor it may appear, could give an image more context. As an example, while searching for a missing person, an image of a banana leaf led investigators to research where banana production exists in the world.\nOne of the more obvious ways we can geolocate an image is to look at the image details:\nWho posted the image? Where was it posted? Does it contain metadata? Is there a location tagged on social media? Your investigation also serves as context.\nImage Analysis Be creative and scan the image for visual clues. Look for Point-Of-Interests in the image like its landscape, terrain, road layouts, a river, bridge, statue or a steep hill or for unique features like vegetation, specific trees, windows, street art, business names, architectural details like light-posts, balconies or rooftops in the Background as well as Foreground.\nReverse image search One of the methods for geolocating an image is to do an image reverse search. This means that if the image has been indexed by search engines we may find the exact image or we can do a visual or crop search to help us find similar images. Remember that changing the crop and the keywords for searching an image may yield completely different results.\nI like to use this browser addon to ease the workflow when I find images online that I want to do an image reverse on:\nRevEye Reverse Image Search\nFor Chrome, For Firefox\nLet’s see an Example Consider we are provided below image for analysis:\nFrom the things we discussed above, we can see some odd buildings which really stand out and something like a playground in the background (marked in red). If we pay close attention, we notice something in the foreground (marked in cyan) also which, probably, is a railing. We can later use it for confirmation purposes like actually from where the photo was taken.\nKeeping these point of interests in sight, a reverse image search tells us that the image was taken in London and the skyscrapers and railing help confirm it.\nMap Markings Orienting an image on a map provides valuable insights. If compared to Traditional mapping platforms, Local mapping platforms or data sets sometimes provide more valuable information. Sources like Weather Underground can be used to check historical weather data to corroborate image dates with weather at various locations, WolframAlpha to establish a time frame based on rainfall or London Street Trees to locate a particular type of tree across the city. SunCalc is another useful resource to identify a particular location using the sun’s direction and shadow in an image.\nA tool like Wikimapia allows users to annotate maps, include adding the names and locations of various structures. We can later add place marks on Google Earth or Google Maps as they have variety of different other options.\nKeep an Eye for what is NOT in your image/video? During a Bellingcat investigation to geolocate an image of mass executions in or near Benghazi, a Twitter user noticed the color of the sand was grey compared to other areas of Benghazi, where colors of the sand are more orange or yellow. This tip helped investigators identify the location to be in the southwest area of Benghazi. Furthermore, this was the first instance when (in August 2017) the International Criminal Court (ICC) issued its first ever arrest warrant solely based on evidence gathered via social media.\nTrial and Error Sometimes you need to revisit previous assumptions. When you feel like giving up, go back repeatedly and revisit your assumptions, check if any possible suspicion or guess may be correct or not. Try to look for what is not in an image. Even when an image shows no clear horizon, the lack of a horizon could become just as useful to reduce your area of interest.\nFurther Tips While geolocatting, it’s important to know what is and isn’t likely to be in a country. For example, it is unlikely for a regular Catholic church to appear in places where Budhism / Islam is the most popular religion. The language used on the shops and vehicles matter too. We can use Google translate to predict what language it could be. Which side of the road the cars are on, the license plates, the markings on the road (different countries have different markings), the style of traffic lights, the clothing choices of those walking around.\nTo be good at geolocation, we’ve got to open our eyes to all that could be. In your country, for example, it may be common to wear coats during the winter periods. However, in other countries it may not be (think). Even the smallest of things that we wouldn’t normally think twice about can reveal to us the possible location.\nStill wandering? Here’s a nice (beginner) geolocation challenge write-up https://www.secjuice.com/geolocation-osint-amateur-hour/ For Improving Skills Follow @quiztime on Twitter Play a lot of Geoguesser! References Benjamin Strick (on Twitter): https://twitter.com/BenDoBrown Weather Underground: https://www.wunderground.com/history WolframAlpha: https://www.wolframalpha.com/examples/science-and-technology/weather-and-meteorology/ London Street Trees: https://apps.london.gov.uk/street-trees/ SunCalc: https://www.suncalc.org/ Wikimapia: https://wikimapia.org/ Geoguesser: https://geoguessr.com/ Identify a location from a photo or video: https://youtu.be/RoqWbpZUOSo Robin Taylor’s session “More Than Meets the Eye: Geolocation for human rights investigations” at the Investigation is Collaboration conference: https://cdn.ttc.io/s/exposingtheinvisible.org/iic-conf/slides/Geolocation_RTaylor.pdf OSINT Geo Location: https://rallypoint.withyouwithme.com/cyber_challenges/osint-geo-location/ Geolocation Techniques - Mapping Landmarks: https://www.bellingcat.com/resources/how-tos/2014/07/15/geolocation-techniques-mapping-landmarks/ Google Earth: https://earth.google.com/ Google Maps: https://www.google.com/maps Bellingcat: https://www.bellingcat.com/ * This article was originally published in this Cyber Secrets Edition.\n",
   "wordCount" : "1072",
   "inLanguage": "en",
-  "image":"http://localhost:1313/images/cover-geoint-urban-city.png","datePublished": "2021-11-17T00:00:00Z",
+  "image":"https://signore.co.uk/images/cover-geoint-urban-city.png","datePublished": "2021-11-17T00:00:00Z",
   "dateModified": "2021-11-17T00:00:00Z",
   "author":{
     "@type": "Person",
@@ -96,14 +96,14 @@
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "http://localhost:1313/posts/geoint/"
+    "@id": "https://signore.co.uk/posts/geoint/"
   },
   "publisher": {
     "@type": "Organization",
     "name": "New Horizonz",
     "logo": {
       "@type": "ImageObject",
-      "url": "http://localhost:1313/favicon.ico"
+      "url": "https://signore.co.uk/favicon.ico"
     }
   }
 }
@@ -115,8 +115,8 @@
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="home (Alt + H)">
-                <img src="http://localhost:1313/apple-touch-icon-grey.png" alt="logo" aria-label="logo"
+            <a href="https://signore.co.uk/" accesskey="h" title="home (Alt + H)">
+                <img src="https://signore.co.uk/apple-touch-icon-grey.png" alt="logo" aria-label="logo"
                     height="28">home
             </a>
             <div class="logo-switches">
@@ -127,27 +127,27 @@
         </div>
         <ul id="menu">
             <li>
-                <a href="http://localhost:1313/author/">
+                <a href="https://signore.co.uk/author/">
                     <span>About Me</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/archives/">
+                <a href="https://signore.co.uk/archives/">
                     <span>Archive</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/categories/">
+                <a href="https://signore.co.uk/categories/">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/tags/">
+                <a href="https://signore.co.uk/tags/">
                     <span>Tags</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/search/" accesskey=/>
+                <a href="https://signore.co.uk/search/" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
@@ -158,7 +158,7 @@
 
 <article class="post-single">
   <header class="post-header">
-    <div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/posts/">Posts</a></div>
+    <div class="breadcrumbs"><a href="https://signore.co.uk/">Home</a>&nbsp;»&nbsp;<a href="https://signore.co.uk/posts/">Posts</a></div>
     <h1 class="post-title">
       GEOINT: Geo-locating Images Using Landmarks
     </h1>
@@ -309,10 +309,10 @@ this</a> Cyber Secrets Edition.</em></p>
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="http://localhost:1313/tags/osint/">OSINT</a></li>
+      <li><a href="https://signore.co.uk/tags/osint/">OSINT</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="http://localhost:1313/posts/pwn-0x00-warmup/">
+  <a class="prev" href="https://signore.co.uk/posts/pwn-0x00-warmup/">
     <span class="title">« Prev</span>
     <br>
     <span>Pwn 0x00: Warmup</span>
@@ -345,7 +345,7 @@ this</a> Cyber Secrets Edition.</em></p>
     </main>
     
 <footer class="footer">
-    <span>&copy; 2025 <a href="http://localhost:1313/">New Horizonz</a></span>
+    <span>&copy; 2025 <a href="https://signore.co.uk/">New Horizonz</a></span>
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a>

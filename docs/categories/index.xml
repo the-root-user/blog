@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Categories on New Horizonz</title>
-    <link>http://localhost:1313/categories/</link>
+    <link>https://signore.co.uk/categories/</link>
     <description>Recent content in Categories on New Horizonz</description>
     <image>
-      <url>http://localhost:1313/images/blog-cover.png</url>
-      <link>http://localhost:1313/images/blog-cover.png</link>
+      <url>https://signore.co.uk/images/blog-cover.png</url>
+      <link>https://signore.co.uk/images/blog-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 20 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 20 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://signore.co.uk/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>CTF Writeups</title>
-      <link>http://localhost:1313/categories/ctf-writeups/</link>
+      <link>https://signore.co.uk/categories/ctf-writeups/</link>
       <pubDate>Wed, 20 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/categories/ctf-writeups/</guid>
+      <guid>https://signore.co.uk/categories/ctf-writeups/</guid>
       <description></description>
     </item>
     

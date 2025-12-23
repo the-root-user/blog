@@ -2,39 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Pwn on New Horizonz</title>
-    <link>http://localhost:1313/tags/pwn/</link>
+    <link>https://signore.co.uk/tags/pwn/</link>
     <description>Recent content in Pwn on New Horizonz</description>
     <image>
-      <url>http://localhost:1313/images/blog-cover.png</url>
-      <link>http://localhost:1313/images/blog-cover.png</link>
+      <url>https://signore.co.uk/images/blog-cover.png</url>
+      <link>https://signore.co.uk/images/blog-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 22 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/pwn/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 22 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://signore.co.uk/tags/pwn/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Pwn 0x02: NX Bypass</title>
-      <link>http://localhost:1313/posts/pwn-0x02-nx-bypass/</link>
+      <link>https://signore.co.uk/posts/pwn-0x02-nx-bypass/</link>
       <pubDate>Mon, 22 Aug 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/pwn-0x02-nx-bypass/</guid>
+      <guid>https://signore.co.uk/posts/pwn-0x02-nx-bypass/</guid>
       <description>Stack is not allowing code execution? Let&amp;rsquo;s bypass it</description>
     </item>
     
     <item>
       <title>Pwn 0x01: Buffer Overflow</title>
-      <link>http://localhost:1313/posts/pwn-0x01-buffer-overflow/</link>
+      <link>https://signore.co.uk/posts/pwn-0x01-buffer-overflow/</link>
       <pubDate>Mon, 18 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/pwn-0x01-buffer-overflow/</guid>
+      <guid>https://signore.co.uk/posts/pwn-0x01-buffer-overflow/</guid>
       <description>WTH is a buffer overflow? Let&amp;rsquo;s do it</description>
     </item>
     
     <item>
       <title>Pwn 0x00: Warmup</title>
-      <link>http://localhost:1313/posts/pwn-0x00-warmup/</link>
+      <link>https://signore.co.uk/posts/pwn-0x00-warmup/</link>
       <pubDate>Sun, 03 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/pwn-0x00-warmup/</guid>
+      <guid>https://signore.co.uk/posts/pwn-0x00-warmup/</guid>
       <description>Let&amp;rsquo;s get ready to Pwn</description>
     </item>
     

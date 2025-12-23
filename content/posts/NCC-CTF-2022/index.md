@@ -105,7 +105,7 @@ After trying random input lengths for quite a bit, the offset for RIP comes out 
 
 Now that we have RIP under control, we need to find the memory addresses of `hacked` funtion and ROP gadgets.
 
-As we studied [here](http://localhost:1313/blog/posts/pwn-0x00-warmup/#03-architectures-comparison), if the binary was 32-bit, we could have just pushed the function arguments onto the stack. But, as our binary is 64-bit and arguments are being accessed through `registers`, we'll take the help of ROP gadgets to achieve our goal. 
+As we studied [here](https://signore.co.uk/blog/posts/pwn-0x00-warmup/#03-architectures-comparison), if the binary was 32-bit, we could have just pushed the function arguments onto the stack. But, as our binary is 64-bit and arguments are being accessed through `registers`, we'll take the help of ROP gadgets to achieve our goal. 
 
 We can find the memory address of the `hacked` function with gdb and ROP gadgets with `ropper`.
 
