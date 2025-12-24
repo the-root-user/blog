@@ -3,7 +3,6 @@ title: "New Horizonz"
 baseURL: https://signore.co.uk
 languageCode: en-us
 theme: "PaperMod"
-pagination.pagerSize: 5
 
 publishDir: "docs"
 enableInlineShortcodes: true
@@ -12,15 +11,19 @@ buildDrafts: false
 buildFuture: false
 buildExpired: false
 enableEmoji: true
-pygmentsUseClasses: true # Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
-
-services:
-  googleAnalytics:
-    id: G-48LCDX0T0B
+pygmentsUseClasses: true
+#mainsections: ["posts", "papermod"]
 
 minify:
     disableXML: true
     # minifyOutput: true
+
+pagination:
+  pagerSize: 5
+
+services:
+  googleAnalytics:
+    id: G-48LCDX0T0B
 
 # permalinks:
     # posts: /:year/:monthname/:title/
@@ -30,16 +33,15 @@ params:
     title: "New Horizonz"
     description: "A blog about adventures in Offensive Computers Security"
     keywords: [Blog, Ethical Hacking, Cyber Security, OSINT, Exploit Development, Reverse Engineering, CTF, Writeup, Hackthebox, Tryhackme]
-    author: ["Signore"]
-    # author: ["Me", "You"] # multiple authors
-    images: ["images/blog-cover.png"]
-    # images: ["<link or path of image for opengraph, twitter-cards>"]
+    author: ["Signore"] # ["Me", "You"] # multiple authors
+    images: ["images/blog-cover.png"] # ["<link or path of image for opengraph, twitter-cards>"]
     DateFormat: "January 2, 2006"
     timeZone: Asia/Karachi
+
     defaultTheme: dark # auto, light
     disableThemeToggle: true
-    SidebarRecentLimit: 5
 
+    SidebarRecentLimit: 5
     ShowReadingTime: true
     ShowShareButtons: true
     ShareButtons: ["facebook","whatsapp","linkedin","twitter"] # reddit
@@ -47,6 +49,7 @@ params:
     ShowBreadCrumbs: true
     ShowCodeCopyButtons: true
     # ShowWordCount: true
+    hideAuthor: true
     ShowRssButtonInSectionTermList: true
     UseHugoToc: true
     disableSpecial1stPost: false
@@ -95,7 +98,7 @@ params:
 
             - Feel free to get in contact!
 
-    scialIcons:
+    socialIcons:
         - name: github
           url: "https://github.com/the-root-user"
         # - name: x

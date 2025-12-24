@@ -1,3 +1,7 @@
+/***
+*** Theme vars
+***/
+
 :root {
     --gap: 24px;
     --content-gap: 20px;
@@ -12,27 +16,34 @@
     --secondary: rgb(108, 108, 108);
     --tertiary: rgb(214, 214, 214);
     --content: rgb(31, 31, 31);
-    --hljs-bg: rgb(28, 29, 33);
+    --code-block-bg: rgb(28, 29, 33);
     --code-bg: rgb(245, 245, 245);
     --border: rgb(238, 238, 238);
+    --accent: rgb(242, 148, 146);  /* #f29492, #8AB4F8; #ff79c6 */
+    --tint: rgb(255, 121, 198); /* #ff79c6 #4169E1 #00FFFF #40E0D0 #f29492b3 */
+    color-scheme: light;
 }
 
 :root[data-theme="dark"] {
-    --theme: #202227; /* G #202124; Default #1d1e20; */
+    --theme: rgb(29, 31, 36); /* Default rgb(29, 30, 32); G #202124 rgb(32, 33, 36); */
     --entry: rgb(46, 46, 51);
     --primary: rgb(218, 218, 219);
     --secondary: rgb(155, 156, 157);
     --tertiary: rgb(65, 66, 68);
     --content: rgb(196, 196, 197);
-    --hljs-bg: rgb(46, 46, 51);
-    --code-bg: rgb(55, 57, 62);
+    --code-block-bg: rgb(46, 46, 51);
+    --code-bg: rgb(55, 56, 62);
     --border: rgb(51, 51, 51);
+    color-scheme: dark;
 }
 
-.list {
-    background: var(--code-bg);
-}
+/***
+*** Reset
+***/
 
-[data-theme="dark"] .list {
-    background: var(--theme);
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'DM Sans', 'Segoe UI', Roboto, Oxygen, Ubuntu, 'Helvetica Neue', 'Open Sans', Cantarell, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.6;
 }

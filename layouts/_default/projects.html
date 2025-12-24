@@ -37,61 +37,65 @@
 {{- end }}
 
 <ul>
-{{- $pages := union .RegularPages .Sections }}
+  {{- $pages := union .RegularPages .Sections }}
 
-{{- if .IsHome }}
-{{- $pages = where site.RegularPages "Type" "in" site.Params.mainSections }}
-{{- end }}
-
-{{- $paginator := .Paginate $pages }}
-
-{{- if and .IsHome site.Params.homeInfoParams (eq $paginator.PageNumber 1) }}
-{{- partial "home_info.html" . }}
-{{- end }}
-
-{{- $term := .Data.Term }}
-{{- range $index, $page := $paginator.Pages }}
-
-<!-- {{- $class := "post-entry" }} -->
-{{- $class := "project-entry" }}
-
-{{- $user_preferred := or site.Params.disableSpecial1stPost site.Params.homeInfoParams }}
-{{- if (and $.IsHome (eq $paginator.PageNumber 1) (eq $index 0) (not $user_preferred)) }}
-{{- $class = "first-entry" }}
-{{- else if $term }}
-{{- $class = "project-entry tag-entry" }}
-{{- end }}
-
-<li><article class="{{ $class }}">
-  <header class="project-entry-header">
-    <h2>
-      {{- .Title }}
-      {{ if isset .Params "externallink" }}
-      <span>&#8599;</span>
-      {{ end }}
-      {{- if .Draft }}<sup><span class="entry-isdraft">&nbsp;&nbsp;[draft]</span></sup>{{- end }}
-    </h2>
-  </header>
-  {{- if (ne (.Param "hideSummary") true) }}
-  <div class="project-entry-content">
-    <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
-  </div>
+  {{- if .IsHome }}
+  {{- $pages = where site.RegularPages "Type" "in" site.Params.mainSections }}
   {{- end }}
-  {{- if not (.Param "hideMeta") }}
-  <!-- <footer class="entry-footer">
+
+  {{- $paginator := .Paginate $pages }}
+
+  {{- if and .IsHome site.Params.homeInfoParams (eq $paginator.PageNumber 1) }}
+  {{- partial "home_info.html" . }}
+  {{- end }}
+
+  {{- $term := .Data.Term }}
+  {{- range $index, $page := $paginator.Pages }}
+
+  <!-- {{- $class := "post-entry" }} -->
+  {{- $class := "project-entry" }}
+
+  {{- $user_preferred := or site.Params.disableSpecial1stPost site.Params.homeInfoParams }}
+  {{- if (and $.IsHome (eq $paginator.PageNumber 1) (eq $index 0) (not $user_preferred)) }}
+  {{- $class = "first-entry" }}
+  {{- else if $term }}
+  {{- $class = "project-entry tag-entry" }}
+  {{- end }}
+
+  <li>
+    <article class="{{ $class }}">
+      <header class="project-entry-header">
+        <h2>
+          {{- .Title }}
+          {{ if isset .Params "externallink" }}
+          <span style="font-size: 20px">&nbsp;</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-circle-arrow-up-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-2 4.66h-6l-.117 .007a1 1 0 0 0 -.883 .993l.007 .117a1 1 0 0 0 .993 .883h3.584l-4.291 4.293l-.083 .094a1 1 0 0 0 1.497 1.32l4.293 -4.293v3.586l.007 .117a1 1 0 0 0 1.993 -.117v-6l-.007 -.117l-.029 -.149l-.035 -.105l-.054 -.113l-.071 -.111a1.01 1.01 0 0 0 -.097 -.112l-.09 -.08l-.096 -.067l-.098 -.052l-.11 -.044l-.112 -.03l-.126 -.017l-.075 -.003z" /></svg>
+          {{ end }}
+          {{- if .Draft }}<sup><span class="entry-isdraft">&nbsp;&nbsp;[draft]</span></sup>{{- end }}
+        </h2>
+      </header>
+      {{- if (ne (.Param "hideSummary") true) }}
+      <div class="project-entry-content">
+        <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
+      </div>
+      {{- end }}
+      {{- if not (.Param "hideMeta") }}
+      <!-- <footer class="entry-footer">
     {{- partial "post_meta.html" . -}}
   </footer> -->
+      {{- end }}
+      <!-- If external link exists in post matter -->
+      {{ if isset .Params "externallink" }}
+      <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Params.externallink }}"
+        target="_blank" rel="noreferrer"></a>
+      {{ else }}
+      <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
+      {{ end }}
+      {{- $isHidden := false }}
+      {{- partial "cover.html" (dict "cxt" . "IsHome" true "isHidden" $isHidden) }}
+    </article>
+  </li>
   {{- end }}
-  <!-- If external link exists in post matter -->
-  {{ if isset .Params "externallink" }}
-  <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Params.externallink }}" target="_blank" rel="noreferrer"></a>
-  {{ else }}
-  <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
-  {{ end }}
-  {{- $isHidden := false }}
-  {{- partial "cover.html" (dict "cxt" . "IsHome" true "isHidden" $isHidden) }}
-</article></li>
-{{- end }}
 </ul>
 
 {{- if gt $paginator.TotalPages 1 }}

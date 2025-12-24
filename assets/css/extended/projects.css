@@ -43,7 +43,7 @@
     border-radius: 16px;
     border: none;
     border-left: solid 5px #64646a;
-    transition: ease-in-out 0.3s;
+    transition: ease-in-out 0.25s;
 }
 
 .project-entry:hover {
@@ -52,11 +52,11 @@
 }
 
 .project-entry:active {
-    transform: scale(0.96);
+    transform: scale(0.98);
 }
 
 .project-entry-header h2 {
-    color: #8AB4F8;
+    color: var(--accent);
     font-size: 24px;
     line-height: 1.3;
 }
