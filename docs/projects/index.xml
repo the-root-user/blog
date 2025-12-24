@@ -5,38 +5,34 @@
     <link>https://signore.co.uk/projects/</link>
     <description>Recent content in My Projects on New Horizonz</description>
     <image>
+      <title>New Horizonz</title>
       <url>https://signore.co.uk/images/blog-cover.png</url>
       <link>https://signore.co.uk/images/blog-cover.png</link>
     </image>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo -- 0.152.2</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 20 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://signore.co.uk/projects/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 20 Dec 2022 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://signore.co.uk/projects/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>expdev</title>
       <link>https://signore.co.uk/projects/p03-expdev/</link>
       <pubDate>Tue, 20 Dec 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://signore.co.uk/projects/p03-expdev/</guid>
       <description>Docker container for Exploit Dev</description>
     </item>
-    
     <item>
       <title>Sweet-HTB</title>
       <link>https://signore.co.uk/projects/p02-sweet-htb/</link>
       <pubDate>Fri, 29 Jul 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://signore.co.uk/projects/p02-sweet-htb/</guid>
       <description>Modern theme for Hackers, with dark colors - Inspired from the UI of Hackthebox</description>
     </item>
-    
     <item>
       <title>nmap-auto</title>
       <link>https://signore.co.uk/projects/p01-nmap-auto/</link>
       <pubDate>Wed, 09 Mar 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://signore.co.uk/projects/p01-nmap-auto/</guid>
       <description>A Bash script to fascilitate your Hacking journey</description>
     </item>
-    
   </channel>
 </rss>

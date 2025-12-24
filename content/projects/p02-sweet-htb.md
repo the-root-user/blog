@@ -14,4 +14,4 @@ cover:
 date: 2022-07-29
 ---
 
-[Sweet-HTB](https://github.com/the-root-user/sweet-htb)
+[Sweet-HTB](https://github.com/the-root-user/Sweet-HTB)

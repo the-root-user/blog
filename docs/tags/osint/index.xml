@@ -5,20 +5,20 @@
     <link>https://signore.co.uk/tags/osint/</link>
     <description>Recent content in OSINT on New Horizonz</description>
     <image>
+      <title>New Horizonz</title>
       <url>https://signore.co.uk/images/blog-cover.png</url>
       <link>https://signore.co.uk/images/blog-cover.png</link>
     </image>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo -- 0.152.2</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 17 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://signore.co.uk/tags/osint/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 17 Nov 2021 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://signore.co.uk/tags/osint/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>GEOINT: Geo-locating Images Using Landmarks</title>
       <link>https://signore.co.uk/posts/geoint/</link>
       <pubDate>Wed, 17 Nov 2021 00:00:00 +0000</pubDate>
-      
       <guid>https://signore.co.uk/posts/geoint/</guid>
       <description>A byte sized lesson on geolocating images</description>
     </item>
-    
   </channel>
 </rss>

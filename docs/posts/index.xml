@@ -5,56 +5,48 @@
     <link>https://signore.co.uk/posts/</link>
     <description>Recent content in Posts on New Horizonz</description>
     <image>
+      <title>New Horizonz</title>
       <url>https://signore.co.uk/images/blog-cover.png</url>
       <link>https://signore.co.uk/images/blog-cover.png</link>
     </image>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo -- 0.152.2</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 22 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://signore.co.uk/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 22 Aug 2022 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://signore.co.uk/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Pwn 0x02: NX Bypass</title>
       <link>https://signore.co.uk/posts/pwn-0x02-nx-bypass/</link>
       <pubDate>Mon, 22 Aug 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://signore.co.uk/posts/pwn-0x02-nx-bypass/</guid>
       <description>Stack is not allowing code execution? Let&amp;rsquo;s bypass it</description>
     </item>
-    
     <item>
       <title>NCC CTF 2022 - Rev &amp; BinExp Challenges Writeup</title>
       <link>https://signore.co.uk/posts/ncc-ctf-2022/</link>
       <pubDate>Wed, 20 Jul 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://signore.co.uk/posts/ncc-ctf-2022/</guid>
       <description>Walkthrough of Reversing &amp;amp; Binary Exploitation challenges presented at NED Cyber Community CTF 2022</description>
     </item>
-    
     <item>
       <title>Pwn 0x01: Buffer Overflow</title>
       <link>https://signore.co.uk/posts/pwn-0x01-buffer-overflow/</link>
       <pubDate>Mon, 18 Jul 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://signore.co.uk/posts/pwn-0x01-buffer-overflow/</guid>
       <description>WTH is a buffer overflow? Let&amp;rsquo;s do it</description>
     </item>
-    
     <item>
       <title>Pwn 0x00: Warmup</title>
       <link>https://signore.co.uk/posts/pwn-0x00-warmup/</link>
       <pubDate>Sun, 03 Jul 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://signore.co.uk/posts/pwn-0x00-warmup/</guid>
       <description>Let&amp;rsquo;s get ready to Pwn</description>
     </item>
-    
     <item>
       <title>GEOINT: Geo-locating Images Using Landmarks</title>
       <link>https://signore.co.uk/posts/geoint/</link>
       <pubDate>Wed, 17 Nov 2021 00:00:00 +0000</pubDate>
-      
       <guid>https://signore.co.uk/posts/geoint/</guid>
       <description>A byte sized lesson on geolocating images</description>
     </item>
-    
   </channel>
 </rss>

@@ -1,18 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" dir="auto">
+<html lang="en" dir="auto" data-theme="dark">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-48LCDX0T0B"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-48LCDX0T0B');
-</script>
-
-<meta name="google-site-verification" content="tMHAv1yKyGLEQa4u4DMm_H9UwwX9FXyeMRCiIvg4vRc"/>
-<meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -21,9 +10,8 @@
 <meta name="description" content="Let&rsquo;s get ready to Pwn">
 <meta name="author" content="Signore">
 <link rel="canonical" href="https://signore.co.uk/posts/pwn-0x00-warmup/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.f4b78c5d850152976b0e307f9d0530024c406cc77a4159ae5ea0cb4adc05fb53.css" integrity="sha256-9LeMXYUBUpdrDjB/nQUwAkxAbMd6QVmuXqDLStwF&#43;1M=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
-    onload="hljs.initHighlightingOnLoad();"></script>
+<meta name="google-site-verification" content="tMHAv1yKyGLEQa4u4DMm_H9UwwX9FXyeMRCiIvg4vRc">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.b05de72c287a972e224354d8d25dd0970b1e5632dcb6ab6f544fe55c199896da.css" integrity="sha256-sF3nLCh6ly4iQ1TY0l3QlwseVjLctqtvVE/lXBmYlto=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://signore.co.uk/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://signore.co.uk/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://signore.co.uk/favicon-32x32.png">
@@ -40,19 +28,34 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="Pwn 0x00: Warmup" />
-<meta property="og:description" content="Let&rsquo;s get ready to Pwn" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://signore.co.uk/posts/pwn-0x00-warmup/" />
-<meta property="og:image" content="https://signore.co.uk/images/cover-binexp-00.png" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2022-07-03T00:00:00+00:00" />
-<meta property="article:modified_time" content="2022-07-03T00:00:00+00:00" /><meta property="og:site_name" content="New Horizonz" />
+</noscript>
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-48LCDX0T0B"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://signore.co.uk/images/cover-binexp-00.png" />
-<meta name="twitter:title" content="Pwn 0x00: Warmup"/>
-<meta name="twitter:description" content="Let&rsquo;s get ready to Pwn"/>
+  gtag('config', 'G-48LCDX0T0B');
+</script>
+<meta property="og:url" content="https://signore.co.uk/posts/pwn-0x00-warmup/">
+  <meta property="og:site_name" content="New Horizonz">
+  <meta property="og:title" content="Pwn 0x00: Warmup">
+  <meta property="og:description" content="Let’s get ready to Pwn">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-07-03T00:00:00+00:00">
+    <meta property="article:modified_time" content="2022-07-03T00:00:00+00:00">
+    <meta property="article:tag" content="Memory">
+    <meta property="article:tag" content="Pwn">
+    <meta property="og:image" content="https://signore.co.uk/images/cover-binexp-00.png">
+      <meta property="og:see_also" content="https://signore.co.uk/posts/pwn-0x02-nx-bypass/">
+      <meta property="og:see_also" content="https://signore.co.uk/posts/pwn-0x01-buffer-overflow/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://signore.co.uk/images/cover-binexp-00.png">
+<meta name="twitter:title" content="Pwn 0x00: Warmup">
+<meta name="twitter:description" content="Let&rsquo;s get ready to Pwn">
 
 
 <script type="application/ld+json">
@@ -109,45 +112,40 @@
 }
 </script>
 </head>
-
-<body class=" dark" id="top">
-
-<header class="header">
+<body id="top">
+    <header class="header">
     <nav class="nav">
         <div class="logo">
             <a href="https://signore.co.uk/" accesskey="h" title="home (Alt + H)">
-                <img src="https://signore.co.uk/apple-touch-icon-grey.png" alt="logo" aria-label="logo"
+                <img src="https://signore.co.uk/apple-touch-icon-grey.png" alt="" aria-label="logo"
                     height="28">home
             </a>
             <div class="logo-switches">
-                <ul class="lang-switch">
-                    
-                </ul>
             </div>
         </div>
         <ul id="menu">
             <li>
-                <a href="https://signore.co.uk/author/">
+                <a href="https://signore.co.uk/author/" title="About Me">
                     <span>About Me</span>
                 </a>
             </li>
             <li>
-                <a href="https://signore.co.uk/archives/">
+                <a href="https://signore.co.uk/archives/" title="Archive">
                     <span>Archive</span>
                 </a>
             </li>
             <li>
-                <a href="https://signore.co.uk/categories/">
+                <a href="https://signore.co.uk/categories/" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="https://signore.co.uk/tags/">
+                <a href="https://signore.co.uk/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
             <li>
-                <a href="https://signore.co.uk/search/" accesskey=/>
+                <a href="https://signore.co.uk/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
@@ -159,12 +157,14 @@
 <article class="post-single">
   <header class="post-header">
     <div class="breadcrumbs"><a href="https://signore.co.uk/">Home</a>&nbsp;»&nbsp;<a href="https://signore.co.uk/posts/">Posts</a></div>
-    <h1 class="post-title">
+    <h1 class="post-title entry-hint-parent">
       Pwn 0x00: Warmup
     </h1>
     <div class="post-meta"><span class="meta">
     <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" width="12" height="12" fill="#7c7c7c" viewBox="0 0 512 512"><title>Calendar Clear</title><path d="M480 128a64 64 0 00-64-64h-16V48.45c0-8.61-6.62-16-15.23-16.43A16 16 0 00368 48v16H144V48.45c0-8.61-6.62-16-15.23-16.43A16 16 0 00112 48v16H96a64 64 0 00-64 64v12a4 4 0 004 4h440a4 4 0 004-4zM32 416a64 64 0 0064 64h320a64 64 0 0064-64V180a4 4 0 00-4-4H36a4 4 0 00-4 4z"/></svg> 
-    <span>July 3, 2022</span>
+    <span>
+        July 3, 2022
+    </span>
     <span>&nbsp;&nbsp;</span>
 </span><span class="meta">
     <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" width="12" height="12" fill="#7c7c7c" viewBox="0 0 512 512"><title>Time</title><path d="M256 48C141.13 48 48 141.13 48 256s93.13 208 208 208 208-93.13 208-208S370.87 48 256 48zm96 240h-96a16 16 0 01-16-16V128a16 16 0 0132 0v128h80a16 16 0 010 32z"/></svg>
@@ -172,13 +172,10 @@
     <span>&nbsp;</span>
 </span>
 
-
-
-
 </div>
   </header> <div class="toc">
     <details  open>
-        <summary accesskey="c">
+        <summary accesskey="c" title="(Alt + C)">
             <span class="details">Table of Contents</span>
         </summary>
 
@@ -207,7 +204,7 @@
     </details>
 </div>
 
-  <div class="post-content tooltip"><p>! We will not be diving deep into things but only as much as necessary. For further learning, I&rsquo;ll link relevant resources.</p>
+  <div class="post-content"><p>! We will not be diving deep into things but only as much as necessary. For further learning, I&rsquo;ll link relevant resources.</p>
 <h2 id="01-prerequisites">0.1 Prerequisites<a hidden class="anchor" aria-hidden="true" href="#01-prerequisites">#</a></h2>
 <ul>
 <li>Basic Computer Science knowledge</li>
@@ -450,62 +447,85 @@ video</a>.</p>
 </nav>
 
 
-<div class="share-buttons">
-    <a target="_blank" rel="noopener noreferrer" aria-label="share Pwn 0x00: Warmup on twitter" title="share on X"
-        href="https://x.com/intent/tweet/?text=Pwn%200x00%3a%20Warmup&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2fpwn-0x00-warmup%2f&amp;hashtags=memory%2cpwn">
-        <svg viewBox="0 0 512 512" fill="currentColor"><path d="M 469.33334,94.794994 V 417.20514 c 0,28.76996 -23.35824,52.1282 -52.1282,52.1282 H 94.794994 c -28.769985,0 -52.128327,-23.35824 -52.128327,-52.1282 V 94.794994 c 0,-28.769985 23.357511,-52.128327 52.128327,-52.128327 H 417.20514 c 28.77059,0 52.1282,23.358342 52.1282,52.128327 z M 267.62578,201.62494 194.8058,105.34667 H 89.333335 L 215.34659,270.12486 95.916664,406.65254 h 51.138346 l 92.19507,-105.33342 80.55579,105.33342 h 102.8608 L 291.30578,232.97245 402.97246,105.34667 h -51.11153 z m -118.59827,-67.2916 h 30.38999 l 182.8166,241.7208 h -28.31744 z"/>
-        </svg>
-    </a>
-    <a target="_blank" rel="noopener noreferrer" aria-label="share Pwn 0x00: Warmup on linkedin" title="share on Linkedin"
-        href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2fpwn-0x00-warmup%2f&amp;title=Pwn%200x00%3a%20Warmup&amp;summary=Pwn%200x00%3a%20Warmup&amp;source=http%3a%2f%2flocalhost%3a1313%2fposts%2fpwn-0x00-warmup%2f">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M417.2 64H96.8C79.3 64 64 76.6 64 93.9V415c0 17.4 15.3 32.9 32.8 32.9h320.3c17.6 0 30.8-15.6 30.8-32.9V93.9C448 76.6 434.7 64 417.2 64zM183 384h-55V213h55v171zm-25.6-197h-.4c-17.6 0-29-13.1-29-29.5 0-16.7 11.7-29.5 29.7-29.5s29 12.7 29.4 29.5c0 16.4-11.4 29.5-29.7 29.5zM384 384h-55v-93.5c0-22.4-8-37.7-27.9-37.7-15.2 0-24.2 10.3-28.2 20.3-1.5 3.6-1.9 8.5-1.9 13.5V384h-55V213h55v23.8c8-11.4 20.5-27.8 49.6-27.8 36.1 0 63.4 23.8 63.4 75.1V384z"/></svg>
-    </a>
-    <a target="_blank" rel="noopener noreferrer" aria-label="share Pwn 0x00: Warmup on facebook" title="share on Facebook"
-        href="https://facebook.com/sharer/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fposts%2fpwn-0x00-warmup%2f">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M426.8 64H85.2C73.5 64 64 73.5 64 85.2v341.6c0 11.7 9.5 21.2 21.2 21.2H256V296h-45.9v-56H256v-41.4c0-49.6 34.4-76.6 78.7-76.6 21.2 0 44 1.6 49.3 2.3v51.8h-35.3c-24.1 0-28.7 11.4-28.7 28.2V240h57.4l-7.5 56H320v152h106.8c11.7 0 21.2-9.5 21.2-21.2V85.2c0-11.7-9.5-21.2-21.2-21.2z"/></svg>
-    </a>
-    <a target="_blank" rel="noopener noreferrer" aria-label="share Pwn 0x00: Warmup on whatsapp" title="share on Whatsapp"
-        href="https://api.whatsapp.com/send?text=Pwn%200x00%3a%20Warmup%20-%20http%3a%2f%2flocalhost%3a1313%2fposts%2fpwn-0x00-warmup%2f">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M260.062 32C138.605 32 40.134 129.701 40.134 250.232c0 41.23 11.532 79.79 31.559 112.687L32 480l121.764-38.682c31.508 17.285 67.745 27.146 106.298 27.146C381.535 468.464 480 370.749 480 250.232 480 129.701 381.535 32 260.062 32zm109.362 301.11c-5.174 12.827-28.574 24.533-38.899 25.072-10.314.547-10.608 7.994-66.84-16.434-56.225-24.434-90.052-83.844-92.719-87.67-2.669-3.812-21.78-31.047-20.749-58.455 1.038-27.413 16.047-40.346 21.404-45.725 5.351-5.387 11.486-6.352 15.232-6.413 4.428-.072 7.296-.132 10.573-.011 3.274.124 8.192-.685 12.45 10.639 4.256 11.323 14.443 39.153 15.746 41.989 1.302 2.839 2.108 6.126.102 9.771-2.012 3.653-3.042 5.935-5.961 9.083-2.935 3.148-6.174 7.042-8.792 9.449-2.92 2.665-5.97 5.572-2.9 11.269 3.068 5.693 13.653 24.356 29.779 39.736 20.725 19.771 38.598 26.329 44.098 29.317 5.515 3.004 8.806 2.67 12.226-.929 3.404-3.599 14.639-15.746 18.596-21.169 3.955-5.438 7.661-4.373 12.742-2.329 5.078 2.052 32.157 16.556 37.673 19.551 5.51 2.989 9.193 4.529 10.51 6.9 1.317 2.38.901 13.531-4.271 26.359z"/></svg>
-    </a>
-</div>
+<ul class="share-buttons">
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Pwn 0x00: Warmup on x"
+            title="share on X"
+            href="https://x.com/intent/tweet/?text=Pwn%200x00%3a%20Warmup&amp;url=https%3a%2f%2fsignore.co.uk%2fposts%2fpwn-0x00-warmup%2f&amp;hashtags=memory%2cpwn">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M 469.33334,94.794994 V 417.20514 c 0,28.76996 -23.35824,52.1282 -52.1282,52.1282 H 94.794994 c -28.769985,0 -52.128327,-23.35824 -52.128327,-52.1282 V 94.794994 c 0,-28.769985 23.357511,-52.128327 52.128327,-52.128327 H 417.20514 c 28.77059,0 52.1282,23.358342 52.1282,52.128327 z M 267.62578,201.62494 194.8058,105.34667 H 89.333335 L 215.34659,270.12486 95.916664,406.65254 h 51.138346 l 92.19507,-105.33342 80.55579,105.33342 h 102.8608 L 291.30578,232.97245 402.97246,105.34667 h -51.11153 z m -118.59827,-67.2916 h 30.38999 l 182.8166,241.7208 h -28.31744 z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Pwn 0x00: Warmup on linkedin"
+            title="share on Linkedin"
+            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fsignore.co.uk%2fposts%2fpwn-0x00-warmup%2f&amp;title=Pwn%200x00%3a%20Warmup&amp;summary=Pwn%200x00%3a%20Warmup&amp;source=https%3a%2f%2fsignore.co.uk%2fposts%2fpwn-0x00-warmup%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M417.2 64H96.8C79.3 64 64 76.6 64 93.9V415c0 17.4 15.3 32.9 32.8 32.9h320.3c17.6 0 30.8-15.6 30.8-32.9V93.9C448 76.6 434.7 64 417.2 64zM183 384h-55V213h55v171zm-25.6-197h-.4c-17.6 0-29-13.1-29-29.5 0-16.7 11.7-29.5 29.7-29.5s29 12.7 29.4 29.5c0 16.4-11.4 29.5-29.7 29.5zM384 384h-55v-93.5c0-22.4-8-37.7-27.9-37.7-15.2 0-24.2 10.3-28.2 20.3-1.5 3.6-1.9 8.5-1.9 13.5V384h-55V213h55v23.8c8-11.4 20.5-27.8 49.6-27.8 36.1 0 63.4 23.8 63.4 75.1V384z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Pwn 0x00: Warmup on facebook"
+            title="share on Facebook"
+            href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fsignore.co.uk%2fposts%2fpwn-0x00-warmup%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M426.8 64H85.2C73.5 64 64 73.5 64 85.2v341.6c0 11.7 9.5 21.2 21.2 21.2H256V296h-45.9v-56H256v-41.4c0-49.6 34.4-76.6 78.7-76.6 21.2 0 44 1.6 49.3 2.3v51.8h-35.3c-24.1 0-28.7 11.4-28.7 28.2V240h57.4l-7.5 56H320v152h106.8c11.7 0 21.2-9.5 21.2-21.2V85.2c0-11.7-9.5-21.2-21.2-21.2z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Pwn 0x00: Warmup on whatsapp"
+            title="share on Whatsapp"
+            href="https://api.whatsapp.com/send?text=Pwn%200x00%3a%20Warmup%20-%20https%3a%2f%2fsignore.co.uk%2fposts%2fpwn-0x00-warmup%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M260.062 32C138.605 32 40.134 129.701 40.134 250.232c0 41.23 11.532 79.79 31.559 112.687L32 480l121.764-38.682c31.508 17.285 67.745 27.146 106.298 27.146C381.535 468.464 480 370.749 480 250.232 480 129.701 381.535 32 260.062 32zm109.362 301.11c-5.174 12.827-28.574 24.533-38.899 25.072-10.314.547-10.608 7.994-66.84-16.434-56.225-24.434-90.052-83.844-92.719-87.67-2.669-3.812-21.78-31.047-20.749-58.455 1.038-27.413 16.047-40.346 21.404-45.725 5.351-5.387 11.486-6.352 15.232-6.413 4.428-.072 7.296-.132 10.573-.011 3.274.124 8.192-.685 12.45 10.639 4.256 11.323 14.443 39.153 15.746 41.989 1.302 2.839 2.108 6.126.102 9.771-2.012 3.653-3.042 5.935-5.961 9.083-2.935 3.148-6.174 7.042-8.792 9.449-2.92 2.665-5.97 5.572-2.9 11.269 3.068 5.693 13.653 24.356 29.779 39.736 20.725 19.771 38.598 26.329 44.098 29.317 5.515 3.004 8.806 2.67 12.226-.929 3.404-3.599 14.639-15.746 18.596-21.169 3.955-5.438 7.661-4.373 12.742-2.329 5.078 2.052 32.157 16.556 37.673 19.551 5.51 2.989 9.193 4.529 10.51 6.9 1.317 2.38.901 13.531-4.271 26.359z" />
+            </svg>
+        </a>
+    </li>
+</ul>
 
   </footer>
 </article>
     </main>
     
 <footer class="footer">
-    <span>&copy; 2025 <a href="https://signore.co.uk/">New Horizonz</a></span>
+        <span>&copy; 2025 <a href="https://signore.co.uk/">New Horizonz</a></span> · 
+
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a>
     </span>
 </footer>
-<a href="#top" aria-label="go to top" class="top-link" id="top-link">
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
         <path d="M12 6H0l6-6z" />
     </svg>
 </a>
-<script src="/js/medium-zoom.min.js" data-no-instant
-></script>
+<script src="/js/medium-zoom.min.js" data-no-instant></script>
 
 <script>
-const images = Array.from(document.querySelectorAll(".post-content img"));
-images.forEach(img => {
-  mediumZoom(img, {
-    margin: 10,  
-    background: '#1c1c1ff2',  
-    scrollOffset: 20,  
-    container: null,  
-    template: null  
-  });
-});
+    const images = Array.from(document.querySelectorAll(".post-content img"));
+    images.forEach(img => {
+        mediumZoom(img, {
+            margin: 10,  
+            background: '#1c1c1ff2',  
+            scrollOffset: 20,  
+            container: null,  
+            template: null  
+        });
+    });
 </script><script>
     const toc = document.querySelector('.toc')
 
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', function () {
         if (window.scrollY > 70) {
-             toc.style.top = '2.5rem'
+            toc.style.top = '2.5rem'
         } else {
             toc.style.top = '11.6rem'
         }
@@ -513,50 +533,50 @@ images.forEach(img => {
 </script><script>
     class Scroller {
         static init() {
-        if(document.querySelector('.toc')) { 
-            this.toc = document.querySelectorAll('.toc a');
-            this.toc.forEach(link => link.classList.add('transition', 'duration-200'))
-            this.headers = Array.from(this.toc).map(link => {
-            return document.querySelector(`#${link.href.split('#')[1]}`);
-            })
-            this.ticking = false;
-            window.addEventListener('scroll', (e) => {
-            this.onScroll()
-            })
+            if (document.querySelector('.toc')) { 
+                this.toc = document.querySelectorAll('.toc a');
+                this.toc.forEach(link => link.classList.add('transition', 'duration-200'))
+                this.headers = Array.from(this.toc).map(link => {
+                    return document.querySelector(`#${link.href.split('#')[1]}`);
+                })
+                this.ticking = false;
+                window.addEventListener('scroll', (e) => {
+                    this.onScroll()
+                })
+            }
         }
-        }
-    
+
         static onScroll() {
-        if(!this.ticking) {
-            requestAnimationFrame(this.update.bind(this));
-            this.ticking = true;
+            if (!this.ticking) {
+                requestAnimationFrame(this.update.bind(this));
+                this.ticking = true;
+            }
         }
-        }
-    
+
         static update() {
-        this.activeHeader ||= this.headers[0];
-        let activeIndex = this.headers.findIndex((header) => {
-            return header.getBoundingClientRect().top > 180;
-        });
-        if(activeIndex == -1) {
-            activeIndex = this.headers.length - 1;
-        } else if(activeIndex > 0) {
-            activeIndex--;
-        }
-        let active = this.headers[activeIndex];
-        if(active !== this.activeHeader) {
-            this.activeHeader = active;
-            this.toc.forEach(link => link.classList.remove('toc-active'));
-            this.toc[activeIndex].classList.add('toc-active');
-        }
-        this.ticking = false;
+            this.activeHeader ||= this.headers[0];
+            let activeIndex = this.headers.findIndex((header) => {
+                return header.getBoundingClientRect().top > 180;
+            });
+            if (activeIndex == -1) {
+                activeIndex = this.headers.length - 1;
+            } else if (activeIndex > 0) {
+                activeIndex--;
+            }
+            let active = this.headers[activeIndex];
+            if (active !== this.activeHeader) {
+                this.activeHeader = active;
+                this.toc.forEach(link => link.classList.remove('toc-active'));
+                this.toc[activeIndex].classList.add('toc-active');
+            }
+            this.ticking = false;
         }
     }
-    
-    document.addEventListener('DOMContentLoaded', function(e) {
+
+    document.addEventListener('DOMContentLoaded', function (e) {
         Scroller.init();
     })
-  </script>
+</script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const elementToFade = document.querySelectorAll(".main");
@@ -582,11 +602,15 @@ images.forEach(img => {
     });
 </script>
 
-
 <script>
-    let menu = document.getElementById('menu')
+    let menu = document.getElementById('menu');
     if (menu) {
-        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
         menu.onscroll = function () {
             localStorage.setItem("menu-scroll-position", menu.scrollLeft);
         }
@@ -612,8 +636,6 @@ images.forEach(img => {
     });
 
 </script>
-
-
 <script>
     var mybutton = document.getElementById("top-link");
     window.onscroll = function () {
@@ -627,23 +649,18 @@ images.forEach(img => {
     };
 
 </script>
-
-
-
-
 <script>
     document.querySelectorAll('pre > code').forEach((codeblock) => {
         const container = codeblock.parentNode.parentNode;
 
         const copybutton = document.createElement('button');
         copybutton.classList.add('copy-code');
-        
-        copybutton.innerHTML = '<span style="margin: 5px"><ion-icon name=\"clipboard-outline\"></ion-icon><span style=\"font-size: 16px\"> copy</span></span>';
+        copybutton.innerHTML = 'copy';
 
         function copyingDone() {
-            copybutton.innerHTML = '<span style="margin: 5px"><ion-icon name=\"checkmark-outline\"></ion-icon><span style=\"font-size: 16px\"> copied!</span></span>';
+            copybutton.innerHTML = 'copied!';
             setTimeout(() => {
-                copybutton.innerHTML = '<span style="margin: 5px"><ion-icon name=\"clipboard-outline\"></ion-icon><span style=\"font-size: 16px\"> copy</span></span>';
+                copybutton.innerHTML = 'copy';
             }, 2000);
         }
 

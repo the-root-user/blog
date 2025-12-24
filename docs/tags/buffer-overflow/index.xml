@@ -5,29 +5,27 @@
     <link>https://signore.co.uk/tags/buffer-overflow/</link>
     <description>Recent content in Buffer Overflow on New Horizonz</description>
     <image>
+      <title>New Horizonz</title>
       <url>https://signore.co.uk/images/blog-cover.png</url>
       <link>https://signore.co.uk/images/blog-cover.png</link>
     </image>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo -- 0.152.2</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 22 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://signore.co.uk/tags/buffer-overflow/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 22 Aug 2022 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://signore.co.uk/tags/buffer-overflow/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Pwn 0x02: NX Bypass</title>
       <link>https://signore.co.uk/posts/pwn-0x02-nx-bypass/</link>
       <pubDate>Mon, 22 Aug 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://signore.co.uk/posts/pwn-0x02-nx-bypass/</guid>
       <description>Stack is not allowing code execution? Let&amp;rsquo;s bypass it</description>
     </item>
-    
     <item>
       <title>Pwn 0x01: Buffer Overflow</title>
       <link>https://signore.co.uk/posts/pwn-0x01-buffer-overflow/</link>
       <pubDate>Mon, 18 Jul 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://signore.co.uk/posts/pwn-0x01-buffer-overflow/</guid>
       <description>WTH is a buffer overflow? Let&amp;rsquo;s do it</description>
     </item>
-    
   </channel>
 </rss>

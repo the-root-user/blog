@@ -5,20 +5,20 @@
     <link>https://signore.co.uk/tags/memory/</link>
     <description>Recent content in Memory on New Horizonz</description>
     <image>
+      <title>New Horizonz</title>
       <url>https://signore.co.uk/images/blog-cover.png</url>
       <link>https://signore.co.uk/images/blog-cover.png</link>
     </image>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo -- 0.152.2</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 03 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://signore.co.uk/tags/memory/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 03 Jul 2022 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://signore.co.uk/tags/memory/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Pwn 0x00: Warmup</title>
       <link>https://signore.co.uk/posts/pwn-0x00-warmup/</link>
       <pubDate>Sun, 03 Jul 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://signore.co.uk/posts/pwn-0x00-warmup/</guid>
       <description>Let&amp;rsquo;s get ready to Pwn</description>
     </item>
-    
   </channel>
 </rss>
