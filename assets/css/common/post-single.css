@@ -310,7 +310,7 @@
     }
 }
 
-.dark .toc {
+[data-theme="dark"] .toc {
     background: #27292e;
     /* background: var(--entry); */
     border: solid 1px #282a2f;

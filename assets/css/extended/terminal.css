@@ -2,7 +2,7 @@
     --terminal-bg: #1C1D21;
 }
 
-.dark {
+:root[data-theme="dark"] {
     --terminal-bg: #2E2E33; /* #2e333e Dark HTB Konsole color, #282c34 Atom One Dark bg color */
 }
 

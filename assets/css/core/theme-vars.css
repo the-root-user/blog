@@ -17,7 +17,7 @@
     --border: rgb(238, 238, 238);
 }
 
-.dark {
+:root[data-theme="dark"] {
     --theme: #202227; /* G #202124; Default #1d1e20; */
     --entry: rgb(46, 46, 51);
     --primary: rgb(218, 218, 219);
@@ -33,6 +33,6 @@
     background: var(--code-bg);
 }
 
-.dark.list {
+[data-theme="dark"] .list {
     background: var(--theme);
 }
