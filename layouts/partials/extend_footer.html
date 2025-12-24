@@ -1,24 +1,23 @@
 {{- /* Footer custom content area start */ -}}
-{{- /*     Insert any custom code web-analytics, resources, etc. here */ -}}
+{{- /* Insert any custom code web-analytics, resources, etc. here */ -}}
 
 <!-- Zoom Images -->
 {{- /* MediumZoom for Images */ -}}
 {{- $imagezoom := resources.Get "js/medium-zoom.min.js" }}
-<script src="{{ $imagezoom.RelPermalink }}" data-no-instant
-  {{- if site.Params.assets.disableFingerprinting }}integrity="{{ $imagezoom.Data.Integrity }}"{{- end }}
-></script>
+<script src="{{ $imagezoom.RelPermalink }}" data-no-instant {{- if site.Params.assets.disableFingerprinting
+    }}integrity="{{ $imagezoom.Data.Integrity }}" {{- end }}></script>
 
 <script>
-const images = Array.from(document.querySelectorAll(".post-content img"));
-images.forEach(img => {
-  mediumZoom(img, {
-    margin: 10, /* The space outside the zoomed image */
-    background: '#1c1c1ff2', /* Color is slightly darker than the theme backgound color */
-    scrollOffset: 20, /* The number of pixels to scroll to close the zoom */
-    container: null, /* The viewport to render the zoom in */
-    template: null /* The template element to display on zoom */
-  });
-});
+    const images = Array.from(document.querySelectorAll(".post-content img"));
+    images.forEach(img => {
+        mediumZoom(img, {
+            margin: 10, /* The space outside the zoomed image */
+            background: '#1c1c1ff2', /* Color is slightly darker than the theme backgound color */
+            scrollOffset: 20, /* The number of pixels to scroll to close the zoom */
+            container: null, /* The viewport to render the zoom in */
+            template: null /* The template element to display on zoom */
+        });
+    });
 </script>
 
 {{- /* Lazysizes.js */ -}}
@@ -39,9 +38,9 @@ lazySizes.init({
 <script>
     const toc = document.querySelector('.toc')
 
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', function () {
         if (window.scrollY > 70) {
-             toc.style.top = '2.5rem'
+            toc.style.top = '2.5rem'
         } else {
             toc.style.top = '11.6rem'
         }
@@ -54,50 +53,50 @@ lazySizes.init({
 <script>
     class Scroller {
         static init() {
-        if(document.querySelector('.toc')) { // .toc
-            this.toc = document.querySelectorAll('.toc a');
-            this.toc.forEach(link => link.classList.add('transition', 'duration-200'))
-            this.headers = Array.from(this.toc).map(link => {
-            return document.querySelector(`#${link.href.split('#')[1]}`);
-            })
-            this.ticking = false;
-            window.addEventListener('scroll', (e) => {
-            this.onScroll()
-            })
+            if (document.querySelector('.toc')) { // .toc
+                this.toc = document.querySelectorAll('.toc a');
+                this.toc.forEach(link => link.classList.add('transition', 'duration-200'))
+                this.headers = Array.from(this.toc).map(link => {
+                    return document.querySelector(`#${link.href.split('#')[1]}`);
+                })
+                this.ticking = false;
+                window.addEventListener('scroll', (e) => {
+                    this.onScroll()
+                })
+            }
         }
-        }
-    
+
         static onScroll() {
-        if(!this.ticking) {
-            requestAnimationFrame(this.update.bind(this));
-            this.ticking = true;
+            if (!this.ticking) {
+                requestAnimationFrame(this.update.bind(this));
+                this.ticking = true;
+            }
         }
-        }
-    
+
         static update() {
-        this.activeHeader ||= this.headers[0];
-        let activeIndex = this.headers.findIndex((header) => {
-            return header.getBoundingClientRect().top > 180;
-        });
-        if(activeIndex == -1) {
-            activeIndex = this.headers.length - 1;
-        } else if(activeIndex > 0) {
-            activeIndex--;
-        }
-        let active = this.headers[activeIndex];
-        if(active !== this.activeHeader) {
-            this.activeHeader = active;
-            this.toc.forEach(link => link.classList.remove('toc-active'));
-            this.toc[activeIndex].classList.add('toc-active');
-        }
-        this.ticking = false;
+            this.activeHeader ||= this.headers[0];
+            let activeIndex = this.headers.findIndex((header) => {
+                return header.getBoundingClientRect().top > 180;
+            });
+            if (activeIndex == -1) {
+                activeIndex = this.headers.length - 1;
+            } else if (activeIndex > 0) {
+                activeIndex--;
+            }
+            let active = this.headers[activeIndex];
+            if (active !== this.activeHeader) {
+                this.activeHeader = active;
+                this.toc.forEach(link => link.classList.remove('toc-active'));
+                this.toc[activeIndex].classList.add('toc-active');
+            }
+            this.ticking = false;
         }
     }
-    
-    document.addEventListener('DOMContentLoaded', function(e) {
+
+    document.addEventListener('DOMContentLoaded', function (e) {
         Scroller.init();
     })
-  </script>
+</script>
 
 {{- /* Color Theif script */ -}}
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
